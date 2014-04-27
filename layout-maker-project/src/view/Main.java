@@ -17,38 +17,14 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public Main() throws IOException {
-        initComponents();
-
-        // Montando arquivos
-        //Arquivo arquivo = new Arquivo(1, "teste", "txt");
-        //Arquivo arquivo_2 = new Arquivo(2, "teste", "txt");
-        // Iniciando um novo componente
-        //Componente menu = new Componente(1, "Menu", 3, 50);
-        //menu.getArquivos().add(arquivo);
-        //menu.getArquivos().add(arquivo_2);
-        //Iterator item = menu.getArquivos().iterator();  
-        //while (item.hasNext()) {  
-        //   System.out.println(item.next());  
-        //}  
-//        File diretorioRaiz = new File("/teste");
-//        File arquivo1 = new File(diretorioRaiz, "autoexec.bat");
-//
-//        diretorioRaiz.mkdirs();
-//
-//        if (arquivo1.exists()) {
-//            System.out.println("Existe");
-//        } else {
-//            System.out.println("Não existe");
-//        }
-//        
-//        File source = new File("/teste/teste1.txt");
-//                
-//        File destination = new File("/copiateste/teste1.txt");
-//        
-//        Arquivo.copyFile(source, destination);
         
- 
-
+            //initComponents();
+        
+            File path_src = new File("files/framework/layout-test");
+            File path_dest = new File("files/layout/layout-test");
+        
+            FileManager.copyDirectory( path_src, path_dest);
+        
         }
 
         /**
