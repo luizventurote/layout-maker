@@ -1,10 +1,13 @@
 package model;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import javax.swing.JFileChooser;
+import view.Main;
 
 public class FileManager {
 
@@ -57,6 +60,14 @@ public class FileManager {
         } else {
             copyFile(srcDir, dstDir);
         }
+    }
+    
+    public static File FileChooser(Component comp) throws Exception {
+        
+            JFileChooser jfc = new JFileChooser();
+            jfc.showOpenDialog(comp);
+            return jfc.getSelectedFile();
+           
     }
 
 }
