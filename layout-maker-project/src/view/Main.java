@@ -1,5 +1,6 @@
 package view;
 
+import control.FileManagerControl;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -70,8 +71,8 @@ public class Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      
         try {
-            File file = FileManager.FileChooser(this);
-            System.out.println(file.getName());
+            FileManagerControl file_control = new FileManagerControl();
+            file_control.saveFileInBuild(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

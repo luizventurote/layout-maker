@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
-import view.Main;
 
 public abstract class FileManager {
 
@@ -16,6 +15,22 @@ public abstract class FileManager {
     private final static String path_framework = path + "framework/";
     private final static String path_layout = path + "layout/";
 
+    public static String getPath() {
+        return path;
+    }
+
+    public static String getPath_build() {
+        return path_build;
+    }
+
+    public static String getPath_framework() {
+        return path_framework;
+    }
+
+    public static String getPath_layout() {
+        return path_layout;
+    }
+    
     public static void readFile(String file) {
 
     }
