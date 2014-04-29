@@ -9,7 +9,7 @@ import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
 import view.Main;
 
-public class FileManager {
+public abstract class FileManager {
 
     private final static String path = "files/";
     private final static String path_build = path + "build/";
