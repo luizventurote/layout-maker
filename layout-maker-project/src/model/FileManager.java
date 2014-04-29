@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import static model.Arquivo.copyFile;
+import java.nio.channels.FileChannel;
 
 public class FileManager {
 
@@ -21,40 +21,28 @@ public class FileManager {
 
     }
 
-//    public static void copyFile(String input, String output) throws IOException {
-//
-//        FileInputStream in = null;
-//        FileOutputStream out = null;
-//
-//        try {
-//
-//            in = new FileInputStream(input);
-//            out = new FileOutputStream(output);
-//
-//            int c;
-//            while ((c = in.read()) != -1) {
-//                out.write(c);
-//            }
-//
-//        } finally {
-//
-//            if (in != null) {
-//                in.close();
-//            }
-//
-//            if (out != null) {
-//                out.close();
-//            }
-//        }
-//    }
-//
-//    public static void copyFileToLayout(String name, String file_path) throws IOException {
-//
-//        String output = path_layout + name;
-//
-//        copyFile(file_path, output);
-//
-//    }
+    public static void copyFile(File source, File destination) throws IOException {
+        if (destination.exists()) {
+            destination.delete();
+        }
+
+        FileChannel sourceChannel = null;
+        FileChannel destinationChannel = null;
+
+        try {
+            sourceChannel = new FileInputStream(source).getChannel();
+            destinationChannel = new FileOutputStream(destination).getChannel();
+            sourceChannel.transferTo(0, sourceChannel.size(),
+                    destinationChannel);
+        } finally {
+            if (sourceChannel != null && sourceChannel.isOpen()) {
+                sourceChannel.close();
+            }
+            if (destinationChannel != null && destinationChannel.isOpen()) {
+                destinationChannel.close();
+            }
+        }
+    }
 
     public static void copyDirectory(File srcDir, File dstDir) throws IOException {
         if (srcDir.isDirectory()) {
@@ -67,7 +55,6 @@ public class FileManager {
                         new File(dstDir, children[i]));
             }
         } else {
-            // Este método está implementado na dica – Copiando um arquivo utilizando o Java
             copyFile(srcDir, dstDir);
         }
     }
