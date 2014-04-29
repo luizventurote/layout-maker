@@ -1,14 +1,9 @@
 package view;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Arquivo;
-import model.Componente;
 import model.FileManager;
 
 public class Main extends javax.swing.JFrame {
@@ -20,13 +15,13 @@ public class Main extends javax.swing.JFrame {
         
             //initComponents();
         
-            File path_src = new File("files/framework/layout-test");
-            File path_dest = new File("files/layout/layout-test");
+            //File path_src = new File("files/framework/layout-test");
+            //File path_dest = new File("files/layout/layout-test");
         
-            FileManager.copyDirectory( path_src, path_dest);
+            //FileManager.copyDirectory( path_src, path_dest);
+        
             
             
-        
         }
 
         /**
