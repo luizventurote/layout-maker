@@ -3,23 +3,23 @@ package model;
 public class Arquivo {
 
     private int id;
-    private String nome;
-    private String extensao;
+    private String name;
+    private String extension;
 
-    public Arquivo(int id, String nome_base, String extensao) {
+    public Arquivo(int id, String base_name, String extension) {
         this.id = id;
-        this.extensao = extensao;
+        this.extension = extension;
 
-        // Monta o nome do arquivo
-        this.nome = Integer.toString(id) + '_' + nome_base + '.' + extensao;
+        // Set file name
+        this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
     }
 
-    public String getExtensao() {
-        return extensao;
+    public String getExtension() {
+        return extension;
     }
 
-    public void setExtensao(String extensao) {
-        this.extensao = extensao;
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     public int getId() {
@@ -30,12 +30,12 @@ public class Arquivo {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
 }
