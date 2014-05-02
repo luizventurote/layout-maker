@@ -40,6 +40,8 @@ public class FileManagerWin extends javax.swing.JDialog {
         jToggleButton4 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciador de Arquivos");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,6 +69,13 @@ public class FileManagerWin extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jToggleButton1.setText("Pesquisar");
+
+        jTextField1.setText("hhh");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -155,14 +164,18 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
 
-        ComponentWin win_component = new ComponentWin(null, true);
-        win_component.setVisible(true);
+        FileWin win_file = new FileWin(null, true);
+        win_file.setVisible(true);
 
     }//GEN-LAST:event_add_componentActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
