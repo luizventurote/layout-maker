@@ -6,6 +6,9 @@
 
 package view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Luiz
@@ -164,7 +167,14 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
 
-        FileWin win_file = new FileWin(null, true);
+        FileWin win_file = null;
+        
+        try {
+            win_file = new FileWin(null, true);
+        } catch (Exception ex) {
+            Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         win_file.setVisible(true);
 
     }//GEN-LAST:event_add_componentActionPerformed

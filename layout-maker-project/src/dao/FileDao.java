@@ -15,7 +15,7 @@ public class FileDao {
         
     }
     
-    public void inserir ( Arquivo file ) throws Exception, SQLException {
+    public void insert( Arquivo file ) throws Exception, SQLException {
    
         String sql = "INSERT INTO lm_file (name, extension) VALUES (?,?)";
         

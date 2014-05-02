@@ -19,10 +19,7 @@ public class MainWin extends javax.swing.JFrame {
     public MainWin() throws IOException {
 
         initComponents();
-
-        //File path_src = new File("files/framework/layout-test");
-        //File path_dest = new File("files/layout/layout-test");
-        //FileManager.copyDirectory( path_src, path_dest);
+        
     }
 
     /**
