@@ -156,13 +156,25 @@ public class FileWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selected_fileActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        
+
         int id = Integer.parseInt( input_id.getText() );
+        String name = input_name.getText();
+        String ext = input_ext.getText();
         
         try {
             
+            // Checking for empty fields
+            if("".equals(name)) {
+                throw new Exception("Adicione um nome para o arquivo!");
+            }
+            
+            if("".equals(ext)) {
+                throw new Exception("Selecione um arquivo!");
+            }
+            
+            
             // Insert a new file
-            ctr.insert( id , input_name.getText(), input_ext.getText());
+            ctr.insert( id , name, ext );
             
             // Window success
             JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );
@@ -171,7 +183,7 @@ public class FileWin extends javax.swing.JDialog {
             this.setVisible(false);
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );
+            JOptionPane.showMessageDialog(null, "ERRO. " + e.getMessage() );
         }
         
     }//GEN-LAST:event_btn_saveActionPerformed
