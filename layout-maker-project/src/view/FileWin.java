@@ -22,7 +22,12 @@ public class FileWin extends javax.swing.JDialog {
         
         initComponents();
         
+        // Control
         ctr = new FileControl();
+        
+        //Get id and set in the input type
+        input_id.setText( Integer.toString( ctr.getTheLastIDFile() ) );
+        
     }
 
     /**
@@ -48,6 +53,8 @@ public class FileWin extends javax.swing.JDialog {
         setTitle("Arquivo");
 
         jLabel1.setText("Nome");
+
+        input_id.setEditable(false);
 
         jLabel2.setText("ID");
 
@@ -134,11 +141,16 @@ public class FileWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selected_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selected_fileActionPerformed
-               
+
         try {
-            
+            // Select a file
             file = FileManagerControl.FileChooser(this);
+            
+            // Get file extension and set in the input field
             input_ext.setText( FileManagerControl.getFileExtension(file) );
+            
+            //Get id and set in the input type
+            
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );

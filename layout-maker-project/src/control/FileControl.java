@@ -23,4 +23,10 @@ public class FileControl {
         
     }
     
+    public int getTheLastIDFile() throws Exception, SQLException {
+        
+        return this.fileDao.getTheLastIDFile();
+        
+    }
+    
 }
