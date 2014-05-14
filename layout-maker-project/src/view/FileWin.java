@@ -172,7 +172,6 @@ public class FileWin extends javax.swing.JDialog {
                 throw new Exception("Selecione um arquivo!");
             }
             
-            
             // Insert a new file
             ctr.insert( id , name, ext );
             

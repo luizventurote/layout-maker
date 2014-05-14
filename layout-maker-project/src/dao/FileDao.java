@@ -49,4 +49,36 @@ public class FileDao {
         return file_id;
     }
 
+    public ArrayList<Arquivo> getAllFiles() throws Exception, SQLException {
+        
+        ResultSet rs;
+        Arquivo file;
+        int file_id = 0;
+        String file_ext;
+        String file_name;
+        ArrayList<Arquivo> files = new ArrayList();
+
+        // SQL que retorna o último ID
+        String sql = "SELECT * FROM lm_file;";
+
+        // Consulta no banco
+        rs = stmt.executeQuery( sql );
+
+        // Gera uma lista de arquivos
+        while (rs.next()) {
+            
+            file_id = rs.getInt(1);
+            file_name = rs.getString(2);
+            file_ext = rs.getString(3);
+            
+            file = new Arquivo(file_id, file_name, file_ext);
+            
+            files.add(file);
+            
+        }
+        
+        return files;       
+        
+    }
+    
 }

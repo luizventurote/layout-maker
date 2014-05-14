@@ -1,19 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
+import control.FileControl;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Luiz
- */
 public class FileManagerWin extends javax.swing.JDialog {
+
+    FileControl ctr;
+    ArrayList files;
 
     /**
      * Creates new form FileManager
@@ -21,6 +19,18 @@ public class FileManagerWin extends javax.swing.JDialog {
     public FileManagerWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        try {
+            // Control
+            ctr = new FileControl();
+
+            // Loading files in the table
+            ctr.loadingAllFilesInTable( file_list );
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
+        }
+
     }
 
     /**
@@ -33,7 +43,7 @@ public class FileManagerWin extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        file_list = new javax.swing.JTable();
         jToggleButton1 = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
@@ -46,7 +56,7 @@ public class FileManagerWin extends javax.swing.JDialog {
         setTitle("Gerenciador de Arquivos");
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        file_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -69,7 +79,7 @@ public class FileManagerWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(file_list);
 
         jToggleButton1.setText("Pesquisar");
 
@@ -168,13 +178,13 @@ public class FileManagerWin extends javax.swing.JDialog {
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
 
         FileWin win_file = null;
-        
+
         try {
             win_file = new FileWin(null, true);
         } catch (Exception ex) {
             Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         win_file.setVisible(true);
 
     }//GEN-LAST:event_add_componentActionPerformed
@@ -231,9 +241,9 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
+    private javax.swing.JTable file_list;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton4;
