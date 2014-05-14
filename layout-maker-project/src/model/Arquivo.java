@@ -23,6 +23,12 @@ public class Arquivo {
         // Set file name
         this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
     }
+    
+    public Arquivo(int id, String name, String ext) {
+        this.id = id;
+        this.name = name;
+        this.extension = ext;
+    }
 
     public String getExtension() {
         return extension;

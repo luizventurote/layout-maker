@@ -15,11 +15,11 @@ public class FileControl {
         
     }
     
-    public void addFile(String name, File file) throws Exception, SQLException {
+    public void insert(int id, String name, String ext) throws Exception, SQLException {
         
-        Arquivo new_file = new Arquivo(name, file);
+        Arquivo file = new Arquivo(id, name, ext);
         
-        this.fileDao.insert(new_file);
+        this.fileDao.insert(file);
         
     }
     

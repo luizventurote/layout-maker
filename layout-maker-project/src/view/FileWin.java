@@ -147,11 +147,8 @@ public class FileWin extends javax.swing.JDialog {
             file = FileManagerControl.FileChooser(this);
             
             // Get file extension and set in the input field
-            input_ext.setText( FileManagerControl.getFileExtension(file) );
-            
-            //Get id and set in the input type
-            
-            
+            input_ext.setText( FileManagerControl.getFileExtension(file) );      
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );
         }
@@ -160,7 +157,22 @@ public class FileWin extends javax.swing.JDialog {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         
-        //ctr.addFile(input_name.getText(), btn_selected_file);
+        int id = Integer.parseInt( input_id.getText() );
+        
+        try {
+            
+            // Insert a new file
+            ctr.insert( id , input_name.getText(), input_ext.getText());
+            
+            // Window success
+            JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );
+            
+            // Close this window
+            this.setVisible(false);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );
+        }
         
     }//GEN-LAST:event_btn_saveActionPerformed
 
