@@ -3,7 +3,7 @@ package control;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JFileChooser;
-import model.FileManager;
+import util.FileManager;
 
 public class FileManagerControl {
 

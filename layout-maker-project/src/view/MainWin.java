@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import model.FileManager;
+import util.FileManager;
 import model.Framework;
 
 public class MainWin extends javax.swing.JFrame {

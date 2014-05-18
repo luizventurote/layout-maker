@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import util.FileManager;
 
 public class FileWin extends javax.swing.JDialog {
     
@@ -51,6 +52,7 @@ public class FileWin extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Arquivo");
+        setResizable(false);
 
         jLabel1.setText("Nome");
 
@@ -147,7 +149,12 @@ public class FileWin extends javax.swing.JDialog {
             file = FileManagerControl.FileChooser(this);
             
             // Get file extension and set in the input field
-            input_ext.setText( FileManagerControl.getFileExtension(file) );      
+            input_ext.setText( FileManagerControl.getFileExtension(file) );
+            
+            // Set name text
+            if( "".equals(input_name.getText()) ) {
+                input_name.setText( file.getName() );
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );
@@ -174,6 +181,18 @@ public class FileWin extends javax.swing.JDialog {
             
             // Insert a new file
             ctr.insert( id , name, ext );
+            
+            // Copy file
+            FileManager.copyFile(file, "files/files/");
+         
+            // Get new file
+            File temporary_file = new File("files/files/"+file.getName());
+            
+            // Rename file
+            FileManager.renameFile(temporary_file, input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase());
+            
+            // Remove temporary file
+            temporary_file.delete();
             
             // Window success
             JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );
