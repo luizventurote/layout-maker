@@ -207,7 +207,9 @@ public class FileWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        // TODO add your handling code here:
+        
+        
+        
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     /**

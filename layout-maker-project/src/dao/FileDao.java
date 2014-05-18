@@ -30,6 +30,20 @@ public class FileDao {
 
     }
 
+    public void delete(int id) throws Exception, SQLException {
+        
+        ResultSet rs;
+
+        // SQL que retorna o último ID
+        String sql = "DELETE FROM lm_file WHERE id_file=?;";
+
+        PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        pst.setInt(1, id);
+
+        pst.execute();
+        
+    }
+    
     public int getTheLastIDFile() throws Exception, SQLException {
         
         int file_id = 0;

@@ -28,6 +28,12 @@ public class FileControl {
         this.fileDao.insert(file);
 
     }
+    
+    public void delete(int id) throws Exception, SQLException {
+
+        this.fileDao.delete(id);
+
+    }
 
     public int getTheLastIDFile() throws Exception, SQLException {
 

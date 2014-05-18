@@ -25,7 +25,7 @@ public class FileManagerWin extends javax.swing.JDialog {
             ctr = new FileControl();
 
             // Loading files in the table
-            ctr.loadingAllFilesInTable( file_list );
+            ctr.loadingAllFilesInTable(file_list);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
@@ -47,10 +47,10 @@ public class FileManagerWin extends javax.swing.JDialog {
         jToggleButton1 = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
+        btn_alter = new javax.swing.JToggleButton();
+        btn_select = new javax.swing.JToggleButton();
         add_component = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        btn_delete = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciador de Arquivos");
@@ -79,6 +79,11 @@ public class FileManagerWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        file_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                file_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(file_list);
 
         jToggleButton1.setText("Pesquisar");
@@ -92,17 +97,19 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jToggleButton5.setText("Alterar");
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_alter.setText("Alterar");
+        btn_alter.setEnabled(false);
+        btn_alter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
+                btn_alterActionPerformed(evt);
             }
         });
 
-        jToggleButton6.setText("Selecionar");
-        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_select.setText("Selecionar");
+        btn_select.setEnabled(false);
+        btn_select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton6ActionPerformed(evt);
+                btn_selectActionPerformed(evt);
             }
         });
 
@@ -113,10 +120,11 @@ public class FileManagerWin extends javax.swing.JDialog {
             }
         });
 
-        jToggleButton4.setText("Excluir");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.setText("Excluir");
+        btn_delete.setEnabled(false);
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
 
@@ -136,11 +144,11 @@ public class FileManagerWin extends javax.swing.JDialog {
                         .addComponent(jToggleButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton6)
+                        .addComponent(btn_select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton5)
+                        .addComponent(btn_alter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton4)
+                        .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(add_component)))
                 .addContainerGap())
@@ -158,22 +166,22 @@ public class FileManagerWin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_component, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_alter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+    private void btn_alterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
+    }//GEN-LAST:event_btn_alterActionPerformed
 
-    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
+    private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton6ActionPerformed
+    }//GEN-LAST:event_btn_selectActionPerformed
 
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
 
@@ -189,13 +197,47 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     }//GEN-LAST:event_add_componentActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+
+        int row_selected = file_list.getSelectedRow();
+
+        if (row_selected >= 0) {
+            try {
+                // Enable buttons
+                btn_delete.setEnabled(true);
+                btn_alter.setEnabled(true);
+                btn_select.setEnabled(true);
+                
+                // Delete file
+                int file_id = Integer.parseInt(file_list.getValueAt(row_selected, 0).toString());
+                
+                ctr.delete(file_id);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage() );
+            }
+
+        }
+
+    }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void file_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_file_listMouseClicked
+
+        int row_selected = file_list.getSelectedRow();
+
+        if (row_selected >= 0) {
+
+            // Enable buttons
+            btn_delete.setEnabled(true);
+            btn_alter.setEnabled(true);
+            btn_select.setEnabled(true);
+
+        }
+
+    }//GEN-LAST:event_file_listMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,13 +283,13 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
+    private javax.swing.JToggleButton btn_alter;
+    private javax.swing.JToggleButton btn_delete;
+    private javax.swing.JToggleButton btn_select;
     private javax.swing.JTable file_list;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
     // End of variables declaration//GEN-END:variables
 }
