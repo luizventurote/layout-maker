@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class FileManagerWin extends javax.swing.JDialog {
 
@@ -195,6 +196,12 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         win_file.setVisible(true);
 
+        try {
+            this.refreshTable();
+        } catch (Exception ex) {
+            Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_add_componentActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -207,13 +214,15 @@ public class FileManagerWin extends javax.swing.JDialog {
                 btn_delete.setEnabled(true);
                 btn_alter.setEnabled(true);
                 btn_select.setEnabled(true);
-                
+
                 // Delete file
                 int file_id = Integer.parseInt(file_list.getValueAt(row_selected, 0).toString());
-                
+
+                this.refreshTable();
+
                 ctr.delete(file_id);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage() );
+                JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
             }
 
         }
@@ -279,6 +288,21 @@ public class FileManagerWin extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public void refreshTable() throws Exception {
+
+        // Clean selection
+        file_list.clearSelection();
+
+        // Clean table
+        for (int i = file_list.getRowCount()-1; i >= 0; i--) {
+            System.out.println(i);
+            ((DefaultTableModel) file_list.getModel()).removeRow(i);
+        }
+        
+        // Loading files in the table
+        ctr.loadingAllFilesInTable(file_list);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
