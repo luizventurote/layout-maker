@@ -1,0 +1,24 @@
+.sass-cache/**/*
+node_modules/**/* 
+node_modules/
+
+**/.sass-cache/**/*
+**/node_modules/**/* 
+**/node_modules/files/**/*
+
+layout-maker-project/
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs #
+########
+*.log
+/nbproject/private/
