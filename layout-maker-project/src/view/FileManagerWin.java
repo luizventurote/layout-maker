@@ -89,7 +89,6 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         jToggleButton1.setText("Pesquisar");
 
-        jTextField1.setText("hhh");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

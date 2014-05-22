@@ -144,12 +144,22 @@ public class FileWin extends javax.swing.JDialog {
 
     private void btn_selected_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selected_fileActionPerformed
 
+        int id = Integer.parseInt( input_id.getText() );
+        
         try {
             // Select a file
             file = FileManagerControl.FileChooser(this);
             
             // Get file extension and set in the input field
             input_ext.setText( FileManagerControl.getFileExtension(file) );
+            
+            // Check ID and set in the input type
+            if( id == 0) {
+                ctr.insert( id, "test", "txt", "0_test.txt");
+                input_id.setText( Integer.toString( ctr.getTheLastIDFile() ) );
+                ctr.delete( ctr.getTheLastIDFile() - 1 );
+                System.out.println("ok");
+            }
             
             // Set name text
             if( "".equals(input_name.getText()) ) {
@@ -183,7 +193,7 @@ public class FileWin extends javax.swing.JDialog {
             FileManager.copyFile(file, "files/files/");
          
             // Get new file
-            File temporary_file = new File("files/files/"+file.getName());
+            File temporary_file = new File("files/files/"+file.getName()); 
             
             // Rename file
             String file_name = input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase();
