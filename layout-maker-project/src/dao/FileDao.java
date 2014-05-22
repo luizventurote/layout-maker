@@ -65,6 +65,23 @@ public class FileDao {
 
         return file_id;
     }
+    
+    public Arquivo getFile(int id) {
+        
+        ResultSet rs;
+        
+        // SQL que retorna o último ID
+        String sql = "SELECT * FROM lm_file WHERE id_file="+id+" LIMIT 1;";
+
+        // Consulta no banco
+        //rs = stmt.executeQuery( sql );
+        
+        // Create new file
+        //Arquivo file = new Arquivo();
+        
+        return null;
+        
+    }
 
     public ArrayList<Arquivo> getAllFiles() throws Exception, SQLException {
         

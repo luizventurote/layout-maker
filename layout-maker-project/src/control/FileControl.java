@@ -40,6 +40,12 @@ public class FileControl {
         return this.fileDao.getTheLastIDFile();
 
     }
+    
+    public File getFileByID(int id) {
+        
+        
+        return null;
+    }
 
     public ArrayList getAllFiles() throws Exception, SQLException {
 

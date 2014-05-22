@@ -13,6 +13,7 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     FileControl ctr;
     ArrayList files;
+    int row_selected;
 
     /**
      * Creates new form FileManager
@@ -205,26 +206,16 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
 
-        int row_selected = file_list.getSelectedRow();
-
-        if (row_selected >= 0) {
             try {
-                // Enable buttons
-                btn_delete.setEnabled(true);
-                btn_alter.setEnabled(true);
-                btn_select.setEnabled(true);
-
                 // Delete file
-                int file_id = Integer.parseInt(file_list.getValueAt(row_selected, 0).toString());
-
-                this.refreshTable();
-
+                int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
                 ctr.delete(file_id);
+                
+                this.refreshTable();
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
             }
-
-        }
 
     }//GEN-LAST:event_btn_deleteActionPerformed
 
@@ -234,9 +225,9 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     private void file_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_file_listMouseClicked
 
-        int row_selected = file_list.getSelectedRow();
+        this.row_selected = file_list.getSelectedRow();
 
-        if (row_selected >= 0) {
+        if (this.row_selected >= 0) {
 
             // Enable buttons
             btn_delete.setEnabled(true);

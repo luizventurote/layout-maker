@@ -79,6 +79,7 @@ public class FileWin extends javax.swing.JDialog {
         });
 
         btn_delete.setText("Excluir");
+        btn_delete.setEnabled(false);
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
