@@ -6,8 +6,6 @@ node_modules/
 **/node_modules/**/* 
 **/node_modules/files/**/*
 
-layout-maker-project/
-
 # OS generated files #
 ######################
 .DS_Store
