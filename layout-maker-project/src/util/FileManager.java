@@ -91,8 +91,6 @@ public abstract class FileManager {
 
         // Destination folder
         File file_dest = new File(destination + new_name);
-        
-        System.out.println( file_dest.getName() );
 
         if (file_dest.exists()) {
             file_dest.delete();

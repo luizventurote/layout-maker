@@ -20,11 +20,14 @@ public class FileDao {
 
     public void insert(Arquivo file) throws Exception, SQLException {
 
-        String sql = "INSERT INTO lm_file (name, extension) VALUES (?,?)";
+        String sql = "INSERT INTO lm_file (name, extension, file_name) VALUES (?,?,?)";
 
         PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         pst.setString(1, file.getName());
         pst.setString(2, file.getExtension());
+        pst.setString(3, file.getFileName());
+        
+        //System.out.println( "ok" + file.getFileName() );
 
         pst.execute();
 
@@ -84,8 +87,9 @@ public class FileDao {
             file_id = rs.getInt(1);
             file_name = rs.getString(2);
             file_ext = rs.getString(3);
+            file_name = rs.getString(4);
             
-            file = new Arquivo(file_id, file_name, file_ext);
+            file = new Arquivo(file_id, file_name, file_ext, file_name);
             
             files.add(file);
             

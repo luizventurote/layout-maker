@@ -7,6 +7,7 @@ public class Arquivo {
     private int id;
     private String name;
     private String extension;
+    private String file_name;
     private File file;
 
     public Arquivo(int id, String base_name, String extension, File file) {
@@ -24,10 +25,11 @@ public class Arquivo {
         this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
     }
     
-    public Arquivo(int id, String name, String ext) {
+    public Arquivo(int id, String name, String ext, String file_name) {
         this.id = id;
         this.name = name;
         this.extension = ext;
+        this.file_name = file_name;
     }
 
     public String getExtension() {
@@ -52,6 +54,14 @@ public class Arquivo {
 
     public void setName(String nome) {
         this.name = nome;
+    }
+
+    public String getFileName() {
+        return file_name;
+    }
+
+    public void setFileName(String file_name) {
+        this.file_name = file_name;
     }
 
 }

@@ -179,9 +179,6 @@ public class FileWin extends javax.swing.JDialog {
                 throw new Exception("Selecione um arquivo!");
             }
             
-            // Insert a new file
-            ctr.insert( id , name, ext );
-            
             // Copy file
             FileManager.copyFile(file, "files/files/");
          
@@ -189,10 +186,14 @@ public class FileWin extends javax.swing.JDialog {
             File temporary_file = new File("files/files/"+file.getName());
             
             // Rename file
-            FileManager.renameFile(temporary_file, input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase());
+            String file_name = input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase();
+            FileManager.renameFile(temporary_file, file_name);
             
             // Remove temporary file
             temporary_file.delete();
+            
+            // Insert a new file
+            ctr.insert( id, name, ext, file_name);
             
             // Window success
             JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );

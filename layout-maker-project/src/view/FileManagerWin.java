@@ -297,7 +297,6 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         // Clean table
         for (int i = file_list.getRowCount()-1; i >= 0; i--) {
-            System.out.println(i);
             ((DefaultTableModel) file_list.getModel()).removeRow(i);
         }
         

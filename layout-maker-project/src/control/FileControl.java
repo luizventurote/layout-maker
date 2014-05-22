@@ -21,10 +21,10 @@ public class FileControl {
 
     }
 
-    public void insert(int id, String name, String ext) throws Exception, SQLException {
+    public void insert(int id, String name, String ext, String file_name) throws Exception, SQLException {
 
-        Arquivo file = new Arquivo(id, name, ext);
-
+        Arquivo file = new Arquivo(id, name, ext, file_name);
+        
         this.fileDao.insert(file);
 
     }
