@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import util.FileManager;
+import util.ErrorView;
 
 public class FileWin extends javax.swing.JDialog {
     
@@ -168,7 +169,7 @@ public class FileWin extends javax.swing.JDialog {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage() );
+            ErrorView.errorDefault(e);
         }
         
     }//GEN-LAST:event_btn_selected_fileActionPerformed

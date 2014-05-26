@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Arquivo;
 
-public class FileDao {
+public class FileDao extends DefaultDao {
 
     Statement stmt;
 
@@ -26,15 +26,14 @@ public class FileDao {
         pst.setString(1, file.getName());
         pst.setString(2, file.getExtension());
         pst.setString(3, file.getFileName());
-        
-        //System.out.println( "ok" + file.getFileName() );
 
+        //System.out.println( "ok" + file.getFileName() );
         pst.execute();
 
     }
 
     public void delete(int id) throws Exception, SQLException {
-        
+
         ResultSet rs;
 
         // SQL que retorna o último ID
@@ -44,11 +43,11 @@ public class FileDao {
         pst.setInt(1, id);
 
         pst.execute();
-        
+
     }
-    
+
     public int getTheLastIDFile() throws Exception, SQLException {
-        
+
         int file_id = 0;
         ResultSet rs;
 
@@ -56,7 +55,7 @@ public class FileDao {
         String sql = "SELECT id_file FROM lm_file ORDER BY id_file DESC LIMIT 1;";
 
         // Consulta no banco
-        rs = stmt.executeQuery( sql );
+        rs = stmt.executeQuery(sql);
 
         // Gera o valor do próximo ID
         while (rs.next()) {
@@ -65,26 +64,45 @@ public class FileDao {
 
         return file_id;
     }
-    
-    public Arquivo getFile(int id) {
-        
+
+    /**
+     * Get file by ID.
+     *
+     * @param id
+     * @return Arquivo
+     */
+    public Arquivo getFile(int id) throws Exception, SQLException {
+
         ResultSet rs;
-        
+        Arquivo file;
+        int file_id = 0;
+        String file_ext = "";
+        String file_name = "";
+
         // SQL que retorna o último ID
-        String sql = "SELECT * FROM lm_file WHERE id_file="+id+" LIMIT 1;";
+        String sql = "SELECT * FROM lm_file WHERE id_file=" + id + " LIMIT 1;";
 
         // Consulta no banco
-        //rs = stmt.executeQuery( sql );
-        
+        rs = stmt.executeQuery(sql);
+
         // Create new file
-        //Arquivo file = new Arquivo();
+        while (rs.next()) {
+
+            file_id = rs.getInt(1);
+            file_name = rs.getString(2);
+            file_ext = rs.getString(3);
+            file_name = this.getFilePath() + rs.getString(4);
+
+        }
         
-        return null;
-        
+        file = new Arquivo(file_id, file_name, file_ext, file_name);
+
+        return file;
+
     }
 
     public ArrayList<Arquivo> getAllFiles() throws Exception, SQLException {
-        
+
         ResultSet rs;
         Arquivo file;
         int file_id = 0;
@@ -96,24 +114,24 @@ public class FileDao {
         String sql = "SELECT * FROM lm_file;";
 
         // Consulta no banco
-        rs = stmt.executeQuery( sql );
+        rs = stmt.executeQuery(sql);
 
         // Gera uma lista de arquivos
         while (rs.next()) {
-            
+
             file_id = rs.getInt(1);
             file_name = rs.getString(2);
             file_ext = rs.getString(3);
             file_name = rs.getString(4);
-            
+
             file = new Arquivo(file_id, file_name, file_ext, file_name);
-            
+
             files.add(file);
-            
+
         }
-        
-        return files;       
-        
+
+        return files;
+
     }
-    
+
 }

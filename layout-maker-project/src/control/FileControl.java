@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Arquivo;
 
-public class FileControl {
+public class FileControl extends DefaultControl {
 
     FileDao fileDao;
 
@@ -30,6 +30,12 @@ public class FileControl {
     }
     
     public void delete(int id) throws Exception, SQLException {
+        
+        Arquivo file = this.fileDao.getFile(id);
+        
+        File temp_file = new File( file.getName() );
+        
+        temp_file.delete();
 
         this.fileDao.delete(id);
 

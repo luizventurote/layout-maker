@@ -10,6 +10,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import util.FileManager;
 import model.Framework;
+import control.DefaultControl;
+import util.ErrorView;
 
 public class MainWin extends javax.swing.JFrame {
 
@@ -17,8 +19,13 @@ public class MainWin extends javax.swing.JFrame {
      * Creates new form Main
      */
     public MainWin() throws IOException {
-
         initComponents();
+        
+        try {
+            DefaultControl ctr = new DefaultControl();
+        } catch (Exception e) {
+            ErrorView.errorDefault(e);
+        }
         
     }
 
