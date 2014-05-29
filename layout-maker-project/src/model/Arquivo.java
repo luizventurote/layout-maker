@@ -4,10 +4,29 @@ import java.io.File;
 
 public class Arquivo {
 
+    /**
+     * File ID
+     */
     private int id;
+    
+    /**
+     * File name
+     */
     private String name;
+    
+    /**
+     * File extension
+     */
     private String extension;
+    
+    /**
+     * File single name
+     */
     private String file_name;
+    
+    /**
+     * File source
+     */
     private File file;
 
     public Arquivo(int id, String base_name, String extension, File file) {

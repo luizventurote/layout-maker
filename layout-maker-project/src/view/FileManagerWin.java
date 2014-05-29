@@ -8,16 +8,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import util.ErrorView;
 
 public class FileManagerWin extends javax.swing.JDialog {
 
     FileControl ctr;
     ArrayList files;
     int row_selected;
-
-    /**
-     * Creates new form FileManager
-     */
+    
     public FileManagerWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -122,7 +120,9 @@ public class FileManagerWin extends javax.swing.JDialog {
         });
 
         btn_delete.setText("Excluir");
+        btn_delete.setBorderPainted(false);
         btn_delete.setEnabled(false);
+        btn_delete.setFocusPainted(false);
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
@@ -177,7 +177,20 @@ public class FileManagerWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_alterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterActionPerformed
-        // TODO add your handling code here:
+        
+        FileWin win_file = null;
+
+        try {
+            // Get file ID
+            int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
+            
+            win_file = new FileWin(file_id, null, true);
+        } catch (Exception ex) {
+            ErrorView.errorDefault(ex);
+        }
+
+        win_file.setVisible(true);
+        
     }//GEN-LAST:event_btn_alterActionPerformed
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
@@ -238,9 +251,6 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     }//GEN-LAST:event_file_listMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -292,6 +302,13 @@ public class FileManagerWin extends javax.swing.JDialog {
         
         // Loading files in the table
         ctr.loadingAllFilesInTable(file_list);
+        
+        // Check list is empty 
+        if( file_list.getRowCount() == 0 ) {
+            btn_alter.setEnabled(false);
+            btn_delete.setEnabled(false);
+            btn_select.setEnabled(false);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

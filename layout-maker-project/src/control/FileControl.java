@@ -10,10 +10,11 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Arquivo;
+import view.FileWin;
 
 public class FileControl extends DefaultControl {
 
-    FileDao fileDao;
+    private FileDao fileDao;
 
     public FileControl() throws Exception, SQLException {
 
@@ -47,10 +48,20 @@ public class FileControl extends DefaultControl {
 
     }
     
-    public File getFileByID(int id) {
+    public File getFileByID(int id) throws Exception, SQLException {
         
+        Arquivo arquivo = this.fileDao.getFile(id);
         
-        return null;
+        File file = new File( arquivo.getFileName() );
+
+        return file;
+        
+    }
+    
+    public Arquivo getArquivoByID(int id) throws Exception, SQLException {
+
+        return this.fileDao.getFile(id);
+        
     }
 
     public ArrayList getAllFiles() throws Exception, SQLException {
@@ -85,6 +96,9 @@ public class FileControl extends DefaultControl {
             table.setValueAt(file.getName(), linha, col++);
             table.setValueAt(file.getExtension(), linha, col);
             
+            System.out.println( file.getName() );
+            System.out.println( file.getFileName() );
+            
             // Reset number of columns
             col = 0;
         
@@ -92,6 +106,26 @@ public class FileControl extends DefaultControl {
             
         }
 
+    }
+    
+    public void loadValuesByID(FileWin win, int id) throws Exception, SQLException{
+        
+        Arquivo file = this.getArquivoByID(id);
+        
+        // Load ID
+        win.getInput_id().setText( Integer.toString(id) );
+        
+        // Load file
+        win.setFile( file.getFileName() );
+        
+        // Load file name
+        win.getInput_name().setText( file.getName() );
+        
+        // Load extension
+        win.getInput_ext().setText( file.getExtension() );
+        
+        System.out.println( file.getFileName() );
+        
     }
 
 }

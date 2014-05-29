@@ -80,6 +80,8 @@ public class MainWin extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Gerar Layout");
+        jButton5.setBorderPainted(false);
+        jButton5.setFocusPainted(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

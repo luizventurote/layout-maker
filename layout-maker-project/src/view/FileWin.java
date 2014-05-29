@@ -7,14 +7,16 @@ import java.io.FilenameFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import util.FileManager;
 import util.ErrorView;
 
 public class FileWin extends javax.swing.JDialog {
     
-    FileControl ctr;
-    File file;
+    private FileControl ctr;
+    private File file;
+    private int file_id;
 
     /**
      * Creates new form FileWin
@@ -29,6 +31,22 @@ public class FileWin extends javax.swing.JDialog {
         
         //Get id and set in the input type
         input_id.setText( Integer.toString( ctr.getTheLastIDFile() ) );
+        
+    }
+    
+    /**
+     * Creates new form FileWin to change file
+     */
+    public FileWin(int id, java.awt.Frame parent, boolean modal) throws Exception {
+        super(parent, modal);
+        
+        initComponents();
+        
+        // Control
+        ctr = new FileControl();
+        
+        // Load values in fields
+        ctr.loadValuesByID(this, id);
         
     }
 
@@ -150,7 +168,7 @@ public class FileWin extends javax.swing.JDialog {
         
         try {
             // Select a file
-            file = FileManagerControl.FileChooser(this);
+            this.file = FileManagerControl.FileChooser(this);
             
             // Get file extension and set in the input field
             input_ext.setText( FileManagerControl.getFileExtension(file) );
@@ -267,6 +285,27 @@ public class FileWin extends javax.swing.JDialog {
         });
     }
 
+    public JTextField getInput_ext() {
+        return input_ext;
+    }
+
+    public JTextField getInput_id() {
+        return input_id;
+    }
+
+    public JTextField getInput_name() {
+        return input_name;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(String file_name) {
+        File new_file = new File( file_name );
+        this.file = new_file;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btn_delete;
     private javax.swing.JToggleButton btn_save;
