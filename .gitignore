@@ -20,3 +20,5 @@ Thumbs.db
 ########
 *.log
 /nbproject/private/
+
+layout-maker-project/files/files/**/*
