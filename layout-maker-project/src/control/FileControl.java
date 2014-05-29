@@ -34,7 +34,7 @@ public class FileControl extends DefaultControl {
         
         Arquivo file = this.fileDao.getFile(id);
         
-        File temp_file = new File( file.getName() );
+        File temp_file = new File( file.getFileName() );
         
         temp_file.delete();
 
@@ -96,9 +96,6 @@ public class FileControl extends DefaultControl {
             table.setValueAt(file.getName(), linha, col++);
             table.setValueAt(file.getExtension(), linha, col);
             
-            System.out.println( file.getName() );
-            System.out.println( file.getFileName() );
-            
             // Reset number of columns
             col = 0;
         
@@ -123,8 +120,6 @@ public class FileControl extends DefaultControl {
         
         // Load extension
         win.getInput_ext().setText( file.getExtension() );
-        
-        System.out.println( file.getFileName() );
         
     }
 

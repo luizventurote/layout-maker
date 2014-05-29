@@ -3,12 +3,8 @@ package view;
 import control.FileControl;
 import control.FileManagerControl;
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import util.FileManager;
 import util.ErrorView;
 
@@ -16,7 +12,22 @@ public class FileWin extends javax.swing.JDialog {
     
     private FileControl ctr;
     private File file;
-    private int file_id;
+    private int file_id = 0;
+    
+    /**
+     * File name
+     */
+    private String file_name;
+    
+    /**
+     * File single/directory name
+     */
+    private String file_single_name;
+    
+    /**
+     * Controla o salvamento do arquivo. 0 - Cria o arquivo. 1 - O arquivo alterado é salvo.
+     */
+    private int save_type;
 
     /**
      * Creates new form FileWin
@@ -47,6 +58,17 @@ public class FileWin extends javax.swing.JDialog {
         
         // Load values in fields
         ctr.loadValuesByID(this, id);
+        
+        // Save file name
+        this.file_name = this.input_name.getText();
+        
+        // Save file single/directory name
+        this.file_single_name = this.getName();
+        
+        System.out.println( this.file_single_name);
+        
+        // Altera o tipo de salvamento
+        this.save_type = 1;
         
     }
 
@@ -167,20 +189,20 @@ public class FileWin extends javax.swing.JDialog {
         int id = Integer.parseInt( input_id.getText() );
         
         try {
+
             // Select a file
             this.file = FileManagerControl.FileChooser(this);
-            
+
             // Get file extension and set in the input field
             input_ext.setText( FileManagerControl.getFileExtension(file) );
-            
+
             // Check ID and set in the input type
             if( id == 0) {
                 ctr.insert( id, "test", "txt", "0_test.txt");
                 input_id.setText( Integer.toString( ctr.getTheLastIDFile() ) );
                 ctr.delete( ctr.getTheLastIDFile() - 1 );
-                System.out.println("ok");
             }
-            
+
             // Set name text
             if( "".equals(input_name.getText()) ) {
                 input_name.setText( file.getName() );
@@ -199,34 +221,55 @@ public class FileWin extends javax.swing.JDialog {
         String ext = input_ext.getText();
         
         try {
-            
+
             // Checking for empty fields
             if("".equals(name)) {
                 throw new Exception("Adicione um nome para o arquivo!");
             }
-            
+
             if("".equals(ext)) {
                 throw new Exception("Selecione um arquivo!");
             }
-            
-            // Copy file
-            FileManager.copyFile(file, "files/files/");
-         
-            // Get new file
-            File temporary_file = new File("files/files/"+file.getName()); 
-            
-            // Rename file
-            String file_name = input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase();
-            FileManager.renameFile(temporary_file, file_name);
-            
-            // Remove temporary file
-            temporary_file.delete();
-            
-            // Insert a new file
-            ctr.insert( id, name, ext, file_name);
-            
-            // Window success
-            JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );
+                
+            if(this.save_type == 0) {
+
+                // Copy file
+                FileManager.copyFile(file, "files/files/");
+
+                // Get new file
+                File temporary_file = new File("files/files/"+file.getName()); 
+
+                // Rename file
+                String file_name = input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase();
+                FileManager.renameFile(temporary_file, file_name);
+
+                // Remove temporary file
+                temporary_file.delete();
+
+                // Insert a new file
+                ctr.insert( id, name, ext, file_name);
+
+                // Window success
+                JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!" );
+                
+            } else {
+                
+                // Verifica se o nome do arquivo foi alterado
+                if( !(this.file_name.equals( this.input_name.getText() )) ) {
+                    System.out.println(this.file_name);
+                    System.out.println(this.input_name.getText());
+                }
+                
+                // Verifica se arquivo fonte foi alterado
+                if( this.file.getName() == null) {
+                    System.out.println("Não foi selecionado");
+                } else {
+                    System.out.println("error");
+                }
+                
+                System.out.println( " -- " + this.file.getName() );
+                
+            }
             
             // Close this window
             this.setVisible(false);

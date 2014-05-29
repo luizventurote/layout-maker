@@ -78,6 +78,7 @@ public class FileDao extends DefaultDao {
         int file_id = 0;
         String file_ext = "";
         String file_name = "";
+        String file_single_name = "";
 
         // SQL que retorna o último ID
         String sql = "SELECT * FROM lm_file WHERE id_file=" + id + " LIMIT 1;";
@@ -91,11 +92,11 @@ public class FileDao extends DefaultDao {
             file_id = rs.getInt(1);
             file_name = rs.getString(2);
             file_ext = rs.getString(3);
-            file_name = this.getFilePath() + rs.getString(4);
+            file_single_name = this.getFilePath() + rs.getString(4);
 
         }
         
-        file = new Arquivo(file_id, file_name, file_ext, file_name);
+        file = new Arquivo(file_id, file_name, file_ext, file_single_name);
 
         return file;
 
@@ -124,9 +125,6 @@ public class FileDao extends DefaultDao {
             file_name = rs.getString(2);
             file_ext = rs.getString(3);
             file_single_name = rs.getString(4);
-            
-            System.out.println(" ---- " + file_name);
-            System.out.println(" ++++ " + file_name);
 
             file = new Arquivo(file_id, file_name, file_ext, file_single_name);
 

@@ -184,6 +184,7 @@ public class FileManagerWin extends javax.swing.JDialog {
             // Get file ID
             int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
             
+            // Build windows
             win_file = new FileWin(file_id, null, true);
         } catch (Exception ex) {
             ErrorView.errorDefault(ex);
@@ -203,6 +204,10 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         try {
             win_file = new FileWin(null, true);
+            
+            btn_alter.setEnabled(false);
+            btn_delete.setEnabled(false);
+            btn_select.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
         }
