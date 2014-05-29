@@ -29,20 +29,23 @@ public class Arquivo {
      */
     private File file;
 
-    public Arquivo(int id, String base_name, String extension, File file) {
-        this.id = id;
-        this.extension = extension;
-
-        // Set file name
-        this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
-    }
+//    public Arquivo(int id, String base_name, String extension, File file) {
+//        this.id = id;
+//        this.extension = extension;
+//
+//        // Set file name
+//        this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
+//        
+//        // Set file
+//        this.file = file;
+//    }
     
-    public Arquivo(String base_name, File file) {
-        this.extension = extension;
-
-        // Set file name
-        this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
-    }
+//    public Arquivo(String base_name, File file) {
+//        this.extension = extension;
+//
+//        // Set file name
+//        this.name = Integer.toString(id) + '_' + base_name + '.' + extension;
+//    }
     
     public Arquivo(int id, String name, String ext, String file_name) {
         this.id = id;
