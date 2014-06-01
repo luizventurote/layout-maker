@@ -5,7 +5,6 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,7 @@ public class FileControl extends DefaultControl {
 
     public FileControl() throws Exception, SQLException {
 
-        fileDao = new FileDao();
+        this.fileDao = new FileDao();
 
     }
 
