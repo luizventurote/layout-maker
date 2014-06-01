@@ -1,5 +1,6 @@
 package dao;
 
+import util.ConnectMySQL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class FileDao extends DefaultDao {
 
     public FileDao() throws Exception, SQLException {
 
-        stmt = ConnectMySQL.startConnection().createStatement();
+        //stmt = ConnectMySQL.startConnection().createStatement();
 
     }
 
@@ -22,27 +23,27 @@ public class FileDao extends DefaultDao {
 
         String sql = "INSERT INTO lm_file (name, extension, file_name) VALUES (?,?,?)";
 
-        PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        pst.setString(1, file.getName());
-        pst.setString(2, file.getExtension());
-        pst.setString(3, file.getFileName());
+        //PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        //pst.setString(1, file.getName());
+        //pst.setString(2, file.getExtension());
+       // pst.setString(3, file.getFileName());
 
         //System.out.println( "ok" + file.getFileName() );
-        pst.execute();
+        //pst.execute();
 
     }
 
     public void delete(int id) throws Exception, SQLException {
 
-        ResultSet rs;
-
-        // SQL que retorna o último ID
-        String sql = "DELETE FROM lm_file WHERE id_file=?;";
-
-        PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        pst.setInt(1, id);
-
-        pst.execute();
+//        ResultSet rs;
+//
+//        // SQL que retorna o último ID
+//        String sql = "DELETE FROM lm_file WHERE id_file=?;";
+//
+//        PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//        pst.setInt(1, id);
+//
+//        pst.execute();
 
     }
 

@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import util.FileManager;
 import model.Framework;
 import control.DefaultControl;
+import dao.DefaultDao;
+import model.Arquivo;
 import util.ErrorView;
 
 public class MainWin extends javax.swing.JFrame {
@@ -20,6 +22,22 @@ public class MainWin extends javax.swing.JFrame {
      */
     public MainWin() throws IOException {
         initComponents();
+        
+        int id = 10;
+        String name = "Teste";
+        String ext = "txt";
+        String file_name = "10_teste.txt";
+
+        Arquivo file = new Arquivo(id, name, ext, file_name);
+        
+        DefaultDao dao;
+        try {
+            dao = new DefaultDao();
+            dao.insert(file);
+        } catch (Exception ex) {
+            Logger.getLogger(MainWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         try {
             DefaultControl ctr = new DefaultControl();
