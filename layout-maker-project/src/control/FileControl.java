@@ -26,6 +26,11 @@ public class FileControl extends DefaultControl {
 
         Arquivo file = new Arquivo(id, name, ext, file_name);
         
+        System.out.println( id );
+        System.out.println( name );
+        System.out.println( ext );
+        System.out.println( file_name );
+        
         this.fileDao.insert(file);
 
     }

@@ -1,32 +1,33 @@
 package model;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
-
 public class ArquivoTest {
+    
+    Arquivo file;
 
+    @Before
+    public void testSetup() {
+        
+        int id = 10;
+        String name = "Teste";
+        String ext = "txt";
+        String file_name = "10_teste.txt";
+
+        this.file = new Arquivo(id, name, ext, file_name);
+    }
 
     /**
-     * Test of setFileName method, of class Arquivo.
+     * Creation file
      */
     @Test
     public void testArquivo() {
-        
-        Arquivo file;
-        
-        int id = 10;
-        String ext = "txt";
-        String base_name = "Teste";
-        String nome = Integer.toString(id) + '_' + base_name + '.' + ext;
-        
-        
-        //file = new Arquivo(id, base_name, ext);
-        
+        assertEquals(10, this.file.getId());
+        assertEquals("Teste", this.file.getName());
+        assertEquals("txt", this.file.getExtension());
+        assertEquals("10_teste.txt", this.file.getFileName());
     }
-    
+
 }
