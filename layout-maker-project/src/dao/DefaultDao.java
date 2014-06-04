@@ -3,9 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import model.Arquivo;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import org.hibernate.*;
 
 public class DefaultDao {
 
@@ -17,8 +15,8 @@ public class DefaultDao {
         /**
          * Start new hibernate session
          */
-        this.sess = util.HibernateUtil.getSessionFactory().openSession();
-        this.sess.beginTransaction();
+        //this.sess = util.HibernateUtil.getSessionFactory().openSession();
+        //this.sess.beginTransaction();
 
     }
 

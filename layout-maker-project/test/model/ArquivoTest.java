@@ -14,9 +14,9 @@ public class ArquivoTest {
         int id = 10;
         String name = "Teste";
         String ext = "txt";
-        String file_name = "10_teste.txt";
+        String dir = "10_teste.txt";
 
-        this.file = new Arquivo(id, name, ext, file_name);
+        this.file = new Arquivo(id, name, ext, dir);
     }
 
     /**
@@ -24,10 +24,13 @@ public class ArquivoTest {
      */
     @Test
     public void testArquivo() {
-        assertEquals(10, this.file.getId());
+        
+        int id = this.file.getId();
+        
+        assertEquals(10, id);
         assertEquals("Teste", this.file.getName());
         assertEquals("txt", this.file.getExtension());
-        assertEquals("10_teste.txt", this.file.getFileName());
+        assertEquals("10_teste.txt", this.file.getDirectory());
     }
 
 }

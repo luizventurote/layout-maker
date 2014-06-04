@@ -1,5 +1,5 @@
-package dao.hibernate;
-// Generated Jun 1, 2014 5:37:10 PM by Hibernate Tools 3.6.0
+package model;
+// Generated Jun 4, 2014 3:58:00 PM by Hibernate Tools 3.6.0
 
 
 

@@ -1,50 +1,12 @@
 package view;
 
-import control.FileManagerControl;
-import static control.FileManagerControl.FileChooser;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import util.FileManager;
-import model.Framework;
-import control.DefaultControl;
-import dao.DefaultDao;
-import model.Arquivo;
-import util.ErrorView;
-
 public class MainWin extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public MainWin() throws IOException {
+    public MainWin() {
         initComponents();
-        
-        int id = 10;
-        String name = "Teste";
-        String ext = "txt";
-        String file_name = "10_teste.txt";
-
-        Arquivo file = new Arquivo(id, name, ext, file_name);
-        
-        DefaultDao dao;
-        try {
-            dao = new DefaultDao();
-            dao.insert(file);
-        } catch (Exception ex) {
-            Logger.getLogger(MainWin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        try {
-            DefaultControl ctr = new DefaultControl();
-        } catch (Exception e) {
-            ErrorView.errorDefault(e);
-        }
-        
     }
 
     /**
@@ -171,6 +133,7 @@ public class MainWin extends javax.swing.JFrame {
     private void btn_componentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_componentsActionPerformed
 
         ComponentManagerWin win_cm = new ComponentManagerWin(this, true);
+        win_cm.setLocationRelativeTo(null);
         win_cm.setVisible(true);
 
     }//GEN-LAST:event_btn_componentsActionPerformed
@@ -184,10 +147,11 @@ public class MainWin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_filesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filesActionPerformed
-        
+
         FileManagerWin win_fm = new FileManagerWin(this, true);
+        win_fm.setLocationRelativeTo(null);
         win_fm.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_filesActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -199,10 +163,11 @@ public class MainWin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btn_configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_configActionPerformed
-        
+
         ConfigWin cw = new ConfigWin(this, true);
+        cw.setLocationRelativeTo(null);
         cw.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_configActionPerformed
 
     /**
@@ -230,11 +195,9 @@ public class MainWin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                try {
-                    new MainWin().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(MainWin.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                MainWin wm = new MainWin();
+                wm.setLocationRelativeTo(null);
+                wm.setVisible(true);
             }
         });
     }

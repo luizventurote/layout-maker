@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jun 1, 2014 5:37:10 PM by Hibernate Tools 3.6.0 -->
+<!-- Generated Jun 4, 2014 3:58:00 PM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="dao.hibernate.LmFile" table="lm_file" catalog="layout_maker">
-        <id name="idFile" type="java.lang.Integer">
-            <column name="id_file" />
+    <class name="model.Arquivo" table="arquivo" catalog="layout_maker">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
         <property name="name" type="string">
@@ -14,8 +14,8 @@
         <property name="extension" type="string">
             <column name="extension" length="5" not-null="true" />
         </property>
-        <property name="fileName" type="string">
-            <column name="file_name" length="45" not-null="true" />
+        <property name="directory" type="string">
+            <column name="directory" length="45" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

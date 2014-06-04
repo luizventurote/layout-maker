@@ -38,7 +38,7 @@ public class FileControl extends DefaultControl {
         
         Arquivo file = this.fileDao.getFile(id);
         
-        File temp_file = new File( file.getFileName() );
+        File temp_file = new File( file.getDirectory());
         
         temp_file.delete();
 
@@ -56,7 +56,7 @@ public class FileControl extends DefaultControl {
         
         Arquivo arquivo = this.fileDao.getFile(id);
         
-        File file = new File( arquivo.getFileName() );
+        File file = new File( arquivo.getDirectory());
 
         return file;
         
@@ -117,7 +117,7 @@ public class FileControl extends DefaultControl {
         win.getInput_id().setText( Integer.toString(id) );
         
         // Load file
-        win.setFile( file.getFileName() );
+        win.setFile( file.getDirectory());
         
         // Load file name
         win.getInput_name().setText( file.getName() );
