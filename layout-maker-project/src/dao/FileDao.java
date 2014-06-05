@@ -1,69 +1,63 @@
 package dao;
 
-import util.ConnectMySQL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import model.Arquivo;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
-public class FileDao extends DefaultDao {
+public class FileDao {
 
-    Statement stmt;
+    Session session;
 
-    public FileDao() throws Exception, SQLException {
+    public FileDao() throws Exception, SQLException, HibernateException {
 
-        //stmt = ConnectMySQL.startConnection().createStatement();
-
-    }
-
-    public void insert(Arquivo file) throws Exception, SQLException {
-
-        String sql = "INSERT INTO lm_file (name, extension, file_name) VALUES (?,?,?)";
-
-        //PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        //pst.setString(1, file.getName());
-        //pst.setString(2, file.getExtension());
-       // pst.setString(3, file.getFileName());
-
-        //System.out.println( "ok" + file.getFileName() );
-        //pst.execute();
+        this.session = util.HibernateUtil.getSessionFactory().openSession();
 
     }
 
-    public void delete(int id) throws Exception, SQLException {
+    public void insert(Arquivo file) throws Exception, SQLException, HibernateException {
 
-//        ResultSet rs;
-//
-//        // SQL que retorna o último ID
-//        String sql = "DELETE FROM lm_file WHERE id_file=?;";
-//
-//        PreparedStatement pst = ConnectMySQL.startConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-//        pst.setInt(1, id);
-//
-//        pst.execute();
+        this.session.beginTransaction();
+
+        this.session.save(file);
+
+        this.session.getTransaction().commit();
+        
+    }
+
+    public void delete(Arquivo file) throws Exception, SQLException, HibernateException {
+
+        this.session.beginTransaction();
+
+        this.session.delete(file);
+
+        this.session.getTransaction().commit();
 
     }
 
-    public int getTheLastIDFile() throws Exception, SQLException {
+    public int getTheLastIDFile() throws Exception, SQLException, HibernateException {
 
-        int file_id = 0;
-        ResultSet rs;
+        int id = this.getTheNextID();
+        
+        return id-1;
 
-        // SQL que retorna o último ID
-        String sql = "SELECT id_file FROM lm_file ORDER BY id_file DESC LIMIT 1;";
+    }
 
-        // Consulta no banco
-        rs = stmt.executeQuery(sql);
+    public int getTheNextID() {
 
-        // Gera o valor do próximo ID
-        while (rs.next()) {
-            file_id = rs.getInt(1) + 1;
-        }
+        this.session.beginTransaction();
 
-        return file_id;
+        // HQL           
+        Query con = this.session.createSQLQuery("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='layout_maker' AND TABLE_NAME='arquivo';");
+
+        List result = con.list();
+
+        this.session.getTransaction().commit();
+        
+        return Integer.parseInt( result.get(0).toString() );
+
     }
 
     /**
@@ -74,67 +68,32 @@ public class FileDao extends DefaultDao {
      */
     public Arquivo getFile(int id) throws Exception, SQLException {
 
-        ResultSet rs;
-        Arquivo file;
-        int file_id = 0;
-        String file_ext = "";
-        String file_name = "";
-        String file_single_name = "";
+        this.session.beginTransaction();
 
-        // SQL que retorna o último ID
-        String sql = "SELECT * FROM lm_file WHERE id_file=" + id + " LIMIT 1;";
+        // HQL           
+        Query con = this.session.createQuery("FROM Arquivo file WHERE file.id=" + id);
 
-        // Consulta no banco
-        rs = stmt.executeQuery(sql);
+        con.setMaxResults(1);
 
-        // Create new file
-        while (rs.next()) {
+        List<Arquivo> result = con.list();
 
-            file_id = rs.getInt(1);
-            file_name = rs.getString(2);
-            file_ext = rs.getString(3);
-            file_single_name = this.getFilePath() + rs.getString(4);
+        this.session.getTransaction().commit();
 
-        }
-        
-        file = new Arquivo(file_id, file_name, file_ext, file_single_name);
-
-        return file;
-
+        return result.get(0);
     }
 
-    public ArrayList<Arquivo> getAllFiles() throws Exception, SQLException {
+    public List<Arquivo> getAllFiles() throws Exception, SQLException {
 
-        ResultSet rs;
-        Arquivo file;
-        int file_id = 0;
-        String file_ext;
-        String file_name;
-        String file_single_name;
-        ArrayList<Arquivo> files = new ArrayList();
+        this.session.beginTransaction();
 
-        // SQL que retorna o último ID
-        String sql = "SELECT * FROM lm_file;";
+        // HQL           
+        Query con = this.session.createQuery("FROM Arquivo");
 
-        // Consulta no banco
-        rs = stmt.executeQuery(sql);
+        List<Arquivo> files = con.list();
 
-        // Gera uma lista de arquivos
-        while (rs.next()) {
-
-            file_id = rs.getInt(1);
-            file_name = rs.getString(2);
-            file_ext = rs.getString(3);
-            file_single_name = rs.getString(4);
-
-            file = new Arquivo(file_id, file_name, file_ext, file_single_name);
-
-            files.add(file);
-
-        }
+        this.session.getTransaction().commit();
 
         return files;
-
     }
 
 }

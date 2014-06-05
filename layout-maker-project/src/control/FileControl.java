@@ -5,13 +5,14 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Arquivo;
 import view.FileWin;
 
-public class FileControl extends DefaultControl {
+public class FileControl {
 
     private FileDao fileDao;
 
@@ -25,11 +26,6 @@ public class FileControl extends DefaultControl {
 
         Arquivo file = new Arquivo(id, name, ext, file_name);
         
-        System.out.println( id );
-        System.out.println( name );
-        System.out.println( ext );
-        System.out.println( file_name );
-        
         this.fileDao.insert(file);
 
     }
@@ -42,7 +38,7 @@ public class FileControl extends DefaultControl {
         
         temp_file.delete();
 
-        this.fileDao.delete(id);
+        this.fileDao.delete(file);
 
     }
 
@@ -50,6 +46,12 @@ public class FileControl extends DefaultControl {
 
         return this.fileDao.getTheLastIDFile();
 
+    }
+    
+    public int getTheNextID() throws Exception, SQLException {
+        
+        return this.fileDao.getTheNextID();
+        
     }
     
     public File getFileByID(int id) throws Exception, SQLException {
@@ -68,11 +70,9 @@ public class FileControl extends DefaultControl {
         
     }
 
-    public ArrayList getAllFiles() throws Exception, SQLException {
+    public List getAllFiles() throws Exception, SQLException {
 
-        ArrayList files = new ArrayList();
-
-        files = this.fileDao.getAllFiles();
+        List files = this.fileDao.getAllFiles();
 
         return files;
 
@@ -80,31 +80,36 @@ public class FileControl extends DefaultControl {
 
     public void loadingAllFilesInTable(JTable table) throws Exception, SQLException {
 
-        ArrayList files = new ArrayList();
-        files = this.getAllFiles();
+        List files = this.getAllFiles();
         Arquivo file;
-
-        // Config table
-        int linha = 0;
-        int col = 0;        
-
-        Iterator<Arquivo> it = files.iterator(); //iterator
-        while (it.hasNext()) {
-            
-            // New Arquivo
-            file =  it.next();
-            
-            // New line
-            ((DefaultTableModel) table.getModel()).addRow(new Vector());
-            table.setValueAt(file.getId(), linha, col++);
-            table.setValueAt(file.getName(), linha, col++);
-            table.setValueAt(file.getExtension(), linha, col);
-            
-            // Reset number of columns
-            col = 0;
         
-            linha++;
-            
+        int size_list = files.size();
+
+        if(size_list > 0) {
+           
+            // Config table
+            int linha = 0;
+            int col = 0;        
+
+            Iterator<Arquivo> it = files.iterator(); //iterator
+            while (it.hasNext()) {
+
+                // New Arquivo
+                file =  it.next();
+
+                // New line
+                ((DefaultTableModel) table.getModel()).addRow(new Vector());
+                table.setValueAt(file.getId(), linha, col++);
+                table.setValueAt(file.getName(), linha, col++);
+                table.setValueAt(file.getExtension(), linha, col);
+
+                // Reset number of columns
+                col = 0;
+
+                linha++;
+
+            }
+        
         }
 
     }

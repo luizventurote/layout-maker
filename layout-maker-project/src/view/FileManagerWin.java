@@ -212,6 +212,7 @@ public class FileManagerWin extends javax.swing.JDialog {
             Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        win_file.setLocationRelativeTo(null);
         win_file.setVisible(true);
 
         try {

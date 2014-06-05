@@ -1,12 +1,19 @@
 package view;
 
+import java.util.List;
+import model.Arquivo;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 public class MainWin extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
     public MainWin() {
+        
         initComponents();
+        
     }
 
     /**
