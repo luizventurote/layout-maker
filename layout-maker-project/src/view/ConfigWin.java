@@ -1,13 +1,22 @@
 package view;
 
+import control.ConfigControl;
+
 public class ConfigWin extends javax.swing.JDialog {
+    
+    ConfigControl ctr;
 
     /**
      * Creates new form ConfigWin Luiz
      */
     public ConfigWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();     
+        initComponents();
+        
+        this.ctr = ConfigControl.getInstance();
+        
+        input_file.setText( this.ctr.getPathFiles() );
+        
     }
 
     /**
@@ -21,7 +30,7 @@ public class ConfigWin extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        input_file = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
@@ -46,7 +55,7 @@ public class ConfigWin extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jTextField1)
+                .addComponent(input_file)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1))
         );
@@ -54,7 +63,7 @@ public class ConfigWin extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(input_file)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -202,6 +211,7 @@ public class ConfigWin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField input_file;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -209,7 +219,6 @@ public class ConfigWin extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
