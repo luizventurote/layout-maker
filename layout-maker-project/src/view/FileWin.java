@@ -20,11 +20,6 @@ public class FileWin extends javax.swing.JDialog {
     private String file_name;
 
     /**
-     * File single/directory name
-     */
-    private String file_single_name;
-
-    /**
      * Controla o salvamento do arquivo. 0 - Cria o arquivo. 1 - O arquivo
      * alterado é salvo.
      */
@@ -63,13 +58,14 @@ public class FileWin extends javax.swing.JDialog {
         // Save file name
         this.file_name = this.input_name.getText();
 
-        // Save file single/directory name
-        this.file_single_name = this.getName();
-
-        System.out.println(this.file_single_name);
-
         // Altera o tipo de salvamento
         this.save_type = 1;
+
+        System.out.println(" --- Antes --- ");
+        System.out.println(id);
+        System.out.println(file_name);
+        System.out.println(this.file.getAbsolutePath());
+        System.out.println(this.file.getName());
 
     }
 
@@ -191,22 +187,35 @@ public class FileWin extends javax.swing.JDialog {
 
         try {
 
-            // Select a file
-            this.file = FileManagerControl.FileChooser(this);
+            // Verifica se já existe um arquivo na área de seleção
+            if (this.file.isFile()) {
 
-            // Get file extension and set in the input field
-            input_ext.setText(FileManagerControl.getFileExtension(file));
+                // Select a new file
+                this.file = FileManagerControl.FileChooser(this);
 
-            // Check ID and set in the input type
-            if (id == 0) {
-                ctr.insert(id, "test", "txt", "0_test.txt");
-                input_id.setText(Integer.toString(ctr.getTheLastIDFile()));
-                ctr.delete(ctr.getTheLastIDFile() - 1);
-            }
+                // Get file extension and set in the input field
+                input_ext.setText(FileManagerControl.getFileExtension(file));
 
-            // Set name text
-            if ("".equals(input_name.getText())) {
-                input_name.setText(file.getName());
+            } else {
+
+                // Select a file
+                this.file = FileManagerControl.FileChooser(this);
+
+                // Get file extension and set in the input field
+                input_ext.setText(FileManagerControl.getFileExtension(file));
+
+                // Check ID and set in the input type
+                if (id == 0) {
+                    ctr.insert(id, "test", "txt", "0_test.txt");
+                    input_id.setText(Integer.toString(ctr.getTheLastIDFile()));
+                    ctr.delete(ctr.getTheLastIDFile() - 1);
+                }
+
+                // Set name text
+                if ("".equals(input_name.getText())) {
+                    input_name.setText(file.getName());
+                }
+
             }
 
         } catch (Exception e) {
@@ -257,19 +266,27 @@ public class FileWin extends javax.swing.JDialog {
 
                 // Verifica se o nome do arquivo foi alterado
                 if (!(this.file_name.equals(this.input_name.getText()))) {
-                    System.out.println(this.file_name);
-                    System.out.println(this.input_name.getText());
+                    
+                    // Adiciona um novo nome para o arquivo
+                    this.file_name = this.input_name.getText();
+                    
                 }
-
-                // Verifica se arquivo fonte foi alterado
-                if (this.file.getName() == null) {
-                    System.out.println("Não foi selecionado");
-                } else {
-                    System.out.println("error");
-                }
-
-                System.out.println(" -- " + this.file.getName());
-
+//                
+//                System.out.println(this.file.getAbsolutePath());
+//
+//                // Verifica se arquivo fonte foi alterado
+//                if (this.file.getName() == null) {
+//                    System.out.println("Não foi selecionado");
+//                } else {
+//                    System.out.println("error");
+//                }
+//                
+//                System.out.println(this.file.getAbsolutePath());
+//
+//                System.out.println(" -- " + this.file.getName());
+                
+                ctr.update(id, file_name, this.file);
+                
             }
 
             // Close this window
@@ -344,9 +361,16 @@ public class FileWin extends javax.swing.JDialog {
         return file;
     }
 
-    public void setFile(String file_name) {
+    public void setFile(String file_name) throws Exception {
         File new_file = new File(file_name);
-        this.file = new_file;
+
+        // Verifica se o arquivo existe
+        if (new_file.isFile()) {
+            this.file = new_file;
+        } else {
+            throw new Exception("O arquivo não foi encontrado!");
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,6 +36,16 @@ public class FileDao {
         this.session.getTransaction().commit();
 
     }
+    
+    public void update(Arquivo file) throws Exception, SQLException, HibernateException {
+        
+        this.session.beginTransaction();
+
+        this.session.update(file);
+
+        this.session.getTransaction().commit();
+        
+    }
 
     public int getTheLastIDFile() throws Exception, SQLException, HibernateException {
 
@@ -94,6 +104,26 @@ public class FileDao {
         this.session.getTransaction().commit();
 
         return files;
+    }
+    
+    public boolean checkFileInRepository(int id) {
+        
+        this.session.beginTransaction();
+
+        // HQL           
+        Query con = this.session.createQuery("FROM Arquivo file WHERE file.directory= LIKE '"+id+"_%'");
+        
+        // Quantidade de registros retornados
+        int result_cont = con.list().size();
+        
+        this.session.getTransaction().commit();
+        
+        if( con.list().size() > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

@@ -15,7 +15,7 @@ public class FileManagerWin extends javax.swing.JDialog {
     FileControl ctr;
     ArrayList files;
     int row_selected;
-    
+
     public FileManagerWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -177,21 +177,23 @@ public class FileManagerWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_alterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterActionPerformed
-        
+
         FileWin win_file = null;
 
         try {
             // Get file ID
             int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
-            
+
             // Build windows
             win_file = new FileWin(file_id, null, true);
+
+            win_file.setLocationRelativeTo(null);
+            win_file.setVisible(true);
+
         } catch (Exception ex) {
             ErrorView.errorDefault(ex);
         }
 
-        win_file.setVisible(true);
-        
     }//GEN-LAST:event_btn_alterActionPerformed
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
@@ -204,7 +206,7 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         try {
             win_file = new FileWin(null, true);
-            
+
             btn_alter.setEnabled(false);
             btn_delete.setEnabled(false);
             btn_select.setEnabled(false);
@@ -225,16 +227,16 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
 
-            try {
-                // Delete file
-                int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
-                ctr.delete(file_id);
-                
-                this.refreshTable();
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
-            }
+        try {
+            // Delete file
+            int file_id = Integer.parseInt(file_list.getValueAt(this.row_selected, 0).toString());
+            ctr.delete(file_id);
+
+            this.refreshTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
+        }
 
     }//GEN-LAST:event_btn_deleteActionPerformed
 
@@ -302,15 +304,15 @@ public class FileManagerWin extends javax.swing.JDialog {
         file_list.clearSelection();
 
         // Clean table
-        for (int i = file_list.getRowCount()-1; i >= 0; i--) {
+        for (int i = file_list.getRowCount() - 1; i >= 0; i--) {
             ((DefaultTableModel) file_list.getModel()).removeRow(i);
         }
-        
+
         // Loading files in the table
         ctr.loadingAllFilesInTable(file_list);
-        
+
         // Check list is empty 
-        if( file_list.getRowCount() == 0 ) {
+        if (file_list.getRowCount() == 0) {
             btn_alter.setEnabled(false);
             btn_delete.setEnabled(false);
             btn_select.setEnabled(false);

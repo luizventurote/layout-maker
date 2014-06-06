@@ -41,9 +41,9 @@ public class FileControl {
 
         // Pega os dados do arquivo a partir do ID
         Arquivo file = this.fileDao.getFile(id);
-
+        
         // Monta o arquivo passando o diretório de arquivos mais o nome do arquivo
-        File temp_file = new File("files/filefs/" + file.getDirectory());
+        File temp_file = new File(ConfigControl.getInstance().getPathFiles() + file.getDirectory());
 
         // Verifica se o arquivo realmente existe no repositório
         if (temp_file.isFile()) {
@@ -57,6 +57,44 @@ public class FileControl {
             throw new Exception("O arquivo não foi encontrado!");
         }
 
+    }
+    
+    /**
+     * Atualiza os dados do arquivo no banco de dados
+     * 
+     * @param id ID do arquivo
+     * @param file_name Nome personalizado do arquivo
+     * @param file_directory Diretório onde se encontra o arquivo
+     * @throws Exception
+     * @throws SQLException 
+     */
+    public void update(int id, String file_name, File file) throws Exception, SQLException {
+        
+        // Carrega o arquivo antigo
+        Arquivo file_old = this.fileDao.getFile(id);
+        
+        System.out.println("");
+        
+        System.out.println( file_old.getDirectory() );
+        
+        System.out.println( id );
+        
+        System.out.println(file_name);
+        
+        System.out.println( file.getAbsoluteFile() );
+        
+        System.out.println("");
+        
+        if( this.checkFileInRepository( file.getName() ) ) {
+            System.out.println("O arquivo já existe");
+        } else {
+            System.out.println("Não existe");
+        }
+        
+        System.out.println("============================");
+        
+        //System.out.println( this.checkFileInRepository(id) );
+        
     }
 
     public int getTheLastIDFile() throws Exception, SQLException {
@@ -139,7 +177,7 @@ public class FileControl {
         win.getInput_id().setText(Integer.toString(id));
 
         // Load file
-        win.setFile(file.getDirectory());
+        win.setFile(ConfigControl.getInstance().getPathFiles() + file.getDirectory());
 
         // Load file name
         win.getInput_name().setText(file.getName());
@@ -147,6 +185,32 @@ public class FileControl {
         // Load extension
         win.getInput_ext().setText(file.getExtension());
 
+    }
+    
+    /**
+     * Verifica se um determinado arquivo existe no repositório de arquivos.
+     * 
+     * @param file_name Nome do arquivo a ser verificado
+     * @return boolean
+     */
+    public boolean checkFileInRepository(String file_name) {
+        
+        File file = new File( ConfigControl.getInstance().getPathFiles() + file_name );
+        
+        return file.isFile();
+        
+    }
+    
+    /**
+     * Verifica se um determinado arquivo existe no repositório de arquivos através do ID
+     * 
+     * @param id ID do arquivo
+     * @return boolean
+     */
+    public boolean checkFileInRepository(int id) {
+        
+        return this.fileDao.checkFileInRepository(id);
+        
     }
 
 }
