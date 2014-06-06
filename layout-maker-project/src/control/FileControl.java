@@ -254,6 +254,9 @@ public class FileControl {
             case 1: // Pesquisar Nome
                 list = fileDao.search(search);
                 break;
+            case 2: // Pesquisar Extensão
+                list = fileDao.searchExtension(search);
+                break;
         }
         
         // Clean table

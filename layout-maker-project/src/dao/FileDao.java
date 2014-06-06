@@ -268,4 +268,30 @@ public class FileDao {
         
     }
 
+    public List searchExtension(String ext) {
+        
+        List list = null;
+        
+        try {
+            
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+            
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo file WHERE file.extension='"+ext+"'");
+            
+            list = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            this.session.getTransaction().rollback();
+        } finally {
+            if (this.session != null) { this.session.close(); }
+            return list;
+        }
+        
+    }
+
 }
