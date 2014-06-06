@@ -12,61 +12,104 @@ public class FileDao {
     Session session;
 
     public FileDao() throws Exception, SQLException, HibernateException {
-
-        this.session = util.HibernateUtil.getSessionFactory().openSession();
-
     }
 
     public void insert(Arquivo file) throws Exception, SQLException, HibernateException {
 
-        this.session.beginTransaction();
+        try {
 
-        this.session.save(file);
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
 
-        this.session.getTransaction().commit();
-        
+            this.session.beginTransaction();
+
+            this.session.save(file);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     public void delete(Arquivo file) throws Exception, SQLException, HibernateException {
 
-        this.session.beginTransaction();
+        try {
 
-        this.session.delete(file);
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
 
-        this.session.getTransaction().commit();
+            this.session.beginTransaction();
 
+            this.session.delete(file);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
-    
+
     public void update(Arquivo file) throws Exception, SQLException, HibernateException {
-        
-        this.session.beginTransaction();
 
-        this.session.update(file);
+        try {
 
-        this.session.getTransaction().commit();
-        
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            this.session.update(file);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     public int getTheLastIDFile() throws Exception, SQLException, HibernateException {
 
         int id = this.getTheNextID();
-        
-        return id-1;
+
+        return id - 1;
 
     }
 
     public int getTheNextID() {
-
-        this.session.beginTransaction();
-
-        // HQL           
-        Query con = this.session.createSQLQuery("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='layout_maker' AND TABLE_NAME='arquivo';");
-
-        List result = con.list();
-
-        this.session.getTransaction().commit();
         
-        return Integer.parseInt( result.get(0).toString() );
+        int id = 0;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createSQLQuery("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='layout_maker' AND TABLE_NAME='arquivo';");
+
+            List result = con.list();
+            
+            id = Integer.parseInt(result.get(0).toString());
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) { session.close(); }
+            return id;
+        }
 
     }
 
@@ -78,50 +121,89 @@ public class FileDao {
      */
     public Arquivo getFile(int id) throws Exception, SQLException {
 
-        this.session.beginTransaction();
+        Arquivo file = null;
 
-        // HQL           
-        Query con = this.session.createQuery("FROM Arquivo file WHERE file.id=" + id);
+        try {
 
-        con.setMaxResults(1);
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
 
-        List<Arquivo> result = con.list();
+            this.session.beginTransaction();
 
-        this.session.getTransaction().commit();
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo file WHERE file.id=" + id);
 
-        return result.get(0);
+            con.setMaxResults(1);
+
+            List<Arquivo> result = con.list();
+
+            file = result.get(0);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) { session.close(); }
+            return file;
+        }
     }
 
     public List<Arquivo> getAllFiles() throws Exception, SQLException {
 
-        this.session.beginTransaction();
+        List<Arquivo> files = null;
 
-        // HQL           
-        Query con = this.session.createQuery("FROM Arquivo");
+        try {
 
-        List<Arquivo> files = con.list();
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
 
-        this.session.getTransaction().commit();
+            this.session.beginTransaction();
 
-        return files;
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo");
+
+            files = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) { session.close(); }
+            return files;
+        }
+
     }
-    
+
     public boolean checkFileInRepository(int id) {
         
-        this.session.beginTransaction();
+        int size = 0;
 
-        // HQL           
-        Query con = this.session.createQuery("FROM Arquivo file WHERE file.directory= LIKE '"+id+"_%'");
-        
-        // Quantidade de registros retornados
-        int result_cont = con.list().size();
-        
-        this.session.getTransaction().commit();
-        
-        if( con.list().size() > 0 ) {
-            return true;
-        } else {
-            return false;
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo file WHERE file.directory= LIKE '" + Integer.toString(id) + "_%'");
+            
+            size = con.list().size();
+
+            // Quantidade de registros retornados
+            int result_cont = con.list().size();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) { session.close(); }
+
+            if (size > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }

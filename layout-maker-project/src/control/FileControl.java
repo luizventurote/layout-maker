@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Arquivo;
+import util.FileManager;
 import view.FileWin;
 
 public class FileControl {
@@ -44,18 +45,12 @@ public class FileControl {
         
         // Monta o arquivo passando o diretório de arquivos mais o nome do arquivo
         File temp_file = new File(ConfigControl.getInstance().getPathFiles() + file.getDirectory());
+ 
+        // Apaga o arquivo do repositório
+        temp_file.delete();
 
-        // Verifica se o arquivo realmente existe no repositório
-        if (temp_file.isFile()) {
-            
-            // Apaga o arquivo do repositório
-            temp_file.delete();
-
-            // Apaga o registro no banco
-            this.fileDao.delete(file);
-        } else {
-            throw new Exception("O arquivo não foi encontrado!");
-        }
+        // Apaga o registro no banco
+        this.fileDao.delete(file);
 
     }
     
@@ -64,36 +59,36 @@ public class FileControl {
      * 
      * @param id ID do arquivo
      * @param file_name Nome personalizado do arquivo
-     * @param file_directory Diretório onde se encontra o arquivo
+     * @param file Fonte do arquivo
+     * @param ext extensão do arquivo
      * @throws Exception
      * @throws SQLException 
      */
-    public void update(int id, String file_name, File file) throws Exception, SQLException {
+    public void update(int id, String file_name, File file, String ext) throws Exception, SQLException {
         
-        // Carrega o arquivo antigo
-        Arquivo file_old = this.fileDao.getFile(id);
+        // Carrega o arquivo
+        Arquivo arquivo = this.fileDao.getFile(id);
         
-        System.out.println("");
+        // Arquivo fonte antigo
+        File arquivo_old = file;
+
+        // Altera o nome
+        arquivo.setName(file_name);
         
-        System.out.println( file_old.getDirectory() );
+        // Altera a extensão
+        arquivo.setExtension(ext);
         
-        System.out.println( id );
+        // Gera um novo diretório
+        arquivo.generateDirectory();
         
-        System.out.println(file_name);
+        // Gera um novo arquivo com o nome alterado
+        FileManager.renameFile(file, arquivo.getDirectory());
         
-        System.out.println( file.getAbsoluteFile() );
+        // Apaga o arquivo antigo
+        arquivo_old.delete();
         
-        System.out.println("");
-        
-        if( this.checkFileInRepository( file.getName() ) ) {
-            System.out.println("O arquivo já existe");
-        } else {
-            System.out.println("Não existe");
-        }
-        
-        System.out.println("============================");
-        
-        //System.out.println( this.checkFileInRepository(id) );
+        // Atualiza o arquivo no banco
+        this.fileDao.update(arquivo);
         
     }
 
@@ -119,10 +114,33 @@ public class FileControl {
 
     }
 
-    public Arquivo getArquivoByID(int id) throws Exception, SQLException {
+    private Arquivo getArquivoByID(int id) throws Exception, SQLException {
 
         return this.fileDao.getFile(id);
 
+    }
+    
+    /**
+     * Pega os dados de um arquivo pelo ID
+     * 
+     * @param id ID do arquivo
+     * @return arquivo Dados de um determinado arquivo
+     * @throws Exception
+     * @throws SQLException 
+     */
+    public ArrayList getFileDataByID(int id) throws Exception, SQLException {
+        
+        ArrayList arquivo = new ArrayList();
+        
+        Arquivo file = this.getArquivoByID(id);
+        
+        arquivo.add( id );
+        arquivo.add( file.getName() );
+        arquivo.add( file.getExtension() );
+        arquivo.add( file.getDirectory() );        
+        
+        return arquivo;
+        
     }
 
     public List getAllFiles() throws Exception, SQLException {
@@ -156,7 +174,8 @@ public class FileControl {
                 ((DefaultTableModel) table.getModel()).addRow(new Vector());
                 table.setValueAt(file.getId(), linha, col++);
                 table.setValueAt(file.getName(), linha, col++);
-                table.setValueAt(file.getExtension(), linha, col);
+                table.setValueAt(file.getExtension(), linha, col++);
+                table.setValueAt(file.getDirectory(), linha, col);
 
                 // Reset number of columns
                 col = 0;

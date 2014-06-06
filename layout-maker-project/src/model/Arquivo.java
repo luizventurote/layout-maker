@@ -73,5 +73,9 @@ public class Arquivo implements java.io.Serializable {
     public void setDirectory(String directory) {
         this.directory = directory;
     }
+    
+    public void generateDirectory() {
+        this.directory = this.id + "_" + this.name.replaceAll(" ", "_").toLowerCase()+'.'+this.extension;
+    }
 
 }

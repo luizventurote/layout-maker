@@ -51,6 +51,7 @@ public class FileManagerWin extends javax.swing.JDialog {
         btn_select = new javax.swing.JToggleButton();
         add_component = new javax.swing.JToggleButton();
         btn_delete = new javax.swing.JToggleButton();
+        btn_atualizar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciador de Arquivos");
@@ -61,14 +62,14 @@ public class FileManagerWin extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Nome", "Categoria"
+                "ID", "Nome", "Extensão", "Diretório"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -129,6 +130,13 @@ public class FileManagerWin extends javax.swing.JDialog {
             }
         });
 
+        btn_atualizar.setText("Atualizar");
+        btn_atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,6 +153,8 @@ public class FileManagerWin extends javax.swing.JDialog {
                         .addComponent(jToggleButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_atualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_alter)
@@ -169,7 +179,8 @@ public class FileManagerWin extends javax.swing.JDialog {
                     .addComponent(add_component, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_alter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,6 +200,10 @@ public class FileManagerWin extends javax.swing.JDialog {
 
             win_file.setLocationRelativeTo(null);
             win_file.setVisible(true);
+
+            this.refreshTable();
+
+            this.refreshTable();
 
         } catch (Exception ex) {
             ErrorView.errorDefault(ex);
@@ -259,6 +274,16 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     }//GEN-LAST:event_file_listMouseClicked
 
+    private void btn_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atualizarActionPerformed
+
+        try {
+            this.refreshTable();
+        } catch (Exception ex) {
+            Logger.getLogger(FileManagerWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_atualizarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -322,6 +347,7 @@ public class FileManagerWin extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
     private javax.swing.JToggleButton btn_alter;
+    private javax.swing.JToggleButton btn_atualizar;
     private javax.swing.JToggleButton btn_delete;
     private javax.swing.JToggleButton btn_select;
     private javax.swing.JTable file_list;

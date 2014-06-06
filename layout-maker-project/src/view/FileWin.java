@@ -11,7 +11,7 @@ import util.ErrorView;
 public class FileWin extends javax.swing.JDialog {
 
     private FileControl ctr;
-    private File file;
+    private File file = null;
     private int file_id = 0;
 
     /**
@@ -60,12 +60,6 @@ public class FileWin extends javax.swing.JDialog {
 
         // Altera o tipo de salvamento
         this.save_type = 1;
-
-        System.out.println(" --- Antes --- ");
-        System.out.println(id);
-        System.out.println(file_name);
-        System.out.println(this.file.getAbsolutePath());
-        System.out.println(this.file.getName());
 
     }
 
@@ -188,7 +182,7 @@ public class FileWin extends javax.swing.JDialog {
         try {
 
             // Verifica se já existe um arquivo na área de seleção
-            if (this.file.isFile()) {
+            if ( !(this.file == null) ) {
 
                 // Select a new file
                 this.file = FileManagerControl.FileChooser(this);
@@ -250,7 +244,7 @@ public class FileWin extends javax.swing.JDialog {
                 File temporary_file = new File("files/files/" + file.getName());
 
                 // Rename file
-                String file_name = input_id.getText() + "_" + file.getName().replaceAll(" ", "_").toLowerCase();
+                String file_name = input_id.getText() + "_" + input_name.getText().replaceAll(" ", "_").toLowerCase()+'.'+input_ext.getText();
                 FileManager.renameFile(temporary_file, file_name);
 
                 // Remove temporary file
@@ -271,21 +265,12 @@ public class FileWin extends javax.swing.JDialog {
                     this.file_name = this.input_name.getText();
                     
                 }
-//                
-//                System.out.println(this.file.getAbsolutePath());
-//
-//                // Verifica se arquivo fonte foi alterado
-//                if (this.file.getName() == null) {
-//                    System.out.println("Não foi selecionado");
-//                } else {
-//                    System.out.println("error");
-//                }
-//                
-//                System.out.println(this.file.getAbsolutePath());
-//
-//                System.out.println(" -- " + this.file.getName());
                 
-                ctr.update(id, file_name, this.file);
+                // Atualiza no banco
+                ctr.update(id, file_name, this.file, ext);
+                
+                // Window success
+                JOptionPane.showMessageDialog(null, "Arquivo alterado com sucesso!");
                 
             }
 
