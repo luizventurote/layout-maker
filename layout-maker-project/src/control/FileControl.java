@@ -25,20 +25,37 @@ public class FileControl {
     public void insert(int id, String name, String ext, String file_name) throws Exception, SQLException {
 
         Arquivo file = new Arquivo(id, name, ext, file_name);
-        
+
         this.fileDao.insert(file);
 
     }
-    
-    public void delete(int id) throws Exception, SQLException {
-        
-        Arquivo file = this.fileDao.getFile(id);
-        
-        File temp_file = new File( file.getDirectory());
-        
-        temp_file.delete();
 
-        this.fileDao.delete(file);
+    /**
+     * Deleta o arquivo e exclui o seu registro no banco de dados
+     *
+     * @param id ID do arquivo que será excluído
+     * @throws Exception
+     * @throws SQLException
+     */
+    public void delete(int id) throws Exception, SQLException {
+
+        // Pega os dados do arquivo a partir do ID
+        Arquivo file = this.fileDao.getFile(id);
+
+        // Monta o arquivo passando o diretório de arquivos mais o nome do arquivo
+        File temp_file = new File("files/filefs/" + file.getDirectory());
+
+        // Verifica se o arquivo realmente existe no repositório
+        if (temp_file.isFile()) {
+            
+            // Apaga o arquivo do repositório
+            temp_file.delete();
+
+            // Apaga o registro no banco
+            this.fileDao.delete(file);
+        } else {
+            throw new Exception("O arquivo não foi encontrado!");
+        }
 
     }
 
@@ -47,27 +64,27 @@ public class FileControl {
         return this.fileDao.getTheLastIDFile();
 
     }
-    
+
     public int getTheNextID() throws Exception, SQLException {
-        
+
         return this.fileDao.getTheNextID();
-        
+
     }
-    
+
     public File getFileByID(int id) throws Exception, SQLException {
-        
+
         Arquivo arquivo = this.fileDao.getFile(id);
-        
-        File file = new File( arquivo.getDirectory());
+
+        File file = new File(arquivo.getDirectory());
 
         return file;
-        
+
     }
-    
+
     public Arquivo getArquivoByID(int id) throws Exception, SQLException {
 
         return this.fileDao.getFile(id);
-        
+
     }
 
     public List getAllFiles() throws Exception, SQLException {
@@ -82,20 +99,20 @@ public class FileControl {
 
         List files = this.getAllFiles();
         Arquivo file;
-        
+
         int size_list = files.size();
 
-        if(size_list > 0) {
-           
+        if (size_list > 0) {
+
             // Config table
             int linha = 0;
-            int col = 0;        
+            int col = 0;
 
             Iterator<Arquivo> it = files.iterator(); //iterator
             while (it.hasNext()) {
 
                 // New Arquivo
-                file =  it.next();
+                file = it.next();
 
                 // New line
                 ((DefaultTableModel) table.getModel()).addRow(new Vector());
@@ -109,27 +126,27 @@ public class FileControl {
                 linha++;
 
             }
-        
+
         }
 
     }
-    
-    public void loadValuesByID(FileWin win, int id) throws Exception, SQLException{
-        
+
+    public void loadValuesByID(FileWin win, int id) throws Exception, SQLException {
+
         Arquivo file = this.getArquivoByID(id);
-        
+
         // Load ID
-        win.getInput_id().setText( Integer.toString(id) );
-        
+        win.getInput_id().setText(Integer.toString(id));
+
         // Load file
-        win.setFile( file.getDirectory());
-        
+        win.setFile(file.getDirectory());
+
         // Load file name
-        win.getInput_name().setText( file.getName() );
-        
+        win.getInput_name().setText(file.getName());
+
         // Load extension
-        win.getInput_ext().setText( file.getExtension() );
-        
+        win.getInput_ext().setText(file.getExtension());
+
     }
 
 }
