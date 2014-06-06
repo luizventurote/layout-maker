@@ -1,9 +1,7 @@
 package view;
 
 import control.FileControl;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -44,9 +42,9 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         file_list = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        btn_search = new javax.swing.JToggleButton();
+        input_search = new javax.swing.JTextField();
+        search_type = new javax.swing.JComboBox();
         btn_alter = new javax.swing.JToggleButton();
         btn_select = new javax.swing.JToggleButton();
         add_component = new javax.swing.JToggleButton();
@@ -87,15 +85,25 @@ public class FileManagerWin extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(file_list);
 
-        jToggleButton1.setText("Pesquisar");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btn_search.setText("Pesquisar");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btn_searchActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        input_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                input_searchActionPerformed(evt);
+            }
+        });
+
+        search_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Extensão" }));
+        search_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_typeActionPerformed(evt);
+            }
+        });
 
         btn_alter.setText("Alterar");
         btn_alter.setEnabled(false);
@@ -146,11 +154,11 @@ public class FileManagerWin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_type, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(input_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1))
+                        .addComponent(btn_search))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_atualizar)
@@ -169,9 +177,9 @@ public class FileManagerWin extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(input_search)
+                    .addComponent(search_type, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -200,8 +208,6 @@ public class FileManagerWin extends javax.swing.JDialog {
 
             win_file.setLocationRelativeTo(null);
             win_file.setVisible(true);
-
-            this.refreshTable();
 
             this.refreshTable();
 
@@ -255,9 +261,9 @@ public class FileManagerWin extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btn_deleteActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void input_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_input_searchActionPerformed
 
     private void file_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_file_listMouseClicked
 
@@ -283,6 +289,26 @@ public class FileManagerWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_atualizarActionPerformed
+
+    private void search_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_typeActionPerformed
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        
+        try {
+            
+            if( "".equals( input_search.getText() ) ) {
+                JOptionPane.showMessageDialog(this, "Você precisa informar o que quer pesquisar!");
+            } else {
+                ctr.search(file_list, search_type.getSelectedIndex(), input_search.getText() );
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERRO ao PESQUISAR. " + ex.getMessage() );
+        }
+        
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -342,6 +368,9 @@ public class FileManagerWin extends javax.swing.JDialog {
             btn_delete.setEnabled(false);
             btn_select.setEnabled(false);
         }
+        
+        // Clean search input
+        input_search.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -349,11 +378,11 @@ public class FileManagerWin extends javax.swing.JDialog {
     private javax.swing.JToggleButton btn_alter;
     private javax.swing.JToggleButton btn_atualizar;
     private javax.swing.JToggleButton btn_delete;
+    private javax.swing.JToggleButton btn_search;
     private javax.swing.JToggleButton btn_select;
     private javax.swing.JTable file_list;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JTextField input_search;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JComboBox search_type;
     // End of variables declaration//GEN-END:variables
 }

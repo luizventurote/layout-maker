@@ -86,7 +86,7 @@ public class FileDao {
     }
 
     public int getTheNextID() {
-        
+
         int id = 0;
 
         try {
@@ -99,7 +99,7 @@ public class FileDao {
             Query con = this.session.createSQLQuery("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='layout_maker' AND TABLE_NAME='arquivo';");
 
             List result = con.list();
-            
+
             id = Integer.parseInt(result.get(0).toString());
 
             this.session.getTransaction().commit();
@@ -107,7 +107,9 @@ public class FileDao {
         } catch (HibernateException he) {
             session.getTransaction().rollback();
         } finally {
-            if (session != null) { session.close(); }
+            if (session != null) {
+                session.close();
+            }
             return id;
         }
 
@@ -143,7 +145,9 @@ public class FileDao {
         } catch (HibernateException he) {
             session.getTransaction().rollback();
         } finally {
-            if (session != null) { session.close(); }
+            if (session != null) {
+                session.close();
+            }
             return file;
         }
     }
@@ -168,14 +172,16 @@ public class FileDao {
         } catch (HibernateException he) {
             session.getTransaction().rollback();
         } finally {
-            if (session != null) { session.close(); }
+            if (session != null) {
+                session.close();
+            }
             return files;
         }
 
     }
 
     public boolean checkFileInRepository(int id) {
-        
+
         int size = 0;
 
         try {
@@ -186,7 +192,7 @@ public class FileDao {
 
             // HQL           
             Query con = this.session.createQuery("FROM Arquivo file WHERE file.directory= LIKE '" + Integer.toString(id) + "_%'");
-            
+
             size = con.list().size();
 
             // Quantidade de registros retornados
@@ -197,7 +203,9 @@ public class FileDao {
         } catch (HibernateException he) {
             session.getTransaction().rollback();
         } finally {
-            if (session != null) { session.close(); }
+            if (session != null) {
+                session.close();
+            }
 
             if (size > 0) {
                 return true;
@@ -206,6 +214,58 @@ public class FileDao {
             }
         }
 
+    }
+
+    public List search(String search) {
+        
+        List list = null;
+        
+        try {
+            
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+            
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo file WHERE file.name LIKE '%" + search + "%' ");
+            
+            list = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            this.session.getTransaction().rollback();
+        } finally {
+            if (this.session != null) { this.session.close(); }
+            return list;
+        }
+
+    }
+
+    public List search(int id) {
+        
+        List list = null;
+        
+        try {
+            
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+            
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Arquivo file WHERE file.id="+id);
+            
+            list = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            this.session.getTransaction().rollback();
+        } finally {
+            if (this.session != null) { this.session.close(); }
+            return list;
+        }
+        
     }
 
 }
