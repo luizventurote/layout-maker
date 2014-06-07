@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS componente (
   PRIMARY KEY (id),
   CONSTRAINT fk_componente_categoria1
     FOREIGN KEY (categoria_id)
-    REFERENCEScategoria (id)
+    REFERENCES categoria (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -59,12 +59,12 @@ CREATE TABLE IF NOT EXISTS componente_arquivo (
   PRIMARY KEY (componente_id, arquivo_id),
   CONSTRAINT fk_componente_has_arquivo_componente
     FOREIGN KEY (componente_id)
-    REFERENCEScomponente (id)
+    REFERENCES componente (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_componente_has_arquivo_arquivo1
     FOREIGN KEY (arquivo_id)
-    REFERENCESarquivo (id)
+    REFERENCES arquivo (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
