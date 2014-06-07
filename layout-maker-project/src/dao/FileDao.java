@@ -5,13 +5,13 @@ import java.util.List;
 import model.Arquivo;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 
-public class FileDao {
-
-    Session session;
+public class FileDao extends DefaultDao {
 
     public FileDao() throws Exception, SQLException, HibernateException {
+        
+        this.setTable_reference("arquivo");
+        
     }
 
     public void insert(Arquivo file) throws Exception, SQLException, HibernateException {
@@ -82,36 +82,6 @@ public class FileDao {
         int id = this.getTheNextID();
 
         return id - 1;
-
-    }
-
-    public int getTheNextID() {
-
-        int id = 0;
-
-        try {
-
-            this.session = util.HibernateUtil.getSessionFactory().openSession();
-
-            this.session.beginTransaction();
-
-            // HQL           
-            Query con = this.session.createSQLQuery("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='layout_maker' AND TABLE_NAME='arquivo';");
-
-            List result = con.list();
-
-            id = Integer.parseInt(result.get(0).toString());
-
-            this.session.getTransaction().commit();
-
-        } catch (HibernateException he) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-            return id;
-        }
 
     }
 
