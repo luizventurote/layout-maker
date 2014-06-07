@@ -3,24 +3,19 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Jun 7, 2014 1:46:42 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="model.Componente" table="componente" catalog="layout_maker">
+    <class name="model.Categoria" table="categoria" catalog="layout_maker">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="categoria" class="model.Categoria" fetch="select">
-            <column name="categoria_id" not-null="true" />
-        </many-to-one>
         <property name="nome" type="string">
             <column name="nome" length="45" not-null="true" />
         </property>
-        <set name="arquivos" table="componente_arquivo" inverse="false" lazy="true" fetch="select">
+        <set name="componentes" table="componente" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="componente_id" not-null="true" />
+                <column name="categoria_id" not-null="true" />
             </key>
-            <many-to-many entity-name="model.Arquivo">
-                <column name="arquivo_id" not-null="true" />
-            </many-to-many>
+            <one-to-many class="model.Componente" />
         </set>
     </class>
 </hibernate-mapping>

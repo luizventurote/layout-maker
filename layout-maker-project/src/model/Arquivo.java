@@ -1,5 +1,5 @@
 package model;
-// Generated Jun 7, 2014 1:29:31 AM by Hibernate Tools 3.6.0
+// Generated Jun 7, 2014 1:46:42 AM by Hibernate Tools 3.6.0
 
 
 import java.io.File;
@@ -17,11 +17,6 @@ public class Arquivo  implements java.io.Serializable {
      private String extension;
      private String directory;
      private Set componentes = new HashSet(0);
-     
-     /**
-     * File source
-     */
-    private File file;
 
     public Arquivo() {
     }
@@ -48,7 +43,6 @@ public class Arquivo  implements java.io.Serializable {
         this.extension = ext;
         this.directory = dir;
     }
-
    
     public Integer getId() {
         return this.id;

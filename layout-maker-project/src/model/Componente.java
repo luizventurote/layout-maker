@@ -1,5 +1,5 @@
 package model;
-// Generated Jun 7, 2014 1:29:31 AM by Hibernate Tools 3.6.0
+// Generated Jun 7, 2014 1:46:42 AM by Hibernate Tools 3.6.0
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Componente  implements java.io.Serializable {
 
 
      private Integer id;
+     private Categoria categoria;
      private String nome;
      private Set arquivos = new HashSet(0);
 
@@ -19,10 +20,12 @@ public class Componente  implements java.io.Serializable {
     }
 
 	
-    public Componente(String nome) {
+    public Componente(Categoria categoria, String nome) {
+        this.categoria = categoria;
         this.nome = nome;
     }
-    public Componente(String nome, Set arquivos) {
+    public Componente(Categoria categoria, String nome, Set arquivos) {
+       this.categoria = categoria;
        this.nome = nome;
        this.arquivos = arquivos;
     }
@@ -33,6 +36,13 @@ public class Componente  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public Categoria getCategoria() {
+        return this.categoria;
+    }
+    
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     public String getNome() {
         return this.nome;

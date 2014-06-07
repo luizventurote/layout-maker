@@ -6,4 +6,5 @@
   <table-filter match-name="componente_arquivo"/>
   <table-filter match-name="arquivo"/>
   <table-filter match-name="componente"/>
+  <table-filter match-name="categoria"/>
 </hibernate-reverse-engineering>
