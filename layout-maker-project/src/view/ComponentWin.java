@@ -58,14 +58,15 @@ public class ComponentWin extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Nome");
 
         jLabel2.setText("ID");
 
-        jLabel3.setText("Tipo");
+        jTextField2.setEnabled(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel3.setText("Categoria");
 
         btn_add_file.setText("Adicionar Arquivo");
         btn_add_file.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +76,7 @@ public class ComponentWin extends javax.swing.JDialog {
         });
 
         jToggleButton2.setText("Excluir Arquivo");
+        jToggleButton2.setEnabled(false);
 
         jLabel4.setText("Arquivos");
 
@@ -83,12 +85,19 @@ public class ComponentWin extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Nome", "Categoria"
+                "ID", "Nome", "Extensão", "Diretório"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -162,6 +171,7 @@ public class ComponentWin extends javax.swing.JDialog {
     private void btn_add_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_fileActionPerformed
         
         FileManagerWin win_fm = new FileManagerWin(null, true);
+        win_fm.setLocationRelativeTo(null);
         win_fm.setVisible(true);
        
     }//GEN-LAST:event_btn_add_fileActionPerformed

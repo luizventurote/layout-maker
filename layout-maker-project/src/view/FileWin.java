@@ -80,7 +80,6 @@ public class FileWin extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         btn_selected_file = new javax.swing.JToggleButton();
         btn_save = new javax.swing.JToggleButton();
-        btn_delete = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Arquivo");
@@ -110,14 +109,6 @@ public class FileWin extends javax.swing.JDialog {
             }
         });
 
-        btn_delete.setText("Excluir");
-        btn_delete.setEnabled(false);
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,8 +132,6 @@ public class FileWin extends javax.swing.JDialog {
                             .addComponent(input_id, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_save)))
                 .addContainerGap())
         );
@@ -166,9 +155,7 @@ public class FileWin extends javax.swing.JDialog {
                             .addComponent(input_ext, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_selected_file, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -283,11 +270,6 @@ public class FileWin extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-
-
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -359,7 +341,6 @@ public class FileWin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btn_delete;
     private javax.swing.JToggleButton btn_save;
     private javax.swing.JToggleButton btn_selected_file;
     private javax.swing.JTextField input_ext;

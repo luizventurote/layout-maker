@@ -28,15 +28,14 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         jToggleButton4 = new javax.swing.JToggleButton();
         jToggleButton5 = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
+        jToggleButton7 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciador de Componentes");
-        setPreferredSize(null);
         setResizable(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Categoria" }));
 
-        jTextField1.setText("eeee");
         jTextField1.setToolTipText("");
 
         jToggleButton1.setText("Pesquisar");
@@ -74,6 +73,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         });
 
         jToggleButton4.setText("Excluir");
+        jToggleButton4.setEnabled(false);
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -81,6 +81,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         });
 
         jToggleButton5.setText("Alterar");
+        jToggleButton5.setEnabled(false);
         jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton5ActionPerformed(evt);
@@ -88,9 +89,17 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         });
 
         jToggleButton6.setText("Selecionar");
+        jToggleButton6.setEnabled(false);
         jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton6ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton7.setText("Categorias");
+        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton7ActionPerformed(evt);
             }
         });
 
@@ -109,7 +118,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jToggleButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jToggleButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton5)
@@ -134,7 +144,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                     .addComponent(add_component, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -144,6 +155,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
   
         ComponentWin win_component = new ComponentWin(null, true);
+        win_component.setLocationRelativeTo(null);
         win_component.setVisible(true);
         
     }//GEN-LAST:event_add_componentActionPerformed
@@ -159,6 +171,10 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton6ActionPerformed
+
+    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,5 +228,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
     private javax.swing.JToggleButton jToggleButton6;
+    private javax.swing.JToggleButton jToggleButton7;
     // End of variables declaration//GEN-END:variables
 }
