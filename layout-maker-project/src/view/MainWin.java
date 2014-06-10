@@ -32,12 +32,16 @@ public class MainWin extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         btn_config = new javax.swing.JButton();
+        btn_relatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Layout Maker");
         setResizable(false);
 
         btn_components.setText("Componentes");
+        btn_components.setBorderPainted(false);
+        btn_components.setFocusPainted(false);
+        btn_components.setRequestFocusEnabled(false);
         btn_components.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_componentsActionPerformed(evt);
@@ -45,6 +49,9 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Frameworks");
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setRequestFocusEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -52,6 +59,9 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         jButton3.setText("Bibliotecas");
+        jButton3.setBorderPainted(false);
+        jButton3.setFocusPainted(false);
+        jButton3.setRequestFocusEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -59,6 +69,9 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         btn_files.setText("Arquivos");
+        btn_files.setBorderPainted(false);
+        btn_files.setFocusPainted(false);
+        btn_files.setRequestFocusEnabled(false);
         btn_files.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_filesActionPerformed(evt);
@@ -69,6 +82,9 @@ public class MainWin extends javax.swing.JFrame {
         jButton5.setText("Gerar Layout");
         jButton5.setBorderPainted(false);
         jButton5.setFocusPainted(false);
+        jButton5.setRequestFocusEnabled(false);
+        jButton5.setRolloverEnabled(false);
+        jButton5.setVerifyInputWhenFocusTarget(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -76,6 +92,9 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         jButton6.setText("Layouts Gerados");
+        jButton6.setBorderPainted(false);
+        jButton6.setFocusPainted(false);
+        jButton6.setRequestFocusEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -83,9 +102,22 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         btn_config.setText("Configurações");
+        btn_config.setBorderPainted(false);
+        btn_config.setFocusPainted(false);
+        btn_config.setRequestFocusEnabled(false);
         btn_config.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_configActionPerformed(evt);
+            }
+        });
+
+        btn_relatorio.setText("Relatórios");
+        btn_relatorio.setBorderPainted(false);
+        btn_relatorio.setFocusPainted(false);
+        btn_relatorio.setRequestFocusEnabled(false);
+        btn_relatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_relatorioActionPerformed(evt);
             }
         });
 
@@ -96,10 +128,6 @@ public class MainWin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(92, 92, 92))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -114,7 +142,12 @@ public class MainWin extends javax.swing.JFrame {
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_config, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,9 +162,11 @@ public class MainWin extends javax.swing.JFrame {
                     .addComponent(btn_files, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_config, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,6 +212,10 @@ public class MainWin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_configActionPerformed
 
+    private void btn_relatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_relatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_relatorioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,6 +251,7 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JButton btn_components;
     private javax.swing.JButton btn_config;
     private javax.swing.JButton btn_files;
+    private javax.swing.JButton btn_relatorio;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
