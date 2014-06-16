@@ -6,18 +6,18 @@ import model.Componente;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
-public class ComponentDao extends DefaultDao{
+public class ComponentDao extends DefaultDao {
 
     /**
      * Insert Components
-     * 
+     *
      * @param obj
      * @throws Exception
      * @throws SQLException
-     * @throws HibernateException 
+     * @throws HibernateException
      */
     public void insert(Componente obj) throws Exception, SQLException, HibernateException {
-        
+
         try {
 
             this.session = util.HibernateUtil.getSessionFactory().openSession();
@@ -36,13 +36,14 @@ public class ComponentDao extends DefaultDao{
             }
         }
     }
-    
+
     /**
      * Deletar componente
+     *
      * @param comp
      * @throws Exception
      * @throws SQLException
-     * @throws HibernateException 
+     * @throws HibernateException
      */
     public void delete(Componente comp) throws Exception, SQLException, HibernateException {
 
@@ -64,13 +65,14 @@ public class ComponentDao extends DefaultDao{
             }
         }
     }
-    
+
     /**
      * Atualizar componente
+     *
      * @param comp
      * @throws Exception
      * @throws SQLException
-     * @throws HibernateException 
+     * @throws HibernateException
      */
     public void update(Componente comp) throws Exception, SQLException, HibernateException {
 
@@ -92,12 +94,13 @@ public class ComponentDao extends DefaultDao{
             }
         }
     }
-    
+
     /**
      * Return all inserted components.
+     *
      * @return
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public List<Componente> getAll() throws Exception, SQLException {
 
@@ -125,13 +128,14 @@ public class ComponentDao extends DefaultDao{
             return list;
         }
     }
-    
+
     /**
      * Get component by ID
+     *
      * @param id
      * @return
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public Componente get(int id) throws Exception, SQLException {
 
@@ -163,6 +167,71 @@ public class ComponentDao extends DefaultDao{
             return comp;
         }
     }
-    
-    
+
+    /**
+     * Pesquisar por String
+     * @param search
+     * @return 
+     */
+    public List search(String search) {
+
+        List list = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Componente comp WHERE comp.name LIKE '%" + search + "%' ");
+
+            list = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            this.session.getTransaction().rollback();
+        } finally {
+            if (this.session != null) {
+                this.session.close();
+            }
+            return list;
+        }
+
+    }
+
+    /**
+     * Pesquisa por ID
+     * @param id
+     * @return 
+     */
+    public List search(int id) {
+
+        List list = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Componente comp WHERE comp.id=" + id);
+
+            list = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            this.session.getTransaction().rollback();
+        } finally {
+            if (this.session != null) {
+                this.session.close();
+            }
+            return list;
+        }
+
+    }
+
 }

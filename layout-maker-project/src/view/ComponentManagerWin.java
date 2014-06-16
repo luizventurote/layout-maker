@@ -40,9 +40,9 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
+        search_type = new javax.swing.JComboBox();
         input_search = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btn_search = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         add_component = new javax.swing.JToggleButton();
@@ -55,11 +55,16 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         setTitle("Gerenciador de Componentes");
         setResizable(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Categoria" }));
+        search_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Categoria" }));
 
         input_search.setToolTipText("");
 
-        jToggleButton1.setText("Pesquisar");
+        btn_search.setText("Pesquisar");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,11 +143,11 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_type, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(input_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1))
+                        .addComponent(btn_search))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jToggleButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,8 +166,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(input_search)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(search_type, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,6 +234,22 @@ public class ComponentManagerWin extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_tableMouseClicked
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+
+        try {
+
+            if ("".equals(input_search.getText())) {
+                JOptionPane.showMessageDialog(this, "Você precisa informar o que quer pesquisar!");
+            } else {
+                ctr.search(table, search_type.getSelectedIndex(), input_search.getText());
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERRO ao PESQUISAR. " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,12 +321,12 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private javax.swing.JToggleButton add_component;
     private javax.swing.JToggleButton btn_alter;
     private javax.swing.JToggleButton btn_delete;
+    private javax.swing.JToggleButton btn_search;
     private javax.swing.JToggleButton btn_select;
     private javax.swing.JTextField input_search;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JComboBox search_type;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

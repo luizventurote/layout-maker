@@ -129,5 +129,65 @@ public class ComponentControl {
         return dao.getAll();
 
     }
+    
+    /**
+     * Exibe os dados pesquisados na tabela
+     * 
+     * @param table Tabela de exibição dos dados
+     * @param type tipo de pesquisa
+     * @param search pesquisa
+     * @throws Exception
+     * @throws SQLException 
+     */
+    public void search(JTable table, int type, String search) throws Exception, SQLException {
+
+        List list = null;
+
+        switch (type) {
+            case 0: // Pesquisar ID
+                int id = Integer.parseInt(search);
+                list = dao.search(id);
+                break;
+            case 1: // Pesquisar Nome
+                list = dao.search(search);
+                break;
+        }
+        
+        // Clean table
+        for (int i = table.getRowCount() - 1; i >= 0; i--) {
+            ((DefaultTableModel) table.getModel()).removeRow(i);
+        }
+        
+        Componente file;
+
+        int size_list = list.size();
+
+        if (size_list > 0) {
+
+            // Config table
+            int linha = 0;
+            int col = 0;
+
+            Iterator<Componente> it = list.iterator(); //iterator
+            while (it.hasNext()) {
+
+                // New Arquivo
+                file = it.next();
+
+                // New line
+                ((DefaultTableModel) table.getModel()).addRow(new Vector());
+                table.setValueAt(file.getId(), linha, col++);
+                table.setValueAt(file.getNome(), linha, col);
+
+                // Reset number of columns
+                col = 0;
+
+                linha++;
+
+            }
+
+        }
+
+    }
 
 }
