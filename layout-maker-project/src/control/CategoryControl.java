@@ -27,9 +27,21 @@ public class CategoryControl {
 
     }
     
-    public void delete(int id) throws Exception, SQLException {}
+    public void delete(int id) throws Exception, SQLException {
     
-    public void update(int id, String cat_name) throws Exception, SQLException {}  
+        Categoria cat = dao.get(id);
+        
+        dao.delete(cat);
+        
+    }
+    
+    public void update(int id, String cat_name) throws Exception, SQLException {
+    
+        Categoria cat = dao.get(id);
+        
+        dao.update(cat);
+        
+    }  
     
     public void loadingATable(JTable table) throws Exception, SQLException {
 

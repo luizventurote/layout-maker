@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.Arquivo;
 import model.Categoria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -98,6 +97,37 @@ public class CategoryDao extends DefaultDao {
             return cat;
         }
 
+    }
+    
+    public Categoria get(int id) throws Exception, SQLException {
+
+        Categoria file = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Categoria cat WHERE cat.id=" + id);
+
+            con.setMaxResults(1);
+
+            List<Categoria> result = con.list();
+
+            file = result.get(0);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            return file;
+        }
     }
     
 }

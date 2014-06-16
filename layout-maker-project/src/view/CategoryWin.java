@@ -6,8 +6,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CategoryWin extends javax.swing.JDialog {
-    
+
     private CategoryControl ctr;
+    private int row_selected;
 
     /**
      * Creates new form CategoryWin
@@ -15,15 +16,15 @@ public class CategoryWin extends javax.swing.JDialog {
     public CategoryWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         ctr = new CategoryControl();
-        
+
         try {
             ctr.loadingATable(this.table);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar tabela!");
         }
-        
+
     }
 
     /**
@@ -35,12 +36,22 @@ public class CategoryWin extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopupMenu = new javax.swing.JPopupMenu();
+        btn_delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         btn_insert = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         input_cat_name = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+
+        btn_delete.setText("Deletar");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+        PopupMenu.add(btn_delete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Categorias");
@@ -102,6 +113,12 @@ public class CategoryWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        table.setComponentPopupMenu(PopupMenu);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,24 +146,47 @@ public class CategoryWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        
+
         try {
-            
+
             String cat_name = input_cat_name.getText();
-            
+
             ctr.insert(cat_name);
-            
+
             ctr.refreshTable(table);
-            
+
             input_cat_name.setText("");
-            
+
             JOptionPane.showMessageDialog(null, "Categoria adicionada com sucesso!");
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir!");
         }
-        
+
     }//GEN-LAST:event_btn_insertActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+
+        if (this.row_selected >= 0) {
+
+            int cat_id = Integer.parseInt(table.getValueAt(this.row_selected, 0).toString());
+
+            try {
+                ctr.delete(cat_id);
+                ctr.refreshTable(table);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao deletar!");
+            }
+
+        }
+
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+
+        this.row_selected = table.getSelectedRow();
+
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -191,6 +231,8 @@ public class CategoryWin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu PopupMenu;
+    private javax.swing.JMenuItem btn_delete;
     private javax.swing.JButton btn_insert;
     private javax.swing.JTextField input_cat_name;
     private javax.swing.JLabel jLabel1;
