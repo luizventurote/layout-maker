@@ -173,7 +173,11 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     }//GEN-LAST:event_jToggleButton6ActionPerformed
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-        // TODO add your handling code here:
+        
+        CategoryWin catWin = new CategoryWin(null, true);
+        catWin.setLocationRelativeTo(null);
+        catWin.setVisible(true);
+        
     }//GEN-LAST:event_jToggleButton7ActionPerformed
 
     /**
