@@ -1,8 +1,11 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.List;
+import model.Arquivo;
 import model.Categoria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 
 public class CategoryDao extends DefaultDao {
     
@@ -67,6 +70,34 @@ public class CategoryDao extends DefaultDao {
                 session.close();
             }
         }
+    }
+    
+    public List<Categoria> getAll() throws Exception, SQLException {
+
+        List<Categoria> cat = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Categoria");
+
+            cat = con.list();
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            return cat;
+        }
+
     }
     
 }
