@@ -48,9 +48,15 @@ public class Categoria  implements java.io.Serializable {
     public void setComponentes(Set componentes) {
         this.componentes = componentes;
     }
+    
+    @Override
+    public String toString() {
+        return this.nome;
+    }  
 
-
-
+    public Object[] toArray() {
+        return new Object[]{this,this.getNome()};
+    }
 
 }
 

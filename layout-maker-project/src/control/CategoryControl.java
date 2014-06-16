@@ -10,15 +10,16 @@ import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 
 public class CategoryControl {
-    
+
     private CategoryDao dao;
+    Categoria cat;
 
     public CategoryControl() {
-        
+
         this.dao = new CategoryDao();
-        
+
     }
-    
+
     public void insert(String cat_name) throws Exception, SQLException {
 
         Categoria cat = new Categoria(cat_name);
@@ -26,23 +27,23 @@ public class CategoryControl {
         this.dao.insert(cat);
 
     }
-    
+
     public void delete(int id) throws Exception, SQLException {
-    
-        Categoria cat = dao.get(id);
-        
+
+        this.cat = dao.get(id);
+
         dao.delete(cat);
-        
+
     }
-    
+
     public void update(int id, String cat_name) throws Exception, SQLException {
-    
-        Categoria cat = dao.get(id);
-        
+
+        this.cat = dao.get(id);
+
         dao.update(cat);
-        
-    }  
-    
+
+    }
+
     public void loadingATable(JTable table) throws Exception, SQLException {
 
         List categorias = this.getAll();
@@ -77,7 +78,7 @@ public class CategoryControl {
         }
 
     }
-    
+
     public List getAll() throws Exception, SQLException {
 
         List categories = this.dao.getAll();
@@ -85,7 +86,7 @@ public class CategoryControl {
         return categories;
 
     }
-    
+
     public void refreshTable(JTable table) throws Exception {
 
         // Clean selection
@@ -98,7 +99,7 @@ public class CategoryControl {
 
         // Loading files in the table
         this.loadingATable(table);
-        
+
     }
-       
+
 }

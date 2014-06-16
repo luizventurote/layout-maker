@@ -7,7 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 public class CategoryDao extends DefaultDao {
-    
+
     public void insert(Categoria cat) throws Exception, SQLException, HibernateException {
 
         try {
@@ -70,7 +70,7 @@ public class CategoryDao extends DefaultDao {
             }
         }
     }
-    
+
     public List<Categoria> getAll() throws Exception, SQLException {
 
         List<Categoria> cat = null;
@@ -98,7 +98,7 @@ public class CategoryDao extends DefaultDao {
         }
 
     }
-    
+
     public Categoria get(int id) throws Exception, SQLException {
 
         Categoria file = null;
@@ -129,5 +129,69 @@ public class CategoryDao extends DefaultDao {
             return file;
         }
     }
+
+    public int get(String cat) throws Exception, SQLException {
+        
+        Categoria categ = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Categoria category WHERE category.nome='" + cat+"'");
+
+            con.setMaxResults(1);
+
+            List<Categoria> result = con.list();
+
+            categ = result.get(0);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            return categ.getId();
+        }
+
+    }
     
+    public Categoria getObj(String cat) throws Exception, SQLException {
+        
+        Categoria categ = null;
+
+        try {
+
+            this.session = util.HibernateUtil.getSessionFactory().openSession();
+
+            this.session.beginTransaction();
+
+            // HQL           
+            Query con = this.session.createQuery("FROM Categoria category WHERE category.nome='" + cat+"'");
+
+            con.setMaxResults(1);
+
+            List<Categoria> result = con.list();
+
+            categ = result.get(0);
+
+            this.session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            return categ;
+        }
+
+    }
+
 }

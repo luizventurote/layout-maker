@@ -1,10 +1,15 @@
 package view;
 
+import control.CategoryControl;
 import control.ComponentControl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ComponentWin extends javax.swing.JDialog {
     
     ComponentControl ctr;
+    CategoryControl ctr_cat;
 
     /**
      * Creates new form Component
@@ -15,8 +20,17 @@ public class ComponentWin extends javax.swing.JDialog {
         
         // Controller
         this.ctr = new ComponentControl();
+        this.ctr_cat = new CategoryControl();
         
+        // ID
         input_id.setText( Integer.toString( ctr.getTheNextID() ) );
+        
+        // Combo de Categorias
+        try {        
+            ctr.loadCombo(combo_categories);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(this, "Erro não esperado ao consultar. " + erro.getMessage() + erro.getClass() );
+        } 
         
     }
 
@@ -36,13 +50,13 @@ public class ComponentWin extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         input_id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        combo_categories = new javax.swing.JComboBox();
         btn_add_file = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        btn_salvar = new javax.swing.JToggleButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,7 +119,12 @@ public class ComponentWin extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jToggleButton3.setText("Salvar");
+        btn_salvar.setText("Salvar");
+        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +141,7 @@ public class ComponentWin extends javax.swing.JDialog {
                             .addComponent(input_id, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(combo_categories, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,7 +154,7 @@ public class ComponentWin extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton3)))
+                        .addComponent(btn_salvar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,7 +172,7 @@ public class ComponentWin extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_categories, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_add_file, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -161,7 +180,7 @@ public class ComponentWin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,6 +194,24 @@ public class ComponentWin extends javax.swing.JDialog {
         win_fm.setVisible(true);
        
     }//GEN-LAST:event_btn_add_fileActionPerformed
+
+    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        
+        try {
+            
+            // Insere no banco
+            ctr.insert(input_name.getText(), combo_categories.getSelectedItem().toString());
+            
+            JOptionPane.showMessageDialog(this, "O componente foi adicionado!");
+            
+            // Fecha a janela
+            this.setVisible(false);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao adiciona o componente!" + ex);
+        }
+        
+    }//GEN-LAST:event_btn_salvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,9 +257,10 @@ public class ComponentWin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btn_add_file;
+    private javax.swing.JToggleButton btn_salvar;
+    private javax.swing.JComboBox combo_categories;
     private javax.swing.JTextField input_id;
     private javax.swing.JTextField input_name;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -232,6 +270,5 @@ public class ComponentWin extends javax.swing.JDialog {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
 }
