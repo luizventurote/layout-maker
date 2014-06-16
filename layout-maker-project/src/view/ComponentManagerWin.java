@@ -1,6 +1,17 @@
 package view;
 
+import control.ComponentControl;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class ComponentManagerWin extends javax.swing.JDialog {
+
+    ComponentControl ctr;
+    ArrayList comps;
+    int row_selected;
 
     /**
      * Creates new form ComponentManager
@@ -8,6 +19,16 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     public ComponentManagerWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        this.ctr = new ComponentControl();
+
+        try {
+            // Loading files in the table
+            ctr.loadTable(table);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
+        }
+
     }
 
     /**
@@ -20,14 +41,14 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
+        input_search = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         add_component = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
+        btn_delete = new javax.swing.JToggleButton();
+        btn_alter = new javax.swing.JToggleButton();
+        btn_select = new javax.swing.JToggleButton();
         jToggleButton7 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -36,23 +57,23 @@ public class ComponentManagerWin extends javax.swing.JDialog {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Categoria" }));
 
-        jTextField1.setToolTipText("");
+        input_search.setToolTipText("");
 
         jToggleButton1.setText("Pesquisar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Categoria"
+                "ID", "Nome"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -63,7 +84,12 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table);
 
         add_component.setText("Adicionar");
         add_component.addActionListener(new java.awt.event.ActionListener() {
@@ -72,27 +98,27 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             }
         });
 
-        jToggleButton4.setText("Excluir");
-        jToggleButton4.setEnabled(false);
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.setText("Excluir");
+        btn_delete.setEnabled(false);
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
 
-        jToggleButton5.setText("Alterar");
-        jToggleButton5.setEnabled(false);
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn_alter.setText("Alterar");
+        btn_alter.setEnabled(false);
+        btn_alter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
+                btn_alterActionPerformed(evt);
             }
         });
 
-        jToggleButton6.setText("Selecionar");
-        jToggleButton6.setEnabled(false);
-        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_select.setText("Selecionar");
+        btn_select.setEnabled(false);
+        btn_select.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton6ActionPerformed(evt);
+                btn_selectActionPerformed(evt);
             }
         });
 
@@ -114,17 +140,17 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(input_search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jToggleButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton6)
+                        .addComponent(btn_select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton5)
+                        .addComponent(btn_alter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton4)
+                        .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(add_component)))
                 .addContainerGap())
@@ -134,7 +160,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(input_search)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -142,9 +168,9 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_component, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_alter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -153,32 +179,56 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
-  
+
         ComponentWin win_component = new ComponentWin(null, true);
         win_component.setLocationRelativeTo(null);
         win_component.setVisible(true);
-        
+
     }//GEN-LAST:event_add_componentActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
 
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
+        try {
+            // Delete file
+            int id = Integer.parseInt(table.getValueAt(this.row_selected, 0).toString());
+            ctr.delete(id);
 
-    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
+            this.refreshTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_alterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton6ActionPerformed
+    }//GEN-LAST:event_btn_alterActionPerformed
+
+    private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_selectActionPerformed
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-        
+
         CategoryWin catWin = new CategoryWin(null, true);
         catWin.setLocationRelativeTo(null);
         catWin.setVisible(true);
-        
+
     }//GEN-LAST:event_jToggleButton7ActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        this.row_selected = table.getSelectedRow();
+
+        if (this.row_selected >= 0) {
+
+            // Enable buttons
+            btn_delete.setEnabled(true);
+            btn_alter.setEnabled(true);
+            btn_select.setEnabled(true);
+
+        }
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -222,16 +272,40 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         });
     }
 
+    public void refreshTable() throws Exception {
+
+        // Clean selection
+        table.clearSelection();
+
+        // Clean table
+        for (int i = table.getRowCount() - 1; i >= 0; i--) {
+            ((DefaultTableModel) table.getModel()).removeRow(i);
+        }
+
+        // Load table
+        ctr.loadTable(table);
+
+        // Check list is empty 
+        if (table.getRowCount() == 0) {
+            btn_alter.setEnabled(false);
+            btn_delete.setEnabled(false);
+            btn_select.setEnabled(false);
+        }
+
+        // Clean search input
+        input_search.setText("");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
+    private javax.swing.JToggleButton btn_alter;
+    private javax.swing.JToggleButton btn_delete;
+    private javax.swing.JToggleButton btn_select;
+    private javax.swing.JTextField input_search;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
     private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

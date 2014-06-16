@@ -32,18 +32,18 @@
                   <Group type="102" attributes="0">
                       <Component id="jComboBox1" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" max="32767" attributes="0"/>
+                      <Component id="input_search" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jToggleButton7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jToggleButton6" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_select" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jToggleButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_alter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jToggleButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="add_component" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -57,7 +57,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jTextField1" max="32767" attributes="0"/>
+                  <Component id="input_search" max="32767" attributes="0"/>
                   <Component id="jComboBox1" pref="30" max="32767" attributes="0"/>
                   <Component id="jToggleButton1" max="32767" attributes="0"/>
               </Group>
@@ -66,9 +66,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="add_component" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jToggleButton4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jToggleButton5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jToggleButton6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btn_delete" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btn_alter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btn_select" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jToggleButton7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -88,7 +88,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="input_search">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -105,16 +105,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="table">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
+              <Table columnCount="2" rowCount="0">
                 <Column editable="false" title="ID" type="java.lang.Object"/>
                 <Column editable="false" title="Nome" type="java.lang.String"/>
-                <Column editable="false" title="Categoria" type="java.lang.String"/>
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -126,31 +128,31 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_componentActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton4">
+    <Component class="javax.swing.JToggleButton" name="btn_delete">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton5">
+    <Component class="javax.swing.JToggleButton" name="btn_alter">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton6">
+    <Component class="javax.swing.JToggleButton" name="btn_select">
       <Properties>
         <Property name="text" type="java.lang.String" value="Selecionar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_selectActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButton7">
