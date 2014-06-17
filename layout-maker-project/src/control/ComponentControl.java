@@ -2,6 +2,7 @@ package control;
 
 import dao.CategoryDao;
 import dao.ComponentDao;
+import dao.FileDao;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.Arquivo;
 import model.Categoria;
 import model.Componente;
 
@@ -17,6 +19,7 @@ public class ComponentControl {
 
     ComponentDao dao;
     CategoryDao cat_dao;
+    FileDao file_dao;
     Componente comp;
 
     public ComponentControl() {
@@ -38,12 +41,13 @@ public class ComponentControl {
         dao.insert(comp);
 
     }
-    
+
     /**
      * Deleta o componente
+     *
      * @param id
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void delete(int id) throws Exception, SQLException {
 
@@ -54,15 +58,16 @@ public class ComponentControl {
         this.dao.delete(comp);
 
     }
-    
+
     /**
      * Atualiza o componente
+     *
      * @param id
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void insert(int id) throws Exception, SQLException {
-        
+
         // Pega os dados do arquivo a partir do ID
         Componente comp = this.dao.get(id);
 
@@ -129,15 +134,15 @@ public class ComponentControl {
         return dao.getAll();
 
     }
-    
+
     /**
      * Exibe os dados pesquisados na tabela
-     * 
+     *
      * @param table Tabela de exibição dos dados
      * @param type tipo de pesquisa
      * @param search pesquisa
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void search(JTable table, int type, String search) throws Exception, SQLException {
 
@@ -152,12 +157,12 @@ public class ComponentControl {
                 list = dao.search(search);
                 break;
         }
-        
+
         // Clean table
         for (int i = table.getRowCount() - 1; i >= 0; i--) {
             ((DefaultTableModel) table.getModel()).removeRow(i);
         }
-        
+
         Componente file;
 
         int size_list = list.size();
@@ -187,6 +192,80 @@ public class ComponentControl {
             }
 
         }
+
+    }
+
+    /**
+     * Adiciona itens na tabela
+     *
+     * @param list
+     */
+    public void addItemTable(JTable table, List files_id) throws Exception, SQLException {
+
+        file_dao = new FileDao();
+
+        int id;
+
+        Arquivo file;
+
+        int size_list = files_id.size();
+
+        if (size_list > 0) {;
+
+            // Config table
+            int linha = table.getRowCount();
+            int col = 0;
+
+//            for (int i = 0; i < size_list; i++) {
+//
+//                id = Integer.parseInt(files_id.get(i).toString());
+//
+//                if (this.SearchIdInList(files_id, id)) { Não é na lista é na tabela
+//
+//                } else {
+//
+//                    file = file_dao.getFile(id);
+//
+//                    // New line
+//                    ((DefaultTableModel) table.getModel()).addRow(new Vector());
+//                    table.setValueAt(file.getId(), linha, col++);
+//                    table.setValueAt(file.getName(), linha, col++);
+//                    table.setValueAt(file.getExtension(), linha, col++);
+//                    table.setValueAt(file.getDirectory(), linha, col);
+//
+//                    // Reset number of columns
+//                    col = 0;
+//
+//                    linha++;
+//
+//                }
+//            }
+        }
+    }
+
+    /**
+     * Procura por um ID na lista de IDs
+     *
+     * @param table
+     * @return
+     */
+    public boolean SearchIdInList(List list, int id) {
+
+        // Pega a quantidade de linhas
+        int size = list.size();
+
+        // Lista de IDs
+        List id_list = null;
+
+        for (int i = 0; i < size; i++) {
+
+            if (Integer.parseInt(list.get(i).toString()) == id) {
+                return true;
+            }
+
+        }
+
+        return false;
 
     }
 

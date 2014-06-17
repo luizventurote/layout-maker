@@ -2,6 +2,7 @@ package view;
 
 import control.FileControl;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -13,6 +14,8 @@ public class FileManagerWin extends javax.swing.JDialog {
     FileControl ctr;
     ArrayList files;
     int row_selected;
+    int opt_select = 0;
+    List list = null;
 
     public FileManagerWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,7 +31,33 @@ public class FileManagerWin extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
         }
+    }
 
+    /**
+     * Select option
+     *
+     * @param parent
+     * @param modal
+     */
+    public FileManagerWin(java.awt.Frame parent, boolean modal, boolean select) {
+        super(parent, modal);
+        initComponents();
+
+        try {
+            // Control
+            ctr = new FileControl();
+
+            // Loading files in the table
+            ctr.loadingAllFilesInTable(file_list);
+
+            // Enable select button
+            if (select) {
+                this.opt_select = 1;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
+        }
     }
 
     /**
@@ -218,7 +247,22 @@ public class FileManagerWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_alterActionPerformed
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
-        // TODO add your handling code here:
+
+        this.list = new ArrayList();
+        
+        // Pega a quantiade de linhas selecionadas
+        int list_size = file_list.getSelectedRows().length;
+        
+        // Pega as linhas selecionadas
+        int[] list_file = file_list.getSelectedRows();
+        
+        // Salva os IDs na list
+        for (int i = 0; i < list_size; i++) {
+            this.list.add( Integer.parseInt(file_list.getValueAt(list_file[i], 0).toString()) );
+        }
+        
+        this.setVisible(false);
+
     }//GEN-LAST:event_btn_selectActionPerformed
 
     private void add_componentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_componentActionPerformed
@@ -274,7 +318,10 @@ public class FileManagerWin extends javax.swing.JDialog {
             // Enable buttons
             btn_delete.setEnabled(true);
             btn_alter.setEnabled(true);
-            btn_select.setEnabled(true);
+
+            if (this.opt_select == 1) {
+                btn_select.setEnabled(true);
+            }
 
         }
 
@@ -295,19 +342,19 @@ public class FileManagerWin extends javax.swing.JDialog {
     }//GEN-LAST:event_search_typeActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        
+
         try {
-            
-            if( "".equals( input_search.getText() ) ) {
+
+            if ("".equals(input_search.getText())) {
                 JOptionPane.showMessageDialog(this, "Você precisa informar o que quer pesquisar!");
             } else {
-                ctr.search(file_list, search_type.getSelectedIndex(), input_search.getText() );
+                ctr.search(file_list, search_type.getSelectedIndex(), input_search.getText());
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "ERRO ao PESQUISAR. " + ex.getMessage() );
+            JOptionPane.showMessageDialog(this, "ERRO ao PESQUISAR. " + ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_btn_searchActionPerformed
 
     public static void main(String args[]) {
@@ -349,6 +396,11 @@ public class FileManagerWin extends javax.swing.JDialog {
         });
     }
 
+    /**
+     * Atualiza a tabela
+     *
+     * @throws Exception
+     */
     public void refreshTable() throws Exception {
 
         // Clean selection
@@ -368,9 +420,13 @@ public class FileManagerWin extends javax.swing.JDialog {
             btn_delete.setEnabled(false);
             btn_select.setEnabled(false);
         }
-        
+
         // Clean search input
         input_search.setText("");
+    }
+
+    public List getList() {
+        return this.list;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

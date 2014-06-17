@@ -50,12 +50,13 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         btn_alter = new javax.swing.JToggleButton();
         btn_select = new javax.swing.JToggleButton();
         jToggleButton7 = new javax.swing.JToggleButton();
+        btn_refresh = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciador de Componentes");
         setResizable(false);
 
-        search_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome", "Categoria" }));
+        search_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Nome" }));
 
         input_search.setToolTipText("");
 
@@ -134,6 +135,13 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             }
         });
 
+        btn_refresh.setText("Atualizar");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +149,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(search_type, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,6 +159,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jToggleButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_refresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_alter)
@@ -176,7 +186,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_alter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -188,6 +199,12 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         ComponentWin win_component = new ComponentWin(null, true);
         win_component.setLocationRelativeTo(null);
         win_component.setVisible(true);
+        
+        try {
+            this.refreshTable();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERRO!");
+        }
 
     }//GEN-LAST:event_add_componentActionPerformed
 
@@ -250,6 +267,16 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        
+        try {
+            this.refreshTable();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ERRO!");
+        }
+        
+    }//GEN-LAST:event_btn_refreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +348,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     private javax.swing.JToggleButton add_component;
     private javax.swing.JToggleButton btn_alter;
     private javax.swing.JToggleButton btn_delete;
+    private javax.swing.JToggleButton btn_refresh;
     private javax.swing.JToggleButton btn_search;
     private javax.swing.JToggleButton btn_select;
     private javax.swing.JTextField input_search;

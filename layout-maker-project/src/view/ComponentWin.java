@@ -2,6 +2,7 @@ package view;
 
 import control.CategoryControl;
 import control.ComponentControl;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ public class ComponentWin extends javax.swing.JDialog {
     
     ComponentControl ctr;
     CategoryControl ctr_cat;
+    List list = null;
 
     /**
      * Creates new form Component
@@ -55,7 +57,7 @@ public class ComponentWin extends javax.swing.JDialog {
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         btn_salvar = new javax.swing.JToggleButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,7 +96,7 @@ public class ComponentWin extends javax.swing.JDialog {
 
         jLabel4.setText("Arquivos");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -117,7 +119,7 @@ public class ComponentWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(table);
 
         btn_salvar.setText("Salvar");
         btn_salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,9 +191,16 @@ public class ComponentWin extends javax.swing.JDialog {
 
     private void btn_add_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_fileActionPerformed
         
-        FileManagerWin win_fm = new FileManagerWin(null, true);
+        FileManagerWin win_fm = new FileManagerWin(null, true, true);
         win_fm.setLocationRelativeTo(null);
         win_fm.setVisible(true);
+        
+        try {
+            // Adiciona os arquivos selecionados na lista
+            ctr.addItemTable(table, win_fm.getList() );
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao selecionar arquivo. " + e.getMessage() );
+        }
        
     }//GEN-LAST:event_btn_add_fileActionPerformed
 
@@ -268,7 +277,7 @@ public class ComponentWin extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

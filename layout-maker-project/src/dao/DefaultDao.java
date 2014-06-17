@@ -8,8 +8,13 @@ import org.hibernate.Session;
 public class DefaultDao {
     
     Session session;
-    
     private String table_reference;
+
+    public DefaultDao() {
+        
+        this.table_reference = "componente";
+        
+    }
     
     /**
      * Pega o valor do próximo ID
