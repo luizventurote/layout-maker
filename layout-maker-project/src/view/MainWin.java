@@ -33,6 +33,8 @@ public class MainWin extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         btn_config = new javax.swing.JButton();
         btn_relatorio = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Layout Maker");
@@ -50,6 +52,7 @@ public class MainWin extends javax.swing.JFrame {
 
         jButton2.setText("Frameworks");
         jButton2.setBorderPainted(false);
+        jButton2.setEnabled(false);
         jButton2.setFocusPainted(false);
         jButton2.setRequestFocusEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +63,7 @@ public class MainWin extends javax.swing.JFrame {
 
         jButton3.setText("Bibliotecas");
         jButton3.setBorderPainted(false);
+        jButton3.setEnabled(false);
         jButton3.setFocusPainted(false);
         jButton3.setRequestFocusEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +97,7 @@ public class MainWin extends javax.swing.JFrame {
 
         jButton6.setText("Layouts Gerados");
         jButton6.setBorderPainted(false);
+        jButton6.setEnabled(false);
         jButton6.setFocusPainted(false);
         jButton6.setRequestFocusEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +118,7 @@ public class MainWin extends javax.swing.JFrame {
 
         btn_relatorio.setText("Relatórios");
         btn_relatorio.setBorderPainted(false);
+        btn_relatorio.setEnabled(false);
         btn_relatorio.setFocusPainted(false);
         btn_relatorio.setRequestFocusEnabled(false);
         btn_relatorio.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +126,10 @@ public class MainWin extends javax.swing.JFrame {
                 btn_relatorioActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("v0.0.6");
+
+        jLabel2.setText("By Luiz Venturote");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +156,11 @@ public class MainWin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,6 +180,10 @@ public class MainWin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -256,5 +274,7 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
