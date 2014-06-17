@@ -292,6 +292,12 @@ public class ComponentControl {
 
     }
     
+    /**
+     * Procura por um ID na tabela
+     * @param table
+     * @param id
+     * @return 
+     */
     public boolean SearchIdInTable(JTable table, int id) {
         
         int qtd_row = table.getRowCount();
@@ -304,6 +310,16 @@ public class ComponentControl {
         }
         
         return false;
+        
+    }
+
+    /**
+     * Remove o relacionamento entre um Componente e um Arquivo
+     * @param id 
+     */
+    public void removeFile(int id) throws Exception, SQLException {
+        
+        
         
     }
 

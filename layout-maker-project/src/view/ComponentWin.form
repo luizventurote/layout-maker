@@ -62,7 +62,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="combo_categories" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jToggleButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_delete_file" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_add_file" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -102,7 +102,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="combo_categories" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_add_file" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jToggleButton2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btn_delete_file" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -153,11 +153,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_add_fileActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+    <Component class="javax.swing.JToggleButton" name="btn_delete_file">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir Arquivo"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_delete_fileActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>

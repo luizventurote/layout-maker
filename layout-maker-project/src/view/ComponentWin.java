@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ComponentWin extends javax.swing.JDialog {
 
     ComponentControl ctr;
     CategoryControl ctr_cat;
     List list = null;
+    private int row_selected;
 
     /**
      * Creates new form Component
@@ -21,7 +23,7 @@ public class ComponentWin extends javax.swing.JDialog {
         initComponents();
 
         try {
-            
+
             // Controller
             this.ctr = new ComponentControl();
             this.ctr_cat = new CategoryControl();
@@ -55,7 +57,7 @@ public class ComponentWin extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         combo_categories = new javax.swing.JComboBox();
         btn_add_file = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        btn_delete_file = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -92,8 +94,13 @@ public class ComponentWin extends javax.swing.JDialog {
             }
         });
 
-        jToggleButton2.setText("Excluir Arquivo");
-        jToggleButton2.setEnabled(false);
+        btn_delete_file.setText("Excluir Arquivo");
+        btn_delete_file.setEnabled(false);
+        btn_delete_file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_delete_fileActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Arquivos");
 
@@ -151,7 +158,7 @@ public class ComponentWin extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(combo_categories, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton2)
+                        .addComponent(btn_delete_file)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_add_file))
                     .addGroup(layout.createSequentialGroup()
@@ -182,7 +189,7 @@ public class ComponentWin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combo_categories, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_add_file, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_delete_file, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -230,9 +237,27 @@ public class ComponentWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+
+        btn_delete_file.setEnabled(true);
         
-        
+        this.row_selected = table.getSelectedRow();
+
     }//GEN-LAST:event_tableMouseClicked
+
+    private void btn_delete_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delete_fileActionPerformed
+
+        try {
+            
+            // Remove a linha            
+            ((DefaultTableModel) table.getModel()).removeRow( this.row_selected );
+
+            //this.refreshTable();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btn_delete_fileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,8 +301,29 @@ public class ComponentWin extends javax.swing.JDialog {
         });
     }
 
+    // Atualiza tabela
+    public void refreshTable() throws Exception {
+
+        // Clean selection
+        table.clearSelection();
+
+        // Clean table
+        for (int i = table.getRowCount() - 1; i >= 0; i--) {
+            ((DefaultTableModel) table.getModel()).removeRow(i);
+        }
+
+        // Load table
+        ctr.loadTable(table);
+
+        // Check list is empty 
+        if (table.getRowCount() == 0) {
+            btn_delete_file.setEnabled(false);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btn_add_file;
+    private javax.swing.JToggleButton btn_delete_file;
     private javax.swing.JToggleButton btn_salvar;
     private javax.swing.JComboBox combo_categories;
     private javax.swing.JTextField input_id;
@@ -289,7 +335,6 @@ public class ComponentWin extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
