@@ -20,11 +20,13 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        this.ctr = new ComponentControl();
-
         try {
+
+            this.ctr = new ComponentControl();
+
             // Loading files in the table
             ctr.loadTable(table);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
         }
@@ -199,7 +201,7 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         ComponentWin win_component = new ComponentWin(null, true);
         win_component.setLocationRelativeTo(null);
         win_component.setVisible(true);
-        
+
         try {
             this.refreshTable();
         } catch (Exception ex) {
@@ -246,8 +248,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
 
             // Enable buttons
             btn_delete.setEnabled(true);
-            btn_alter.setEnabled(true);
-            btn_select.setEnabled(true);
+            //btn_alter.setEnabled(true);
+            //btn_select.setEnabled(true);
 
         }
     }//GEN-LAST:event_tableMouseClicked
@@ -269,13 +271,13 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
-        
+
         try {
             this.refreshTable();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ERRO!");
         }
-        
+
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     /**

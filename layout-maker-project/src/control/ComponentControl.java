@@ -4,8 +4,10 @@ import dao.CategoryDao;
 import dao.ComponentDao;
 import dao.FileDao;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -22,14 +24,15 @@ public class ComponentControl {
     FileDao file_dao;
     Componente comp;
 
-    public ComponentControl() {
+    public ComponentControl() throws Exception, SQLException {
 
         this.dao = new ComponentDao();
         this.cat_dao = new CategoryDao();
+        this.file_dao = new FileDao();
 
     }
 
-    public void insert(String name, String cat) throws Exception, SQLException {
+    public void insert(String name, String cat, JTable table) throws Exception, SQLException {
 
         // Busca o objeto categoria a partir do nome
         Categoria category = cat_dao.getObj(cat);
@@ -37,6 +40,26 @@ public class ComponentControl {
         comp = new Componente();
         comp.setNome(name);
         comp.setCategoria(category);
+        
+        // Insere os arquivos ao componente
+        int qtd_row = table.getRowCount();
+        
+        int id;
+        
+        Set<Arquivo> arquivos = new HashSet(0);
+        
+        Arquivo file;
+                
+        for (int i = 0; i < qtd_row; i++) {
+
+            // Recupera um arquivo pelo ID e adicona na lista 
+            id = Integer.parseInt( table.getValueAt(i, 0).toString() );
+            file = this.file_dao.getFile( id );
+            arquivos.add( file );
+
+        }
+        
+        comp.setArquivos(arquivos);
 
         dao.insert(comp);
 

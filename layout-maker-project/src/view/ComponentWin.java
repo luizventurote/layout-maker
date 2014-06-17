@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ComponentWin extends javax.swing.JDialog {
-    
+
     ComponentControl ctr;
     CategoryControl ctr_cat;
     List list = null;
@@ -19,21 +19,22 @@ public class ComponentWin extends javax.swing.JDialog {
     public ComponentWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        // Controller
-        this.ctr = new ComponentControl();
-        this.ctr_cat = new CategoryControl();
-        
-        // ID
-        input_id.setText( Integer.toString( ctr.getTheNextID() ) );
-        
-        // Combo de Categorias
-        try {        
+
+        try {
+            
+            // Controller
+            this.ctr = new ComponentControl();
+            this.ctr_cat = new CategoryControl();
+
+            // ID
+            input_id.setText(Integer.toString(ctr.getTheNextID()));
+
+            // Combo de Categorias
             ctr.loadCombo(combo_categories);
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(this, "Erro não esperado ao consultar. " + erro.getMessage() + erro.getClass() );
-        } 
-        
+            JOptionPane.showMessageDialog(this, "Erro não esperado ao consultar. " + erro.getMessage() + erro.getClass());
+        }
+
     }
 
     /**
@@ -119,6 +120,11 @@ public class ComponentWin extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         btn_salvar.setText("Salvar");
@@ -190,38 +196,43 @@ public class ComponentWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_add_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_fileActionPerformed
-        
+
         // Abre a janela com a opção de selecionar
         FileManagerWin win_fm = new FileManagerWin(null, true, true);
         win_fm.setLocationRelativeTo(null);
         win_fm.setVisible(true);
-        
+
         try {
             // Adiciona os arquivos selecionados na lista
-            ctr.addItemTable(table, win_fm.getList() );
+            ctr.addItemTable(table, win_fm.getList());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao selecionar arquivo. " + e.getMessage() );
+            JOptionPane.showMessageDialog(this, "Erro ao selecionar arquivo. " + e.getMessage());
         }
-       
+
     }//GEN-LAST:event_btn_add_fileActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        
+
         try {
-            
+
             // Insere no banco
-            ctr.insert(input_name.getText(), combo_categories.getSelectedItem().toString());
-            
+            ctr.insert(input_name.getText(), combo_categories.getSelectedItem().toString(), table);
+
             JOptionPane.showMessageDialog(this, "O componente foi adicionado!");
-            
+
             // Fecha a janela
             this.setVisible(false);
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao adiciona o componente!" + ex);
         }
-        
+
     }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        
+        
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments

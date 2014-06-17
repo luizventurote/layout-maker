@@ -184,7 +184,7 @@ public class ComponentDao extends DefaultDao {
             this.session.beginTransaction();
 
             // HQL           
-            Query con = this.session.createQuery("FROM Componente comp WHERE comp.name LIKE '%" + search + "%' ");
+            Query con = this.session.createQuery("FROM Componente comp WHERE comp.nome LIKE '%" + search + "%' ");
 
             list = con.list();
 
