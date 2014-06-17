@@ -191,6 +191,7 @@ public class ComponentWin extends javax.swing.JDialog {
 
     private void btn_add_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_fileActionPerformed
         
+        // Abre a janela com a opção de selecionar
         FileManagerWin win_fm = new FileManagerWin(null, true, true);
         win_fm.setLocationRelativeTo(null);
         win_fm.setVisible(true);

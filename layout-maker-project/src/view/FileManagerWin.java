@@ -249,18 +249,18 @@ public class FileManagerWin extends javax.swing.JDialog {
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
 
         this.list = new ArrayList();
-        
+
         // Pega a quantiade de linhas selecionadas
         int list_size = file_list.getSelectedRows().length;
-        
+
         // Pega as linhas selecionadas
         int[] list_file = file_list.getSelectedRows();
-        
+
         // Salva os IDs na list
         for (int i = 0; i < list_size; i++) {
-            this.list.add( Integer.parseInt(file_list.getValueAt(list_file[i], 0).toString()) );
+            this.list.add(Integer.parseInt(file_list.getValueAt(list_file[i], 0).toString()));
         }
-        
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btn_selectActionPerformed
@@ -315,12 +315,14 @@ public class FileManagerWin extends javax.swing.JDialog {
 
         if (this.row_selected >= 0) {
 
-            // Enable buttons
-            btn_delete.setEnabled(true);
-            btn_alter.setEnabled(true);
-
             if (this.opt_select == 1) {
                 btn_select.setEnabled(true);
+            } else {
+
+                // Enable buttons
+                btn_delete.setEnabled(true);
+                btn_alter.setEnabled(true);
+
             }
 
         }
