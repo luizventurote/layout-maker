@@ -77,6 +77,7 @@ public class ComponentWin extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Componente");
         setResizable(false);
 
         jLabel1.setText("Nome");

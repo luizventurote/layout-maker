@@ -40,6 +40,7 @@ public class ConfigWin extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Configurações");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pasta de Arquivos"));
 
