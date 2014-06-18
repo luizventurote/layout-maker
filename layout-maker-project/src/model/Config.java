@@ -11,6 +11,7 @@ public class Config  implements java.io.Serializable {
 
      private int idConfig;
      private String pathFiles;
+     private String pathTempBuild;
 
     public Config() {
     }
@@ -39,9 +40,13 @@ public class Config  implements java.io.Serializable {
         this.pathFiles = pathFiles;
     }
 
+    public String getPathTempBuild() {
+        return pathTempBuild;
+    }
 
-
-
+    public void setPathTempBuild(String pathTempBuild) {
+        this.pathTempBuild = pathTempBuild;
+    }
 }
 
 

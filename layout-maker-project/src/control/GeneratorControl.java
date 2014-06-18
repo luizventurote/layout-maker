@@ -1,8 +1,12 @@
 package control;
 
 import control.ComponentControl;
+import control.ConfigControl;
 import dao.ComponentDao;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JTable;
 import model.Arquivo;
@@ -18,14 +22,17 @@ public class GeneratorControl {
         
         ComponentControl ctr = new ComponentControl();
         ComponentDao dao = new ComponentDao();
-        
+        ConfigControl config_ctr = ConfigControl.getInstance();
         int size_table = table.getRowCount();
-        
         int id;
         Componente com;
         Arquivo file;
         int qtd_file;
-        Set files;
+        List<Arquivo> files = new ArrayList();
+        
+        // Cria uma pasta temporária
+        File tempPath = new File( config_ctr.getPathTempBuild() );
+        tempPath.mkdir();
         
         for (int i = 0; i < size_table; i++) {
             
@@ -33,29 +40,20 @@ public class GeneratorControl {
             id = Integer.parseInt( table.getValueAt(i, 0).toString() );
             com = dao.get(id);
             
-            System.out.println( com.getNome() );
+            // Recupera os arquivos que estão relacionados ao componente
+            files = dao.getArquivos(com);
             
-            
-            
-//            if (com.getArquivos().isEmpty()) {
-//                System.out.println("sim");
-//            } else {
-//                System.out.println("não");
-//            }
-            
-            // Pega os arquivos do component
-//            files = com.getArquivos();
-//            
-//            // Pega a quantidade de arquivos contidos no componente
-//            qtd_file = files.size();
-//            
-//            System.out.println( qtd_file );
-            
-//            for (int j = 0; j < qtd_file; j++) {
-//             
-//                System.out.println( files. );
-//                
-//            }
+            // Pega o diretório de cada arquivo
+            int list_size = files.size();
+            for (int j = 0; j < list_size; j++) {
+                
+                // Cria uma pasta para cada tipo de arquivo
+                File extPath = new File( tempPath.getPath() +"\\"+ files.get(j).getExtension() );
+                if( !extPath.isDirectory() ) {
+                    extPath.mkdir();
+                }
+                
+            }
             
         }
         

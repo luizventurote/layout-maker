@@ -18,6 +18,7 @@ public class ConfigControl {
      
         this.config = new Config();
         this.config.setPathFiles("files/files/");
+        this.config.setPathTempBuild("files/temp-build/");
         
     }
 
@@ -31,6 +32,14 @@ public class ConfigControl {
      */
     public String getPathFiles() {
         return this.config.getPathFiles();
+    }
+    
+    /**
+     * Retorna o diretório da pasta temporária
+     * @return String
+     */
+    public String getPathTempBuild() {
+        return this.config.getPathTempBuild();
     }
     
 }
