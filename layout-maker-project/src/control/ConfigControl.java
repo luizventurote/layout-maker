@@ -18,7 +18,7 @@ public class ConfigControl {
      
         this.config = new Config();
         this.config.setPathFiles("files/files/");
-        this.config.setPathTempBuild("files/temp-build/");
+        this.config.setPathTempBuild("files/build/");
         
     }
 

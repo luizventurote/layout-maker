@@ -22,5 +22,6 @@ Thumbs.db
 /nbproject/private/
 
 layout-maker-project/files/files/**/*
+layout-maker-project/files/build/**/*
 layout-maker-project/build
 /layout-maker-project/dist/

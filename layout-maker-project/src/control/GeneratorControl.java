@@ -1,22 +1,20 @@
 package control;
 
-import control.ComponentControl;
-import control.ConfigControl;
 import dao.ComponentDao;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JTable;
 import model.Arquivo;
 import model.Componente;
+import util.FileManager;
 
 public class GeneratorControl {
 
     /**
      * Prepara os componentes para a compactação.
-     * @param table_com 
+     * @param table
+     * @throws java.lang.Exception
      */
     public void buildComponents(JTable table) throws Exception {
         
@@ -28,7 +26,7 @@ public class GeneratorControl {
         Componente com;
         Arquivo file;
         int qtd_file;
-        List<Arquivo> files = new ArrayList();
+        List<Arquivo> files;
         
         // Cria uma pasta temporária
         File tempPath = new File( config_ctr.getPathTempBuild() );
@@ -47,11 +45,18 @@ public class GeneratorControl {
             int list_size = files.size();
             for (int j = 0; j < list_size; j++) {
                 
+                Arquivo arquivo = files.get(j);
+                
                 // Cria uma pasta para cada tipo de arquivo
-                File extPath = new File( tempPath.getPath() +"\\"+ files.get(j).getExtension() );
+                File extPath = new File( tempPath.getPath() +"\\"+ arquivo.getExtension() );
                 if( !extPath.isDirectory() ) {
                     extPath.mkdir();
                 }
+                
+                File tempArquivo = new File( config_ctr.getPathFiles()+arquivo.getDirectory() );
+                
+                // Salva o arquivo em sua pasta de acrodo com a extenssão
+                FileManager.copyFile( tempArquivo, extPath.getPath()+"\\"+arquivo.getExtension() );
                 
             }
             
