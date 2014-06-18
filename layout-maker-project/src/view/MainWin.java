@@ -122,7 +122,6 @@ public class MainWin extends javax.swing.JFrame {
 
         btn_relatorio.setText("Relatórios");
         btn_relatorio.setBorderPainted(false);
-        btn_relatorio.setEnabled(false);
         btn_relatorio.setFocusPainted(false);
         btn_relatorio.setRequestFocusEnabled(false);
         btn_relatorio.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +238,11 @@ public class MainWin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_configActionPerformed
 
     private void btn_relatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_relatorioActionPerformed
-        // TODO add your handling code here:
+        
+        ReportWin rw = new ReportWin(this, true);
+        rw.setLocationRelativeTo(null);
+        rw.setVisible(true);
+        
     }//GEN-LAST:event_btn_relatorioActionPerformed
 
     /**
