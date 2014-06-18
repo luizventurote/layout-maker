@@ -2,6 +2,7 @@ package view;
 
 import control.ComponentControl;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -12,6 +13,8 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     ComponentControl ctr;
     ArrayList comps;
     int row_selected;
+    int opt_select = 0;
+    List list = null;
 
     /**
      * Creates new form ComponentManager
@@ -30,7 +33,26 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
         }
+    }
+    
+    public ComponentManagerWin(java.awt.Frame parent, boolean modal, boolean select) {
+        super(parent, modal);
+        initComponents();
 
+        try {
+
+            this.ctr = new ComponentControl();
+
+            // Loading files in the table
+            ctr.loadTable(table);
+            
+            if( select ) {
+                this.opt_select = 1;
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + e.getMessage());
+        }
     }
 
     /**
@@ -230,7 +252,23 @@ public class ComponentManagerWin extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_alterActionPerformed
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
-        // TODO add your handling code here:
+        
+        this.list = new ArrayList();
+
+        // Pega a quantiade de linhas selecionadas
+        int list_size = table.getSelectedRows().length;
+
+        // Pega as linhas selecionadas
+        int[] list_file = table.getSelectedRows();
+
+        // Salva os IDs na list
+        for (int i = 0; i < list_size; i++) {
+            this.list.add(Integer.parseInt(table.getValueAt(list_file[i], 0).toString()));
+            this.list.add(table.getValueAt(list_file[i], 1));
+        }
+
+        this.setVisible(false);
+        
     }//GEN-LAST:event_btn_selectActionPerformed
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
@@ -249,8 +287,10 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             // Enable buttons
             btn_delete.setEnabled(true);
             //btn_alter.setEnabled(true);
-            //btn_select.setEnabled(true);
-
+            
+            if( this.opt_select == 1 ) {
+                btn_select.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_tableMouseClicked
 
@@ -346,6 +386,10 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         input_search.setText("");
     }
 
+    public List getList() {
+        return list;
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
     private javax.swing.JToggleButton btn_alter;

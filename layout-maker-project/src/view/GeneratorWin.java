@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
-/**
- *
- * @author Luiz
- */
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class GeneratorWin extends javax.swing.JDialog {
+
+    List list_com = null;
 
     /**
      * Creates new form GeneratorWin
@@ -140,11 +137,33 @@ public class GeneratorWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_add_comActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_comActionPerformed
-        
-        ComponentManagerWin win_com = new ComponentManagerWin(null, true);
+
+        ComponentManagerWin win_com = new ComponentManagerWin(null, true, true);
         win_com.setLocationRelativeTo(null);
         win_com.setVisible(true);
-        
+
+        // Pega a lista de componentes
+        list_com = win_com.getList();
+
+        // Pega o tamanho da lista
+        int file_size = list_com.size();
+
+        int linha = table_com.getRowCount();
+        int col = 0;
+
+        for (int i = 0; i < file_size; i++) {
+
+            ((DefaultTableModel) table_com.getModel()).addRow(new Vector());
+            table_com.setValueAt(list_com.get(i), linha, col++);
+            i++;
+            table_com.setValueAt(list_com.get(i), linha, col);
+
+            // Reset number of columns
+            col = 0;
+
+            linha++;
+        }
+
     }//GEN-LAST:event_btn_add_comActionPerformed
 
     /**
@@ -197,4 +216,5 @@ public class GeneratorWin extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_com;
     // End of variables declaration//GEN-END:variables
+
 }
