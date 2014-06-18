@@ -1,12 +1,17 @@
 package view;
 
+import control.GeneratorControl;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class GeneratorWin extends javax.swing.JDialog {
 
+    GeneratorControl ctr = new GeneratorControl();
     List list_com = null;
 
     /**
@@ -109,6 +114,11 @@ public class GeneratorWin extends javax.swing.JDialog {
         btn_generate.setText("Gerar layout");
         btn_generate.setFocusCycleRoot(true);
         btn_generate.setFocusTraversalPolicyProvider(true);
+        btn_generate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_generateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,6 +175,16 @@ public class GeneratorWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_add_comActionPerformed
+
+    private void btn_generateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateActionPerformed
+        
+        try {
+            ctr.buildComponents(table_com);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro! " + ex);
+        }
+        
+    }//GEN-LAST:event_btn_generateActionPerformed
 
     /**
      * @param args the command line arguments

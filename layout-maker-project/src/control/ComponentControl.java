@@ -317,10 +317,6 @@ public class ComponentControl {
      * Remove o relacionamento entre um Componente e um Arquivo
      * @param id 
      */
-    public void removeFile(int id) throws Exception, SQLException {
-        
-        
-        
-    }
+    public void removeFile(int id) throws Exception, SQLException {}
 
 }

@@ -1,9 +1,13 @@
 package view;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Arquivo;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import util.FolderZiper;
 
 public class MainWin extends javax.swing.JFrame {
 

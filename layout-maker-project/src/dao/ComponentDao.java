@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
+import model.Arquivo;
 import model.Componente;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -232,6 +234,29 @@ public class ComponentDao extends DefaultDao {
             return list;
         }
 
+    }
+    
+    public Set<Arquivo> getArquivos() {
+        
+//        try {
+//
+//            this.session = util.HibernateUtil.getSessionFactory().openSession();
+//
+//            this.session.beginTransaction();
+//
+//            this.session.getTransaction().commit();
+//
+//        } catch (HibernateException he) {
+//            this.session.getTransaction().rollback();
+//        } finally {
+//            if (this.session != null) {
+//                this.session.close();
+//            }
+//            return list;
+//        }
+        
+        return null;
+        
     }
 
 }
