@@ -86,7 +86,7 @@ public abstract class FileManager {
             }
         }
     }
-    
+
     public static void copyFile(File source, String destination, String new_name) throws IOException {
 
         // Destination folder
@@ -130,9 +130,25 @@ public abstract class FileManager {
     }
 
     public static void renameFile(File file, String new_name) throws IOException {
-        
+
         FileManager.copyFile(file, file.getParent() + "\\", new_name);
 
+    }
+
+    /**
+     * Apaga um diretório
+     *
+     * @param dir
+     * @return
+     */
+    public static void deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            for (File file : files) {
+                deleteDir(file);
+            }
+        }
+        dir.delete();
     }
 
 }

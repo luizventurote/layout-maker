@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import model.Arquivo;
 import model.Componente;
 import util.FileManager;
+import util.FolderZiper;
 
 public class GeneratorControl {
 
@@ -59,8 +60,14 @@ public class GeneratorControl {
                 FileManager.copyFile( tempArquivo, extPath.getPath()+"\\"+arquivo.getExtension() );
                 
             }
-            
         }
+        
+        // Compactação dos arquivos
+        FolderZiper.zipFolder(tempPath.getPath(), "files/layout.zip");
+        
+        // Deleta a pasta temporária
+        //FileManager.deleteDir(tempPath);
+        
         
     }
     
