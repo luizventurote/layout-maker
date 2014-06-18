@@ -1,16 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
+
+import control.ReportControl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Luiz
  */
 public class ReportWin extends javax.swing.JDialog {
+    
+    ReportControl ctr;
 
     /**
      * Creates new form ReportWin
@@ -18,6 +18,9 @@ public class ReportWin extends javax.swing.JDialog {
     public ReportWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        ctr = new ReportControl();
+        
     }
 
     /**
@@ -29,16 +32,22 @@ public class ReportWin extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btn_arquivo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatórios");
         setResizable(false);
 
-        jButton1.setText("Arquivos");
+        btn_arquivo.setText("Arquivos");
+        btn_arquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_arquivoActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Componentes");
+        jButton2.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,7 +55,7 @@ public class ReportWin extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -56,13 +65,23 @@ public class ReportWin extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_arquivoActionPerformed
+
+        try {
+            ctr.showReportArquivo();
+        } catch (Exception ex) {
+            Logger.getLogger(ReportWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_arquivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,7 +126,7 @@ public class ReportWin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_arquivo;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
