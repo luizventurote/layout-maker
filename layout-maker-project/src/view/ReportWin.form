@@ -25,11 +25,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btn_arquivo" min="-2" pref="96" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btn_comp" min="-2" pref="117" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btn_arquivo" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_comp" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_fkw" min="-2" pref="110" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btn_lib" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,7 +48,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_arquivo" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="btn_comp" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="btn_fkw" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btn_lib" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -62,6 +72,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_compActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_lib">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bibliotecas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_libActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_fkw">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Frameworks"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_fkwActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

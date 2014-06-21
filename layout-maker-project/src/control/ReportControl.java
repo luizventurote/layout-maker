@@ -18,26 +18,45 @@ import util.ConnectionFactory;
 import util.ReportUtils;
 
 public class ReportControl {
-
-    public void abrirRelatorioArquivos() throws SQLException, Exception {
-        InputStream inputStream = getClass().getResourceAsStream("/report/Arquivos.jasper");
+    
+    private String report;
+    
+    public void abrirRelatorio() throws SQLException, Exception {
+        InputStream inputStream = getClass().getResourceAsStream("/report/"+this.report+".jasper");
 
         // mapa de parâmetros do relatório (ainda vamos aprender a usar)
         Map parametros = new HashMap();
         
         // abre o relatório
-        ReportUtils.openReport("Arquivos", inputStream, parametros, ConnectMySQL.startConnection());
+        ReportUtils.openReport(this.report, inputStream, parametros, ConnectMySQL.startConnection());
+
+    }
+
+    public void abrirRelatorioArquivos() throws SQLException, Exception {
+        
+        this.report = "Arquivos";
+        this.abrirRelatorio();
 
     }
     
     public void abrirRelatorioComponentes() throws SQLException, Exception {
-        InputStream inputStream = getClass().getResourceAsStream("/report/Componentes.jasper");
 
-        // mapa de parâmetros do relatório (ainda vamos aprender a usar)
-        Map parametros = new HashMap();
-        
-        // abre o relatório
-        ReportUtils.openReport("Componentes", inputStream, parametros, ConnectMySQL.startConnection());
+        this.report = "Componentes";
+        this.abrirRelatorio();
+
+    }
+    
+    public void abrirRelatorioFrameworks() throws SQLException, Exception {
+
+        this.report = "Frameworks";
+        this.abrirRelatorio();
+
+    }
+    
+    public void abrirRelatorioBibliotecas() throws SQLException, Exception {
+
+        this.report = "Bibliotecas";
+        this.abrirRelatorio();
 
     }
 
