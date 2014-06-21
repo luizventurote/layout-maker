@@ -114,7 +114,7 @@ public class MainWin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("v0.0.7");
+        jLabel1.setText("v0.0.8");
 
         jLabel2.setText("By Luiz Venturote");
 
