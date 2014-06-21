@@ -20,21 +20,22 @@ import model.Framework;
  * @author Luiz
  */
 public class FrameworkControl {
-    
+
     FrameworkDao dao;
     Framework frame;
-    
+
     public FrameworkControl() throws Exception, SQLException {
 
         this.dao = new FrameworkDao();
-        
+
     }
-    
+
     /**
      * Inserir
+     *
      * @param name
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void insert(String name) throws Exception, SQLException {
 
@@ -44,7 +45,7 @@ public class FrameworkControl {
         dao.insert(this.frame);
 
     }
-    
+
     /**
      * Delete
      *
@@ -61,7 +62,7 @@ public class FrameworkControl {
         this.dao.delete(comp);
 
     }
-    
+
     /**
      * Pega o valor do próximo ID
      *
@@ -70,7 +71,7 @@ public class FrameworkControl {
     public int getTheNextID() {
         return this.dao.getTheNextID();
     }
-    
+
     /**
      * Return all inserted Objects.
      */
@@ -79,7 +80,7 @@ public class FrameworkControl {
         return dao.getAll();
 
     }
-    
+
     /**
      * Exibe os dados pesquisados na tabela
      *
@@ -139,5 +140,45 @@ public class FrameworkControl {
         }
 
     }
-    
+
+    /**
+     * Load Table objects
+     * @param table
+     * @throws Exception
+     * @throws SQLException 
+     */
+    public void loadTable(JTable table) throws Exception, SQLException {
+
+        List components = this.getAll();
+        Framework obj;
+
+        int size_list = components.size();
+
+        if (size_list > 0) {
+
+            // Config table
+            int linha = 0;
+            int col = 0;
+
+            Iterator<Framework> it = components.iterator(); //iterator
+            while (it.hasNext()) {
+
+                obj = it.next();
+
+                // New line
+                ((DefaultTableModel) table.getModel()).addRow(new Vector());
+                table.setValueAt(obj.getId(), linha, col++);
+                table.setValueAt(obj.getNome(), linha, col);
+
+                // Reset number of columns
+                col = 0;
+
+                linha++;
+
+            }
+
+        }
+
+    }
+
 }
