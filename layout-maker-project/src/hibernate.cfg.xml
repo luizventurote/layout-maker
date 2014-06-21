@@ -8,9 +8,10 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="model/Config.hbm.xml"/>
-    <mapping resource="model/Categoria.hbm.xml"/>
+    <mapping resource="model/Biblioteca.hbm.xml"/>
     <mapping resource="model/Componente.hbm.xml"/>
     <mapping resource="model/Arquivo.hbm.xml"/>
+    <mapping resource="model/Categoria.hbm.xml"/>
     <mapping resource="model/Framework.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

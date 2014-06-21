@@ -8,4 +8,5 @@
   <table-filter match-name="componente"/>
   <table-filter match-name="categoria"/>
   <table-filter match-name="framework"/>
+  <table-filter match-name="biblioteca"/>
 </hibernate-reverse-engineering>
