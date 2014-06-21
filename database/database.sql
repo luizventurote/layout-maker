@@ -7,7 +7,7 @@ USE layout_maker;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS config (
   id_config INT NOT NULL,
-  path_files VARCHAR(50) NULL,
+  path_files VARCHAR(200) NULL,
   PRIMARY KEY (id_config))
 ENGINE = InnoDB;
 

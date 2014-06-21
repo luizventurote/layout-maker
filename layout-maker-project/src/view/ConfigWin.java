@@ -1,10 +1,16 @@
 package view;
 
 import control.ConfigControl;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import util.FileManager;
 
 public class ConfigWin extends javax.swing.JDialog {
     
     ConfigControl ctr;
+    private File pathFile;
 
     /**
      * Creates new form ConfigWin Luiz
@@ -29,7 +35,7 @@ public class ConfigWin extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        select_filePath = new javax.swing.JButton();
         input_file = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -37,17 +43,17 @@ public class ConfigWin extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurações");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pasta de Arquivos"));
 
-        jButton1.setText("Selecionar pasta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        select_filePath.setText("Selecionar pasta");
+        select_filePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                select_filePathActionPerformed(evt);
             }
         });
 
@@ -58,25 +64,28 @@ public class ConfigWin extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(input_file)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(select_filePath))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(input_file)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(select_filePath, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pasta de Frameworks"));
 
         jButton2.setText("Selecionar pasta");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jTextField2.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,11 +108,14 @@ public class ConfigWin extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pasta de Layouts"));
 
         jButton3.setText("Selecionar pasta");
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        jTextField3.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -123,7 +135,12 @@ public class ConfigWin extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton4.setText("Salvar");
+        btn_save.setText("Salvar");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,7 +154,7 @@ public class ConfigWin extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btn_save)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,16 +167,27 @@ public class ConfigWin extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btn_save)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void select_filePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_filePathActionPerformed
+        
+        try {
+            
+            this.pathFile = FileManager.FileDirectory(this);
+            
+            if( this.pathFile != null ){
+                input_file.setText( this.pathFile.getPath() + "\\");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_select_filePathActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -168,6 +196,20 @@ public class ConfigWin extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        
+        try {
+            
+            String path = input_file.getText().replace("\\", "/");            
+            ctr.update( path, "", "");
+            JOptionPane.showMessageDialog(null, "Configuração salva!");
+            this.setVisible(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,15 +254,15 @@ public class ConfigWin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_save;
     private javax.swing.JTextField input_file;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton select_filePath;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,10 +1,12 @@
 package util;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import javax.swing.JFileChooser;
 
 public abstract class FileManager {
 
@@ -149,6 +151,62 @@ public abstract class FileManager {
             }
         }
         dir.delete();
+    }
+
+    /**
+     * Abre uma janela para seleção de um arquivo
+     *
+     * @param comp
+     * @return
+     * @throws Exception
+     */
+    public static File FileChooser(Component comp) throws Exception {
+
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(comp);
+        return jfc.getSelectedFile();
+    }
+
+    /**
+     * Abre uma janela para seleção de um diretório
+     *
+     * @param comp
+     * @return
+     * @throws Exception
+     */
+    public static File FileDirectory(Component comp) throws Exception {
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("Selecione uma pasta");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(comp) == JFileChooser.APPROVE_OPTION) {
+            
+            return chooser.getSelectedFile();
+            
+        } else {
+           
+            return null;
+           
+        }
+        
+    }
+
+    /**
+     * Pega a extensão do arquivo
+     *
+     * @param file
+     * @return
+     */
+    public static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
     }
 
 }
