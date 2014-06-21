@@ -78,3 +78,13 @@ CREATE TABLE framework (
   nome VARCHAR(50) NULL,
   PRIMARY KEY (id))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table biblioteca
+-- -----------------------------------------------------
+CREATE TABLE biblioteca (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(100) NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB;
