@@ -3,6 +3,7 @@ package view;
 import control.ReportControl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,9 +77,10 @@ public class ReportWin extends javax.swing.JDialog {
     private void btn_arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_arquivoActionPerformed
 
         try {
-            ctr.showReportArquivo();
+            ctr.abrirRelatorioArquivos();
+            this.setVisible(false);
         } catch (Exception ex) {
-            Logger.getLogger(ReportWin.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + ex.getMessage());
         }
 
     }//GEN-LAST:event_btn_arquivoActionPerformed

@@ -12,7 +12,7 @@ public class ConnectMySQL {
     static String login = "root";
     static String pass = "";
     
-    static Connection startConnection() throws Exception, SQLException {
+    public static Connection startConnection() throws Exception, SQLException {
         
         String url = "jdbc:mysql://" + server + "/" + database ;
         

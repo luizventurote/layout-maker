@@ -2,40 +2,50 @@ package control;
 
 import dao.FileDao;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import model.Arquivo;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+import util.ConnectMySQL;
+import util.ConnectionFactory;
+import util.ReportUtils;
 
 public class ReportControl {
 
-    public void showReportArquivo() throws Exception {
+    public void abrirRelatorioArquivos() throws SQLException, Exception {
 
-        FileDao dao = new FileDao();
-        List<Arquivo> lista = dao.getAllFiles();
+        /*
+         * Obtendo o arquivo do relatório.
+         * Note que estamos utilizando um InputStream para obter o arquivo que
+         * está dentro do nosso projeto. Fazendo isso, não teremos problema
+         * quando nosso projeto for empacotado em um .jar.
+         *
+         * Note que o caminho do .jasper inicia com /, ou seja, a raiz da
+         * localização das classes compiladas do nosso projeto
+         * (o pacote default).
+         *
+         * Utilize a aba Files (canto superior esquerdo) e veja que os arquivos
+         * .jasper e .jrxml são copiados para o diretório /build/classes
+         * e por consequencia para o .jar que for criado.
+         *
+         * Se não os estiver vendo, mande dar um Clean and Build no projeto
+         * (botão direito no nó raiz do projeto, Clean and Build (Limpar e Construir)
+         *
+         */
+        InputStream inputStream = getClass().getResourceAsStream("/report/Arquivos.jasper");
 
-        // Dados para o RELATORIO
-        JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista);
-
-        // PASSO 1 - Caminho do relatório
-        InputStream rel = getClass().getResourceAsStream("../report/Arquivo.jasper");
-
-        // PASSO 2 - Criar parâmetros de Pesquisa 
+        // mapa de parâmetros do relatório (ainda vamos aprender a usar)
         Map parametros = new HashMap();
-
-        // PASSO 3 - Carregar o relatório com os dados
-        JasperPrint print;
-        // Passar o caminho do RELATORIO e os PARAMETROS dos PASSSOS 1 e 2 e os DADOS
-        print = JasperFillManager.fillReport(rel, parametros, dados);
-
-        // PASSO 4 - Mostrat em uma JANELA
-        JasperViewer janela = new JasperViewer(print, false);
-        janela.setVisible(true);
+        
+        // abre o relatório
+        ReportUtils.openReport("Arquivos", inputStream, parametros, ConnectMySQL.startConnection());
 
     }
 
