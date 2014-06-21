@@ -34,7 +34,7 @@ public class ReportWin extends javax.swing.JDialog {
     private void initComponents() {
 
         btn_arquivo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_comp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatórios");
@@ -47,8 +47,12 @@ public class ReportWin extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Componentes");
-        jButton2.setEnabled(false);
+        btn_comp.setText("Componentes");
+        btn_comp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_compActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,7 +62,7 @@ public class ReportWin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(btn_arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_comp, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -67,7 +71,7 @@ public class ReportWin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_arquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_comp, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -84,6 +88,17 @@ public class ReportWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_arquivoActionPerformed
+
+    private void btn_compActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_compActionPerformed
+        
+        try {
+            ctr.abrirRelatorioComponentes();
+            this.setVisible(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO não esperado. " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_btn_compActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +144,6 @@ public class ReportWin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_arquivo;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_comp;
     // End of variables declaration//GEN-END:variables
 }
