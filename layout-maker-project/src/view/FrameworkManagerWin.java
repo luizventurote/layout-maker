@@ -4,6 +4,7 @@ import control.FrameworkControl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import util.ErrorView;
 
 /**
  *
@@ -118,9 +119,19 @@ public class FrameworkManagerWin extends javax.swing.JDialog {
 
         btn_update.setText("Alterar");
         btn_update.setEnabled(false);
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         btn_delete.setText("Excluir");
         btn_delete.setEnabled(false);
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         btn_select.setText("Selecionar");
         btn_select.setEnabled(false);
@@ -210,7 +221,7 @@ public class FrameworkManagerWin extends javax.swing.JDialog {
 
             // Enable buttons
             btn_delete.setEnabled(true);
-            //btn_alter.setEnabled(true);
+            btn_update.setEnabled(true);
 
             if (this.opt_select == 1) {
                 btn_select.setEnabled(true);
@@ -218,6 +229,44 @@ public class FrameworkManagerWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_tableMouseClicked
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        
+        FrameworkWin win = null;
+
+        try {
+            // Get ID
+            int id = Integer.parseInt(table.getValueAt(this.row_selected, 0).toString());
+
+            // Build windows
+            win = new FrameworkWin(id, null, true);
+
+            win.setLocationRelativeTo(null);
+            win.setVisible(true);
+
+            this.refreshTable();
+
+        } catch (Exception ex) {
+            ErrorView.errorDefault(ex);
+        }
+        
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        
+        try {
+            
+            int file_id = Integer.parseInt(table.getValueAt(this.row_selected, 0).toString());
+            
+            ctr.delete(file_id);
+
+            this.refreshTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO ao excluir. " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_btn_deleteActionPerformed
 
     /**
      * @param args the command line arguments

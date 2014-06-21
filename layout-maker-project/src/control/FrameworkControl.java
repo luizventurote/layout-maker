@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Framework;
+import view.FrameworkWin;
 
 /**
  *
@@ -44,6 +45,21 @@ public class FrameworkControl {
 
         dao.insert(this.frame);
 
+    }
+    
+    /**
+     * Update
+     * @param id
+     * @param text 
+     */
+    public void update(int id, String nome) throws Exception, SQLException {
+        
+        this.frame = new Framework();
+        this.frame.setId(id);
+        this.frame.setNome(nome);
+
+        dao.update(this.frame);
+        
     }
 
     /**
@@ -180,5 +196,37 @@ public class FrameworkControl {
         }
 
     }
+    
+    /**
+     * Get object
+     * @param id
+     * @return
+     * @throws Exception
+     * @throws SQLException 
+     */
+    private Framework get(int id) throws Exception, SQLException {
+
+        return this.dao.get(id);
+
+    }
+
+    /**
+     * Carrega dados na tabela
+     * @param win
+     * @param id 
+     */
+    public void loadValuesByID(FrameworkWin win, int id) throws Exception, SQLException {
+        
+        Framework obj = this.get(id);
+
+        // Load ID
+        win.getInput_id().setText(Integer.toString(id));
+
+        // Load file name
+        win.getInput_nome().setText(obj.getNome());
+        
+    }
+
+    
 
 }

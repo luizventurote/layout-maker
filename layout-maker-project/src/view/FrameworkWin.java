@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import control.FrameworkControl;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,26 +15,53 @@ import javax.swing.JOptionPane;
  */
 public class FrameworkWin extends javax.swing.JDialog {
 
-    FrameworkControl ctr;
-    
+    private FrameworkControl ctr;
+    private int save_type = 0;
+
     public FrameworkWin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         try {
+            
             this.ctr = new FrameworkControl();
+
+            //Get id and set in the input type
+            input_id.setText(Integer.toString(ctr.getTheNextID()));
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage() + ex.getClass());
         }
-        
+
     }
-    
+
+    public FrameworkWin(int id, java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        try {
+
+            this.ctr = new FrameworkControl();
+
+            // Load values in fields
+            ctr.loadValuesByID(this, id);
+
+            // Altera o tipo de salvamento
+            this.save_type = 1;
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage() + ex.getClass());
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         input_nome = new javax.swing.JTextField();
         btn_salvar = new javax.swing.JButton();
+        input_id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Framework");
@@ -48,6 +73,8 @@ public class FrameworkWin extends javax.swing.JDialog {
             }
         });
 
+        input_id.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,8 +83,9 @@ public class FrameworkWin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(input_nome)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 148, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(input_id, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                         .addComponent(btn_salvar)))
                 .addContainerGap())
         );
@@ -67,7 +95,9 @@ public class FrameworkWin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(input_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_salvar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_salvar)
+                    .addComponent(input_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -75,16 +105,39 @@ public class FrameworkWin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-       
+
         try {
-            this.ctr.insert(input_nome.getText());
-            JOptionPane.showMessageDialog(this, "Adicionado com sucesso!");
+
+            int id = Integer.parseInt(input_id.getText());
+
+            if (this.save_type == 0) {
+
+                this.ctr.insert(input_nome.getText());
+
+                JOptionPane.showMessageDialog(this, "Adicionado com sucesso!");
+
+            } else {
+
+                this.ctr.update(id, input_nome.getText());
+
+                JOptionPane.showMessageDialog(this, "Atualizado com sucesso!");
+
+            }
+
             this.setVisible(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro: " + ex.getMessage() + ex.getClass());
         }
-        
+
     }//GEN-LAST:event_btn_salvarActionPerformed
+
+    public JTextField getInput_id() {
+        return input_id;
+    }
+
+    public JTextField getInput_nome() {
+        return input_nome;
+    }
 
     /**
      * @param args the command line arguments
@@ -130,6 +183,7 @@ public class FrameworkWin extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JTextField input_id;
     private javax.swing.JTextField input_nome;
     // End of variables declaration//GEN-END:variables
 }
