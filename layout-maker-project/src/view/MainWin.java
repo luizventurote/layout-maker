@@ -16,7 +16,7 @@ public class MainWin extends javax.swing.JFrame {
 
         btn_components = new javax.swing.JButton();
         btn_framework = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_lib = new javax.swing.JButton();
         btn_files = new javax.swing.JButton();
         btn_generate = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -49,14 +49,13 @@ public class MainWin extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Bibliotecas");
-        jButton3.setBorderPainted(false);
-        jButton3.setEnabled(false);
-        jButton3.setFocusPainted(false);
-        jButton3.setRequestFocusEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_lib.setText("Bibliotecas");
+        btn_lib.setBorderPainted(false);
+        btn_lib.setFocusPainted(false);
+        btn_lib.setRequestFocusEnabled(false);
+        btn_lib.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_libActionPerformed(evt);
             }
         });
 
@@ -132,7 +131,7 @@ public class MainWin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_framework, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_lib, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_files, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,7 +156,7 @@ public class MainWin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_components, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_framework, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_lib, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_files, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,9 +192,13 @@ public class MainWin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_frameworkActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btn_libActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_libActionPerformed
+        
+        LibManagerWin win = new LibManagerWin(this, true);
+        win.setLocationRelativeTo(null);
+        win.setVisible(true);
+        
+    }//GEN-LAST:event_btn_libActionPerformed
 
     private void btn_filesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filesActionPerformed
 
@@ -270,8 +273,8 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JButton btn_files;
     private javax.swing.JButton btn_framework;
     private javax.swing.JButton btn_generate;
+    private javax.swing.JButton btn_lib;
     private javax.swing.JButton btn_relatorio;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
