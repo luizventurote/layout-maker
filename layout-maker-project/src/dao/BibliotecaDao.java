@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.Framework;
+import model.Biblioteca;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -10,11 +10,11 @@ import org.hibernate.Query;
  *
  * @author Luiz
  */
-public class FrameworkDao extends DefaultDao {
+public class BibliotecaDao extends DefaultDao {
     
-    public FrameworkDao() throws Exception, SQLException, HibernateException {
+    public BibliotecaDao() throws Exception, SQLException, HibernateException {
         
-        this.setTable_reference("framework");
+        this.setTable_reference("biblioteca");
         
     }
 
@@ -26,7 +26,7 @@ public class FrameworkDao extends DefaultDao {
      * @throws SQLException
      * @throws HibernateException 
      */
-    public void insert(Framework obj) throws Exception, SQLException, HibernateException {
+    public void insert(Biblioteca obj) throws Exception, SQLException, HibernateException {
 
         try {
 
@@ -55,7 +55,7 @@ public class FrameworkDao extends DefaultDao {
      * @throws SQLException
      * @throws HibernateException
      */
-    public void delete(Framework obj) throws Exception, SQLException, HibernateException {
+    public void delete(Biblioteca obj) throws Exception, SQLException, HibernateException {
 
         try {
 
@@ -84,7 +84,7 @@ public class FrameworkDao extends DefaultDao {
      * @throws SQLException
      * @throws HibernateException
      */
-    public void update(Framework obj) throws Exception, SQLException, HibernateException {
+    public void update(Biblioteca obj) throws Exception, SQLException, HibernateException {
 
         try {
 
@@ -112,9 +112,9 @@ public class FrameworkDao extends DefaultDao {
      * @throws Exception
      * @throws SQLException
      */
-    public List<Framework> getAll() throws Exception, SQLException {
+    public List<Biblioteca> getAll() throws Exception, SQLException {
 
-        List<Framework> list = null;
+        List<Biblioteca> list = null;
 
         try {
 
@@ -123,7 +123,7 @@ public class FrameworkDao extends DefaultDao {
             this.session.beginTransaction();
 
             // HQL           
-            Query con = this.session.createQuery("FROM Framework");
+            Query con = this.session.createQuery("FROM Biblioteca");
 
             list = con.list();
 
@@ -147,9 +147,9 @@ public class FrameworkDao extends DefaultDao {
      * @throws Exception
      * @throws SQLException
      */
-    public Framework get(int id) throws Exception, SQLException {
+    public Biblioteca get(int id) throws Exception, SQLException {
 
-        Framework comp = null;
+        Biblioteca comp = null;
 
         try {
 
@@ -158,11 +158,11 @@ public class FrameworkDao extends DefaultDao {
             this.session.beginTransaction();
 
             // HQL para recuperar o componente do banco de dados           
-            Query con = this.session.createQuery("FROM Framework obj WHERE obj.id=" + id);
+            Query con = this.session.createQuery("FROM Biblioteca obj WHERE obj.id=" + id);
 
             con.setMaxResults(1);
 
-            List<Framework> result = con.list();
+            List<Biblioteca> result = con.list();
 
             comp = result.get(0);
 
@@ -195,7 +195,7 @@ public class FrameworkDao extends DefaultDao {
             this.session.beginTransaction();
 
             // HQL           
-            Query con = this.session.createQuery("FROM Framework obj WHERE obj.nome LIKE '%" + search + "%' ");
+            Query con = this.session.createQuery("FROM Biblioteca obj WHERE obj.nome LIKE '%" + search + "%' ");
 
             list = con.list();
 
@@ -228,7 +228,7 @@ public class FrameworkDao extends DefaultDao {
             this.session.beginTransaction();
 
             // HQL           
-            Query con = this.session.createQuery("FROM Framework obj WHERE obj.id=" + id);
+            Query con = this.session.createQuery("FROM Biblioteca obj WHERE obj.id=" + id);
 
             list = con.list();
 
