@@ -68,3 +68,13 @@ CREATE TABLE IF NOT EXISTS componente_arquivo (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table framework
+-- -----------------------------------------------------
+CREATE TABLE framework (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(50) NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB;
