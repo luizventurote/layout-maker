@@ -11,5 +11,6 @@
     <mapping resource="model/Categoria.hbm.xml"/>
     <mapping resource="model/Componente.hbm.xml"/>
     <mapping resource="model/Arquivo.hbm.xml"/>
+    <mapping resource="model/Framework.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
