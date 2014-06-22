@@ -36,8 +36,6 @@ public class DefaultDao {
             List result = con.list();
 
             id = Integer.parseInt(result.get(0).toString());
-            
-            System.out.println( id );
 
             this.session.getTransaction().commit();
 

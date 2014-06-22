@@ -140,17 +140,20 @@ public abstract class FileManager {
     /**
      * Apaga um diretório
      *
-     * @param dir
      * @return
      */
-    public static void deleteDir(File dir) {
-        if (dir.isDirectory()) {
-            File[] files = dir.listFiles();
-            for (File file : files) {
-                deleteDir(file);
+    static public boolean deleteDir(File path) {
+        if (path.exists()) {
+            File[] files = path.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    deleteDir(files[i]);
+                } else {
+                    files[i].delete();
+                }
             }
         }
-        dir.delete();
+        return (path.delete());
     }
 
     /**
@@ -183,15 +186,15 @@ public abstract class FileManager {
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showOpenDialog(comp) == JFileChooser.APPROVE_OPTION) {
-            
+
             return chooser.getSelectedFile();
-            
+
         } else {
-           
+
             return null;
-           
+
         }
-        
+
     }
 
     /**

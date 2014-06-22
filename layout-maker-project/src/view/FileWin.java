@@ -185,13 +185,6 @@ public class FileWin extends javax.swing.JDialog {
                 // Get file extension and set in the input field
                 input_ext.setText(FileManagerControl.getFileExtension(file));
 
-                // Check ID and set in the input type
-                if (id == 0) {
-                    ctr.insert(id, "test", "txt", "0_test.txt");
-                    input_id.setText(Integer.toString(ctr.getTheLastIDFile()));
-                    ctr.delete(ctr.getTheLastIDFile() - 1);
-                }
-
                 // Set name text
                 if ("".equals(input_name.getText())) {
                     input_name.setText(file.getName());
@@ -217,28 +210,17 @@ public class FileWin extends javax.swing.JDialog {
             if ("".equals(name)) {
                 throw new Exception("Adicione um nome para o arquivo!");
             }
-
             if ("".equals(ext)) {
                 throw new Exception("Selecione um arquivo!");
             }
 
             if (this.save_type == 0) {
-
-                // Copy file
-                FileManager.copyFile(file, "files/files/");
-
-                // Get new file
-                File temporary_file = new File("files/files/" + file.getName());
-
-                // Rename file
-                String file_name = input_id.getText() + "_" + input_name.getText().replaceAll(" ", "_").toLowerCase()+'.'+input_ext.getText();
-                FileManager.renameFile(temporary_file, file_name);
-
-                // Remove temporary file
-                temporary_file.delete();
+                
+                // Monta o Diretório do arquivo
+                String directory = id + "_" + name.replaceAll(" ", "_").toLowerCase() + '.' + ext;
 
                 // Insert a new file
-                ctr.insert(id, name, ext, file_name);
+                ctr.insert(id, name, ext, directory, this.file);
 
                 // Window success
                 JOptionPane.showMessageDialog(null, "Arquivo adicionado com sucesso!");

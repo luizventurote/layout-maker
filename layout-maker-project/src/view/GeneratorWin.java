@@ -1,6 +1,8 @@
 package view;
 
+import control.ConfigControl;
 import control.GeneratorControl;
+import java.io.File;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -8,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import util.FileManager;
 
 public class GeneratorWin extends javax.swing.JDialog {
 
@@ -178,8 +181,9 @@ public class GeneratorWin extends javax.swing.JDialog {
 
     private void btn_generateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateActionPerformed
         
-        try {
+        try {            
             ctr.buildComponents(table_com);
+            JOptionPane.showMessageDialog(null, "Layout gerado com sucesso!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro! " + ex);
         }

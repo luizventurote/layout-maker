@@ -39,9 +39,11 @@ public class FileControlTest {
     public void testInsert() throws Exception {
         
         ArrayList arquivo;
+        
+        File file = new File(this.file_directory);
 
         // Insere o arquivo no banco
-        ctr.insert(this.file_id, this.file_name, this.file_ext, this.file_directory);
+        ctr.insert(this.file_id, this.file_name, this.file_ext, this.file_directory, file);
         
         // Pega os dados do arquivo no banco
         arquivo = ctr.getFileDataByID(this.file_id);

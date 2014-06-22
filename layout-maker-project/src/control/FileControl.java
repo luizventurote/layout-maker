@@ -22,12 +22,24 @@ public class FileControl {
         this.fileDao = new FileDao();
 
     }
+    
+    public void insert(int id, String name, String ext, String directory, File file) throws Exception, SQLException {
 
-    public void insert(int id, String name, String ext, String file_name) throws Exception, SQLException {
+        // Copy file
+        FileManager.copyFile(file, "files/files/");
 
-        Arquivo file = new Arquivo(id, name, ext, file_name);
+        // Get new file
+        File temporary_file = new File("files/files/" + file.getName());
 
-        this.fileDao.insert(file);
+        // Rename file
+        FileManager.renameFile(temporary_file, directory);
+
+        // Remove temporary file
+        temporary_file.delete();
+
+        Arquivo obj = new Arquivo(id, name, ext, directory);
+
+        this.fileDao.insert(obj);
 
     }
 
@@ -235,12 +247,12 @@ public class FileControl {
 
     /**
      * Exibe os dados pesquisados na tabela
-     * 
+     *
      * @param table Tabela de exibição dos dados
      * @param type tipo de pesquisa
      * @param search pesquisa
      * @throws Exception
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void search(JTable table, int type, String search) throws Exception, SQLException {
 
@@ -258,12 +270,12 @@ public class FileControl {
                 list = fileDao.searchExtension(search);
                 break;
         }
-        
+
         // Clean table
         for (int i = table.getRowCount() - 1; i >= 0; i--) {
             ((DefaultTableModel) table.getModel()).removeRow(i);
         }
-        
+
         Arquivo file;
 
         int size_list = list.size();
