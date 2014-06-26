@@ -5,12 +5,12 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
 import javax.swing.JFrame;
+import net.sf.jasperreports.*;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
-import net.sf.jasperreports.*;
  
 /**
  * Classe com métodos utilitários para executar e abrir relatórios.
@@ -35,6 +35,27 @@ public class ReportUtils {
          * usando uma conexão.
          */
         JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, conexao );
+ 
+        // abre o JasperPrint em um JFrame
+        viewReportFrame( titulo, print );
+ 
+    }
+    
+    /**
+     * Abre um relatório usando o hibernate como parâmetro
+     *
+     * @param titulo Título usado na janela do relatório.
+     * @param inputStream InputStream que contém o relatório.
+     * @param parametros Parâmetros utilizados pelo relatório.
+     * @throws JRException Caso ocorra algum problema na execução do relatório
+     */
+    public static void openReport( String titulo, InputStream inputStream, Map parametros) throws JRException {
+ 
+        /*
+         * Cria um JasperPrint, que é a versão preenchida do relatório,
+         * usando um datasource genérico.
+         */
+        JasperPrint print = JasperFillManager.fillReport( inputStream, parametros);
  
         // abre o JasperPrint em um JFrame
         viewReportFrame( titulo, print );

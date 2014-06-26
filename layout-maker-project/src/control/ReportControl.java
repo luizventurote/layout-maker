@@ -12,6 +12,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.query.JRHibernateQueryExecuterFactory;
 import net.sf.jasperreports.view.JasperViewer;
 import util.ConnectMySQL;
 import util.ConnectionFactory;
@@ -27,8 +28,11 @@ public class ReportControl {
         // mapa de parâmetros do relatório (ainda vamos aprender a usar)
         Map parametros = new HashMap();
         
+        // Conexao HIBERNATE
+        parametros.put(JRHibernateQueryExecuterFactory.PARAMETER_HIBERNATE_SESSION, util.HibernateUtil.getSessionFactory().openSession());
+        
         // abre o relatório
-        ReportUtils.openReport(this.report, inputStream, parametros, ConnectMySQL.startConnection());
+        ReportUtils.openReport(this.report, inputStream, parametros);
 
     }
 
