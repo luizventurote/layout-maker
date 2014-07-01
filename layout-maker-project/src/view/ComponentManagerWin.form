@@ -43,8 +43,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_select" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btn_alter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="add_component" min="-2" max="-2" attributes="0"/>
@@ -69,7 +67,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="add_component" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_delete" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btn_alter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_select" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jToggleButton7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btn_refresh" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -140,15 +137,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deleteActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JToggleButton" name="btn_alter">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Alterar"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_alterActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btn_select">

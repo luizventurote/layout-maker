@@ -71,7 +71,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         table = new javax.swing.JTable();
         add_component = new javax.swing.JToggleButton();
         btn_delete = new javax.swing.JToggleButton();
-        btn_alter = new javax.swing.JToggleButton();
         btn_select = new javax.swing.JToggleButton();
         jToggleButton7 = new javax.swing.JToggleButton();
         btn_refresh = new javax.swing.JToggleButton();
@@ -136,14 +135,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
             }
         });
 
-        btn_alter.setText("Alterar");
-        btn_alter.setEnabled(false);
-        btn_alter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_alterActionPerformed(evt);
-            }
-        });
-
         btn_select.setText("Selecionar");
         btn_select.setEnabled(false);
         btn_select.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +178,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_alter)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(add_component)))
@@ -208,7 +197,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(add_component, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_alter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_select, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,10 +234,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btn_deleteActionPerformed
-
-    private void btn_alterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_alterActionPerformed
 
     private void btn_selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectActionPerformed
         
@@ -377,7 +361,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
 
         // Check list is empty 
         if (table.getRowCount() == 0) {
-            btn_alter.setEnabled(false);
             btn_delete.setEnabled(false);
             btn_select.setEnabled(false);
         }
@@ -392,7 +375,6 @@ public class ComponentManagerWin extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton add_component;
-    private javax.swing.JToggleButton btn_alter;
     private javax.swing.JToggleButton btn_delete;
     private javax.swing.JToggleButton btn_refresh;
     private javax.swing.JToggleButton btn_search;
