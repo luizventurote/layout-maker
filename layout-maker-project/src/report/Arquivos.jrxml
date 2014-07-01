@@ -39,19 +39,31 @@
 		<band height="26" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="41" height="20" uuid="2b4c9449-0b0d-48e6-83a6-b2bfb758dcb2"/>
-				<text><![CDATA[id]]></text>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="328" y="0" width="227" height="20" uuid="7d4c6793-71b4-4f1e-bfa8-ffd57cf35da8"/>
-				<text><![CDATA[Diretório]]></text>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRETÓRIO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="51" y="0" width="181" height="20" uuid="203c4a3f-7b49-4996-bcd1-ddda268cb720"/>
-				<text><![CDATA[Nome]]></text>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="248" y="0" width="70" height="20" uuid="134654a3-2f95-4787-a1dc-3c4619b086e9"/>
-				<text><![CDATA[Extensão]]></text>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXTENSÃO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

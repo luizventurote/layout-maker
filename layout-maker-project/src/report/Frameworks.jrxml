@@ -3,15 +3,11 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString>
-		<![CDATA[SELECT * FROM framework;]]>
+	<queryString language="hql">
+		<![CDATA[FROM Framework]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -39,23 +35,29 @@
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="6" width="39" height="20" uuid="63f03990-661f-4420-82ab-86dc58cea3ed"/>
+				<reportElement x="0" y="5" width="45" height="20" uuid="3f908b79-dfb0-419a-8cb0-3d0372d30800"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="39" y="6" width="515" height="20" uuid="0ff322c7-460d-4b80-ac82-aec24e5c4a86"/>
-				<text><![CDATA[Nome]]></text>
+				<reportElement x="45" y="5" width="509" height="20" uuid="2a98c83d-9135-41ab-91a9-8f81c548712e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="33" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="39" height="20" uuid="659678a1-e9b7-4b94-9f56-708f10d78027"/>
+				<reportElement x="0" y="5" width="45" height="20" uuid="4324ce56-9c85-4b7b-9931-5372f03b31d9"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="39" y="0" width="515" height="20" uuid="1c64e87c-4940-4bca-b798-3480b26bda42"/>
+				<reportElement x="45" y="5" width="509" height="20" uuid="fb55fa34-5737-4494-a891-83146e35e408"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 		</band>
