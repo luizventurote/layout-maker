@@ -79,6 +79,9 @@
 			<subreport>
 				<reportElement x="56" y="29" width="499" height="61" backcolor="#CCCCCC" uuid="8365ec8d-e423-4af1-8aad-7ae77af74797"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
+				<subreportParameter name="parIdComponente">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Componente_Arquivo.jasper"]]></subreportExpression>
 			</subreport>
