@@ -64,7 +64,7 @@ public class GeneratorControl {
                 File tempArquivo = new File(config_ctr.getPathFiles() + arquivo.getDirectory());
 
                 // Salva o arquivo em sua pasta de acrodo com a extenssão
-                FileManager.copyFile(tempArquivo, extPath.getPath() + "\\" + arquivo.getExtension());
+                FileManager.copyFile(tempArquivo, extPath.getPath() + "\\", com.getId() + "_" + com.getNome().replace(" ", "_").toLowerCase() + "." +arquivo.getExtension() );
 
             }
         }
