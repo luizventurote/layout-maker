@@ -83,7 +83,7 @@
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="150" y="29" width="405" height="61" backcolor="#CCCCCC" uuid="8365ec8d-e423-4af1-8aad-7ae77af74797"/>
+				<reportElement x="56" y="29" width="499" height="61" backcolor="#CCCCCC" uuid="8365ec8d-e423-4af1-8aad-7ae77af74797"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="parIdComponente">
 					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
