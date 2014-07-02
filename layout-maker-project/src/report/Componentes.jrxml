@@ -38,24 +38,24 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement x="417" y="0" width="138" height="20" uuid="0497ddd9-1038-49ed-ba0e-3bc935c633bf"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CATEGORIA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="56" height="20" uuid="cab737ec-47dd-4a6d-bf14-aa8f1ecbba2d"/>
-				<textElement>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="56" y="0" width="361" height="20" uuid="e6e7bb78-c4e2-4e10-86b5-b53670ffd9f3"/>
-				<textElement>
+				<reportElement x="56" y="0" width="293" height="20" uuid="e6e7bb78-c4e2-4e10-86b5-b53670ffd9f3"/>
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOME]]></text>
@@ -64,20 +64,26 @@
 	</columnHeader>
 	<detail>
 		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#E5E5E5" uuid="f023e115-5656-482e-9d21-b4d3b1d50292"/>
+			</rectangle>
 			<textField>
 				<reportElement x="417" y="0" width="138" height="20" uuid="d99fed10-58d6-4772-9bed-fdd5150b2766"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[""+$F{categoria}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="56" height="20" uuid="10a490ab-d46e-4b13-8dfb-e23b0e7a9c49"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="56" y="0" width="361" height="20" uuid="adb562b2-89ef-4b30-8c0f-f230d44a55ae"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="56" y="29" width="499" height="61" backcolor="#CCCCCC" uuid="8365ec8d-e423-4af1-8aad-7ae77af74797"/>
+				<reportElement x="150" y="29" width="405" height="61" backcolor="#CCCCCC" uuid="8365ec8d-e423-4af1-8aad-7ae77af74797"/>
 				<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
 				<subreportParameter name="parIdComponente">
 					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
