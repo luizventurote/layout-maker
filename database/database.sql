@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS config (
   PRIMARY KEY (id_config))
 ENGINE = InnoDB;
 
+INSERT INTO config (id_config, path_files) VALUES ('1', 'files/files/');
 
 -- -----------------------------------------------------
 -- Table arquivo
